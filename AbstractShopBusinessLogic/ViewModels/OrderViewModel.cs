@@ -15,7 +15,7 @@ namespace AbstractShopBusinessLogic.ViewModels
         public int TourId { get; set; }
 
         [DisplayName("Изделие")]
-        public string OrderName { get; set; }
+        public string TourName { get; set; }
 
         [DisplayName("Количество")]
         public int Count { get; set; }

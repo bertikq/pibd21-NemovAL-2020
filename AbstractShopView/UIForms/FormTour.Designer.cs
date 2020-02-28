@@ -202,7 +202,7 @@
             this.Controls.Add(this.labelName);
             this.Controls.Add(this.groupBox1);
             this.Name = "FormTour";
-            this.Text = "FormTour";
+            this.Text = "Настройки Тура";
             this.Load += new System.EventHandler(this.FormProduct_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).EndInit();
             this.groupBox1.ResumeLayout(false);

@@ -4,6 +4,7 @@ using AbstractShopBusinessLogic.ViewModels;
 using AbstractTravelCompanyListImplement.Models;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace AbstractTravelCompanyListImplement.Implements
@@ -125,7 +126,8 @@ namespace AbstractTravelCompanyListImplement.Implements
                 DateCreate = order.DateCreate,
                 DateImplement = order.DateImplement,
                 Status = order.Status,
-                TourId = order.TourId
+                TourId = order.TourId,
+                TourName = source.Tours.FirstOrDefault(a => a.Id == order.TourId).TourName
             };
         }
     }
