@@ -148,9 +148,9 @@
       <Project>{a9e44f2c-3a4d-4832-9924-42d777ed0172}</Project>
       <Name>AbstractTravelCompanyBusinessLogic</Name>
     </ProjectReference>
-    <ProjectReference Include="..\AbstractTravelCompanyListImplement\AbstractTravelCompanyListImplement.csproj">
-      <Project>{3143B811-8E98-4265-AE8C-553195EC1573}</Project>
-      <Name>AbstractTravelCompanyListImplement</Name>
+    <ProjectReference Include="..\AbstractTravelCompanyFileImplement\AbstractTravelCompanyFileImplement.csproj">
+      <Project>{05e6f7ca-9156-4e9d-a59b-07492770e42d}</Project>
+      <Name>AbstractTravelCompanyFileImplement</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
