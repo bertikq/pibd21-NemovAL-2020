@@ -98,6 +98,7 @@
             this.Controls.Add(this.dataGridView);
             this.Name = "FormTours";
             this.Text = "Туры";
+            this.Load += new System.EventHandler(this.FormComponents_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).EndInit();
             this.ResumeLayout(false);
 
