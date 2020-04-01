@@ -70,6 +70,19 @@ namespace AbstractShopView.UIForms
                 return;
             }
 
+            if (comboBoxComponents.SelectedItem == null)
+            {
+                MessageBox.Show("Выберите компонент", "Ошибка", MessageBoxButtons.OK,
+               MessageBoxIcon.Error);
+                return;
+            }
+            if (comboBoxStores.SelectedItem == null)
+            {
+                MessageBox.Show("Выберите хранилище", "Ошибка", MessageBoxButtons.OK,
+               MessageBoxIcon.Error);
+                return;
+            }
+
             _mainLogic.AddComponentInStore(new AddComponentInStoreBindingModel
             {
                 Count = int.Parse(textBoxCount.Text),
