@@ -4,7 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace AbstractShopBusinessLogic.Interfaces
+namespace AbstractTravelCompanyBusinessLogic.Interfaces
 {
     public interface ITourLogic
     {

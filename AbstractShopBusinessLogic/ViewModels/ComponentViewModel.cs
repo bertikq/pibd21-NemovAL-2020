@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Text;
 
-namespace AbstractShopBusinessLogic.ViewModels
+namespace AbstractTravelCompanyBusinessLogic.ViewModels
 {
     /// <summary>
     /// Компонент, требуемый для изготовления изделия

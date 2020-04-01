@@ -1,6 +1,8 @@
 ﻿using AbstractShopBusinessLogic.BindingModels;
 using AbstractShopBusinessLogic.Enums;
-using AbstractShopBusinessLogic.Interfaces;
+using AbstractTravelCompanyBusinessLogic.BindingModels;
+using AbstractTravelCompanyBusinessLogic.Interfaces;
+using AbstractTravelCompanyBusinessLogic.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -10,10 +12,14 @@ namespace AbstractShopBusinessLogic.BusinessLogics
     public class MainLogic
     {
         private readonly IOrderLogic orderLogic;
+        private readonly IStoreLogic _storeLogic;
+        private readonly IComponentLogic _componentLogic;
 
-        public MainLogic(IOrderLogic orderLogic)
+        public MainLogic(IOrderLogic orderLogic, IStoreLogic storeLogic, IComponentLogic componentLogic)
         {
             this.orderLogic = orderLogic;
+            _storeLogic = storeLogic;
+            _componentLogic = componentLogic;
         }
 
         public void CreateOrder(CreateOrderBindingModel model)
@@ -103,6 +109,28 @@ namespace AbstractShopBusinessLogic.BusinessLogics
                 DateCreate = order.DateCreate,
                 DateImplement = order.DateImplement,
                 Status = OrderStatus.Оплачен
+            });
+        }
+
+        public void AddComponentInStore(AddComponentInStoreBindingModel model)
+        {
+            StoreViewModel storeViewModel = _storeLogic.Read(new StoreBindingModel { Id = model.StoreId })?[0];
+            ComponentViewModel componentViewModel = _componentLogic.Read(new ComponentBindingModel { Id = model.ComponentId })?[0];
+
+            Dictionary<int, (string, int)> components = storeViewModel.StoreComponents;
+            if (components.ContainsKey(componentViewModel.Id))
+            {
+                components[componentViewModel.Id] = (componentViewModel.ComponentName, model.Count);
+            }
+            else
+            {
+                components.Add(componentViewModel.Id, (componentViewModel.ComponentName, model.Count));
+            }
+            _storeLogic.CreateOrUpdate(new StoreBindingModel
+            {
+                Id = storeViewModel.Id,
+                Name = storeViewModel.Name,
+                StoreComponents = components
             });
         }
     }

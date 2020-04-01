@@ -55,6 +55,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="UIForms\AddComponentInStore.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UIForms\AddComponentInStore.Designer.cs">
+      <DependentUpon>AddComponentInStore.cs</DependentUpon>
+    </Compile>
     <Compile Include="UIForms\FormComponent.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -81,6 +87,18 @@
     <Compile Include="UIForms\FormMain.Designer.cs">
       <DependentUpon>FormMain.cs</DependentUpon>
     </Compile>
+    <Compile Include="UIForms\FormStore.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UIForms\FormStore.Designer.cs">
+      <DependentUpon>FormStore.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UIForms\FormStores.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UIForms\FormStores.Designer.cs">
+      <DependentUpon>FormStores.cs</DependentUpon>
+    </Compile>
     <Compile Include="UIForms\FormTour.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -99,6 +117,9 @@
     <Compile Include="UIForms\FormTours.Designer.cs">
       <DependentUpon>FormTours.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="UIForms\AddComponentInStore.resx">
+      <DependentUpon>AddComponentInStore.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UIForms\FormComponent.resx">
       <DependentUpon>FormComponent.cs</DependentUpon>
     </EmbeddedResource>
@@ -119,6 +140,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UIForms\FormMain.resx">
       <DependentUpon>FormMain.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UIForms\FormStore.resx">
+      <DependentUpon>FormStore.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UIForms\FormStores.resx">
+      <DependentUpon>FormStores.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UIForms\FormTour.resx">
       <DependentUpon>FormTour.cs</DependentUpon>
