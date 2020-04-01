@@ -70,23 +70,45 @@ namespace AbstractTravelCompanyDatabaseImplement.Implements
             }
         }
 
-        public List<OrderViewModel> Read(OrderBindingModel model)
+        public List<OrderViewModel> Read(OrderBindingModel model, DateTime dateFrom, DateTime dateTo)
         {
-            using (var context = new DataBaseContext())
+            if (dateFrom == null || dateTo == null)
             {
-                return context.Orders
-                .Where(rec => model == null || rec.Id == model.Id)
-                .Select(rec => new OrderViewModel
+                using (var context = new DataBaseContext())
                 {
-                    Id = rec.Id,
-                    Count = rec.Count,
-                    Sum = rec.Sum,
-                    DateCreate = rec.DateCreate,
-                    DateImplement = rec.DateImplement,
-                    Status = rec.Status,
-                    TourId = rec.TourId,
-                    TourName = context.Tours.FirstOrDefault(a => a.Id == rec.TourId).TourName
-                }).ToList();
+                    return context.Orders
+                    .Where(rec => model == null || rec.Id == model.Id)
+                    .Select(rec => new OrderViewModel
+                    {
+                        Id = rec.Id,
+                        Count = rec.Count,
+                        Sum = rec.Sum,
+                        DateCreate = rec.DateCreate,
+                        DateImplement = rec.DateImplement,
+                        Status = rec.Status,
+                        TourId = rec.TourId,
+                        TourName = context.Tours.FirstOrDefault(a => a.Id == rec.TourId).TourName
+                    }).ToList();
+                }
+            }
+            else
+            {
+                using (var context = new DataBaseContext())
+                {
+                    return context.Orders
+                    .Where(rec => model == null || rec.Id == model.Id)
+                    .Select(rec => new OrderViewModel
+                    {
+                        Id = rec.Id,
+                        Count = rec.Count,
+                        Sum = rec.Sum,
+                        DateCreate = rec.DateCreate,
+                        DateImplement = rec.DateImplement,
+                        Status = rec.Status,
+                        TourId = rec.TourId,
+                        TourName = context.Tours.FirstOrDefault(a => a.Id == rec.TourId).TourName
+                    }).ToList();
+                }
             }
         }
     }
