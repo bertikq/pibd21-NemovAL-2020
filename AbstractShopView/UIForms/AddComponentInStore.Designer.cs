@@ -130,7 +130,7 @@
             this.Controls.Add(this.labelCount);
             this.Controls.Add(this.labelComponents);
             this.Name = "AddComponentInStore";
-            this.Text = "AddComponentInStore";
+            this.Text = "Пополнение склада";
             this.Load += new System.EventHandler(this.FormCreateOrder_Load);
             this.ResumeLayout(false);
             this.PerformLayout();

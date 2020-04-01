@@ -134,7 +134,7 @@
             this.Controls.Add(this.buttonSave);
             this.Controls.Add(this.buttonCancel);
             this.Name = "FormStore";
-            this.Text = "FormStore";
+            this.Text = "Склад";
             this.Load += new System.EventHandler(this.FormStore_Load);
             this.groupBox1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).EndInit();
