@@ -10,6 +10,7 @@ namespace AbstractTravelCompanyBusinessLogic.Interfaces
     {
         List<StoreViewModel> Read(StoreBindingModel model);
         void CreateOrUpdate(StoreBindingModel model);
+        void AddComponent(AddComponentInStoreBindingModel model);
         void Delete(StoreBindingModel model);
     }
 }

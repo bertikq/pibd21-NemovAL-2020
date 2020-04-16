@@ -16,6 +16,45 @@ namespace AbstractTravelCompanyListImplement.Implements
         {
             source = DataListSingleton.GetInstance();
         }
+
+        public void AddComponent(AddComponentInStoreBindingModel model)
+        {
+            StoreComponent storeComponent = source.StoreComponents.FirstOrDefault(x => 
+                x.StoreId == model.StoreId && x.ComponentId == model.ComponentId);
+
+            if (storeComponent == null)
+            {
+                int newId = 0;
+                while (true)
+                {
+                    bool isNewId = true;
+                    foreach (StoreComponent sc in source.StoreComponents)
+                    {
+                        if (sc.Id == newId)
+                        {
+                            newId++;
+                            isNewId = false;
+                            break;
+                        }
+                    }
+
+                    if (isNewId)
+                    {
+                        source.StoreComponents.Add(new StoreComponent
+                        {
+                            Id = newId,
+                            Count = model.Count,
+                            ComponentId = model.ComponentId,
+                            StoreId = model.StoreId
+                        });
+                        return;
+                    }
+                }
+            }
+
+            storeComponent.Count += model.Count;
+        }
+
         public void CreateOrUpdate(StoreBindingModel model)
         {
             Store curStore = source.Stores.FirstOrDefault(x => x.Id == model.Id);
@@ -53,14 +92,12 @@ namespace AbstractTravelCompanyListImplement.Implements
                             Name = model.Name
                         });
                         model.Id = newId;
-                        UpdateStoreComponents(model);
                         return;
                     }
                 }
             }
 
             curStore.Name = model.Name;
-            UpdateStoreComponents(model);
         }
 
         public void Delete(StoreBindingModel model)
@@ -122,68 +159,6 @@ namespace AbstractTravelCompanyListImplement.Implements
             }
 
             return storeViewModel;
-        }
-
-        private void UpdateStoreComponents(StoreBindingModel model)
-        {
-            if (model.StoreComponents == null)
-            {
-                return;
-            }
-
-            List<StoreComponent> storeComponents = source.StoreComponents.Where(x => x.StoreId == model.Id).ToList();
-
-            for (int i = 0; i < storeComponents.Count; i++)
-            {
-                if (!model.StoreComponents.ContainsKey(storeComponents[i].ComponentId))
-                {
-                    storeComponents.RemoveAt(i);
-                }
-            }
-
-            foreach (int idComponent in model.StoreComponents.Keys)
-            {
-                bool isHave = false;
-
-                foreach (StoreComponent storeComponent in storeComponents)
-                {
-                    if (idComponent == storeComponent.ComponentId)
-                    {
-                        isHave = true;
-                        storeComponent.Count = model.StoreComponents[idComponent].Item2;
-                        break;
-                    }
-                }
-
-                if (!isHave)
-                {
-                    int newId = 0;
-                    while (true)
-                    {
-                        bool isNewId = true;
-                        foreach (StoreComponent storeComponent in source.StoreComponents)
-                        {
-                            if (storeComponent.Id == newId)
-                            {
-                                newId++;
-                                isNewId = false;
-                                break;
-                            }
-                        }
-
-                        if (isNewId)
-                            break;
-                    }
-
-                    source.StoreComponents.Add(new StoreComponent
-                    {
-                        ComponentId = idComponent,
-                        Count = model.StoreComponents[idComponent].Item2,
-                        Id = newId,
-                        StoreId = model.Id.Value
-                    });
-                }
-            }
         }
     }
 }

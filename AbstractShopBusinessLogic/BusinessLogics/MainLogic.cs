@@ -114,24 +114,7 @@ namespace AbstractShopBusinessLogic.BusinessLogics
 
         public void AddComponentInStore(AddComponentInStoreBindingModel model)
         {
-            StoreViewModel storeViewModel = _storeLogic.Read(new StoreBindingModel { Id = model.StoreId })?[0];
-            ComponentViewModel componentViewModel = _componentLogic.Read(new ComponentBindingModel { Id = model.ComponentId })?[0];
-
-            Dictionary<int, (string, int)> components = storeViewModel.StoreComponents;
-            if (components.ContainsKey(componentViewModel.Id))
-            {
-                components[componentViewModel.Id] = (componentViewModel.ComponentName, model.Count);
-            }
-            else
-            {
-                components.Add(componentViewModel.Id, (componentViewModel.ComponentName, model.Count));
-            }
-            _storeLogic.CreateOrUpdate(new StoreBindingModel
-            {
-                Id = storeViewModel.Id,
-                Name = storeViewModel.Name,
-                StoreComponents = components
-            });
+            _storeLogic.AddComponent(model);
         }
     }
 }
