@@ -1,6 +1,7 @@
 ﻿using AbstractShopBusinessLogic.BusinessLogics;
 using AbstractShopBusinessLogic.Interfaces;
 using AbstractShopView.UIForms;
+using AbstractTravelCompanyBusinessLogic.BusinessLogics;
 using AbstractTravelCompanyDatabaseImplement.Implements;
 using System;
 using System.Windows.Forms;
@@ -32,6 +33,7 @@ namespace AbstractShopView
             currentContainer.RegisterType<ITourLogic, TourLogic>(new
            HierarchicalLifetimeManager());
             currentContainer.RegisterType<MainLogic>(new HierarchicalLifetimeManager());
+            currentContainer.RegisterType<ReportLogic>(new HierarchicalLifetimeManager());
             return currentContainer;
         }
     }

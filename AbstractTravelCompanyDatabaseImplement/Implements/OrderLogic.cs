@@ -70,7 +70,7 @@ namespace AbstractTravelCompanyDatabaseImplement.Implements
             }
         }
 
-        public List<OrderViewModel> Read(OrderBindingModel model, DateTime dateFrom, DateTime dateTo)
+        public List<OrderViewModel> Read(OrderBindingModel model, DateTime? dateFrom = null, DateTime? dateTo = null)
         {
             if (dateFrom == null || dateTo == null)
             {
@@ -96,7 +96,8 @@ namespace AbstractTravelCompanyDatabaseImplement.Implements
                 using (var context = new DataBaseContext())
                 {
                     return context.Orders
-                    .Where(rec => model == null || rec.Id == model.Id)
+                    .Where(rec => (model == null || rec.Id == model.Id) && 
+                    rec.DateCreate <= dateTo && rec.DateCreate >= dateFrom)
                     .Select(rec => new OrderViewModel
                     {
                         Id = rec.Id,

@@ -97,21 +97,43 @@ namespace AbstractTravelCompanyListImplement.Implements
             }
         }
 
-        public List<OrderViewModel> Read(OrderBindingModel model)
+        public List<OrderViewModel> Read(OrderBindingModel model, DateTime? dateFrom = null, DateTime? dateTo = null)
         {
             List<OrderViewModel> result = new List<OrderViewModel>();
-            foreach (var order in source.Orders)
+            if (dateFrom == null || dateTo == null)
             {
-                if (model != null)
+                foreach (var order in source.Orders)
                 {
-                    if (order.Id == model.Id)
+                    if (model != null)
                     {
-                        result.Add(CreateViewModel(order));
-                        break;
+                        if (order.Id == model.Id)
+                        {
+                            result.Add(CreateViewModel(order));
+                            break;
+                        }
+                        continue;
                     }
-                    continue;
+                    result.Add(CreateViewModel(order));
                 }
-                result.Add(CreateViewModel(order));
+            }
+            else
+            {
+                foreach (var order in source.Orders)
+                {
+                    if (order.DateCreate >= dateFrom && order.DateCreate <= dateTo)
+                    {
+                        if (model != null)
+                        {
+                            if (order.Id == model.Id)
+                            {
+                                result.Add(CreateViewModel(order));
+                                break;
+                            }
+                            continue;
+                        }
+                        result.Add(CreateViewModel(order));
+                    }
+                }
             }
             return result;
         }

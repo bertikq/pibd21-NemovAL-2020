@@ -167,6 +167,12 @@
     <Compile Include="UIForms\FormCreateOrder.Designer.cs">
       <DependentUpon>FormCreateOrder.cs</DependentUpon>
     </Compile>
+    <Compile Include="UIForms\FormDateOrdersForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UIForms\FormDateOrdersForm.Designer.cs">
+      <DependentUpon>FormDateOrdersForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="UIForms\FormMain.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -208,6 +214,9 @@
     </Compile>
     <EmbeddedResource Include="UIForms\FormCreateOrder.resx">
       <DependentUpon>FormCreateOrder.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UIForms\FormDateOrdersForm.resx">
+      <DependentUpon>FormDateOrdersForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UIForms\FormMain.resx">
       <DependentUpon>FormMain.cs</DependentUpon>
