@@ -85,7 +85,7 @@ namespace AbstractTravelCompanyDatabaseImplement.Implements
                     DateImplement = rec.DateImplement,
                     Status = rec.Status,
                     TourId = rec.TourId,
-                    TourName = context.Tours.FirstOrDefault(a => a.Id == rec.TourId).TourName
+                    TourName = rec.Tour.TourName
                 }).ToList();
             }
         }
