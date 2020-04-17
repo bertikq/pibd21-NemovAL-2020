@@ -100,16 +100,15 @@ namespace AbstractTravelCompanyDatabaseImplement.Implements
                     rec.DateCreate <= dateTo && rec.DateCreate >= dateFrom)
                     .Select(rec => new OrderViewModel
                     {
-                        Id = rec.Id,
-                        Count = rec.Count,
-                        Sum = rec.Sum,
-                        DateCreate = rec.DateCreate,
-                        DateImplement = rec.DateImplement,
-                        Status = rec.Status,
-                        TourId = rec.TourId,
-                        TourName = context.Tours.FirstOrDefault(a => a.Id == rec.TourId).TourName
+                          Id = rec.Id,
+                          Count = rec.Count,
+                          Sum = rec.Sum,
+                          DateCreate = rec.DateCreate,
+                          DateImplement = rec.DateImplement,
+                          Status = rec.Status,
+                          TourId = rec.TourId,
+                          TourName = rec.Tour.TourName
                     }).ToList();
-                }
             }
         }
     }
