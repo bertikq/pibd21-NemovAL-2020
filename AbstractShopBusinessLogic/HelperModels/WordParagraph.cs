@@ -6,7 +6,7 @@ namespace AbstractTravelCompanyBusinessLogic.HelperModels
 {
     public class WordParagraph
     {
-        public List<string> Texts { get; set; }
+        public List<StringWord> Texts { get; set; }
         public WordParagraphProperties TextProperties { get; set; }
     }
 }

@@ -7,7 +7,7 @@ namespace AbstractTravelCompanyBusinessLogic.ViewModels
     public class ReportToursComponentsViewModel
     {
         public string TourName { get; set; }
-        public int TotalCount { get; set; }
-        public List<Tuple<string, int>> Components { get; set; }
+        public string ComponentName { get; set; }
+        public int ComponentCount { get; set; }
     }
 }

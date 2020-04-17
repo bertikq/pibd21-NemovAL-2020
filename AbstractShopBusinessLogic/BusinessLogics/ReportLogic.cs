@@ -1,5 +1,4 @@
 ﻿using AbstractShopBusinessLogic.Interfaces;
-using AbstractShopBusinessLogic.ViewModels;
 using AbstractTravelCompanyBusinessLogic.BindingModels;
 using AbstractTravelCompanyBusinessLogic.HelperModels;
 using AbstractTravelCompanyBusinessLogic.ViewModels;
@@ -34,21 +33,24 @@ namespace AbstractTravelCompanyBusinessLogic.BusinessLogics
 
             foreach (OrderViewModel orderViewModel in _orderLogic.Read(null, model.DateFrom, model.DateTo))
             {
-                if (!orders.ContainsKey(orderViewModel.DateCreate.Date))
+                if (orderViewModel.DateCreate > model.DateFrom && orderViewModel.DateCreate < model.DateTo)
                 {
-                    orders.Add(orderViewModel.DateCreate, new List<ReportOrdersViewModel>());
-                }
+                    if (!orders.ContainsKey(orderViewModel.DateCreate.Date))
+                    {
+                        orders.Add(orderViewModel.DateCreate.Date, new List<ReportOrdersViewModel>());
+                    }
 
-                orders[orderViewModel.DateCreate.Date].Add(new ReportOrdersViewModel
-                {
-                    Count = orderViewModel.Count,
-                    DateCreate = orderViewModel.DateCreate,
-                    DateFrom = model.DateFrom.Value,
-                    DateTo = model.DateTo.Value,
-                    TourName = orderViewModel.TourName,
-                    Status = orderViewModel.Status,
-                    Sum = orderViewModel.Sum
-                });
+                    orders[orderViewModel.DateCreate.Date].Add(new ReportOrdersViewModel
+                    {
+                        Count = orderViewModel.Count,
+                        DateCreate = orderViewModel.DateCreate,
+                        DateFrom = model.DateFrom.Value,
+                        DateTo = model.DateTo.Value,
+                        TourName = orderViewModel.TourName,
+                        Status = orderViewModel.Status,
+                        Sum = orderViewModel.Sum
+                    });
+                }
             }
             return orders;
         }
@@ -61,16 +63,16 @@ namespace AbstractTravelCompanyBusinessLogic.BusinessLogics
 
             foreach (TourViewModel tour in tours)
             {
-                ReportToursComponentsViewModel report = new ReportToursComponentsViewModel
-                {
-                    TourName = tour.TourName,
-                    TotalCount = tour.ProductComponents.Count,
-                    Components = new List<Tuple<string, int>>()
-                };
 
                 foreach ((string, int) component in tour.ProductComponents.Values)
                 {
-                    report.Components.Add(new Tuple<string, int>(component.Item1, component.Item2));
+                    ReportToursComponentsViewModel report = new ReportToursComponentsViewModel
+                    {
+                        TourName = tour.TourName,
+                        ComponentCount = component.Item2,
+                        ComponentName = component.Item1
+                    };
+                    result.Add(report);
                 }
             }
 

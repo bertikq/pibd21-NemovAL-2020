@@ -1,6 +1,6 @@
 ﻿using AbstractShopBusinessLogic.BindingModels;
 using AbstractShopBusinessLogic.Interfaces;
-using AbstractShopBusinessLogic.ViewModels;
+using AbstractTravelCompanyBusinessLogic.ViewModels;
 using AbstractTravelCompanyDatabaseImplement.Models;
 using AbstractTravelCompanyFileImplement;
 using Microsoft.EntityFrameworkCore;

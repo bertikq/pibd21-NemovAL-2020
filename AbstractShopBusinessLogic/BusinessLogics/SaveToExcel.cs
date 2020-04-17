@@ -97,7 +97,25 @@ namespace AbstractTravelCompanyBusinessLogic.BusinessLogics
                             StyleIndex = 0U
                         });
                     }
-                    rowIndex += (uint)orders.Count + 1;
+                    InsertCellInWorksheet(new ExcelCellParameters
+                    {
+                        Worksheet = worksheetPart.Worksheet,
+                        ShareStringPart = shareStringPart,
+                        ColumnName = "B",
+                        RowIndex = rowIndex + (uint)orders.Count + 1,
+                        Text = "Общая сумма",
+                        StyleIndex = 0U
+                    });
+                    InsertCellInWorksheet(new ExcelCellParameters
+                    {
+                        Worksheet = worksheetPart.Worksheet,
+                        ShareStringPart = shareStringPart,
+                        ColumnName = "C",
+                        RowIndex = rowIndex + (uint)orders.Count + 1,
+                        Text = info.Orders[date].Sum(x => x.Sum).ToString(),
+                        StyleIndex = 0U
+                    });
+                    rowIndex += (uint)orders.Count + 2;
                 }
                 workbookpart.Workbook.Save();
             }

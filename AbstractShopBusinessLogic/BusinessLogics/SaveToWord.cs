@@ -19,7 +19,7 @@ namespace AbstractTravelCompanyBusinessLogic.BusinessLogics
                     new DocumentFormat.OpenXml.Wordprocessing.Body());
                 docBody.AppendChild(CreateParagraph(new WordParagraph
                 {
-                    Texts = new List<string> { info.Title },
+                    Texts = new List<StringWord> { new StringWord { Content = info.Title, Bold = true } },
                     TextProperties = new WordParagraphProperties
                     {
                         Bold = true,
@@ -29,9 +29,21 @@ namespace AbstractTravelCompanyBusinessLogic.BusinessLogics
                 }));
                 foreach (var tour in info.Tours)
                 {
+                    StringWord name = new StringWord
+                    {
+                        Bold = true,
+                        Content = tour.TourName
+                    }; 
+                    StringWord price = new StringWord
+                    {
+                        Bold = false,
+                        Content = tour.Price.ToString()
+                    };
+
+
                     docBody.AppendChild(CreateParagraph(new WordParagraph
                     {
-                        Texts = new List<string> { tour.TourName, tour.Price.ToString() },
+                        Texts = new List<StringWord> { name, price },
                         TextProperties = new WordParagraphProperties
                         {
                             Size = "24",
@@ -75,19 +87,17 @@ namespace AbstractTravelCompanyBusinessLogic.BusinessLogics
                     RunProperties properties = new RunProperties();
                     properties.AppendChild(new FontSize
                     {
-                        Val =
-                   paragraph.TextProperties.Size
+                        Val = paragraph.TextProperties.Size
                     });
-                    if (paragraph.TextProperties.Bold)
+                    if (run.Bold)
                     {
                         properties.AppendChild(new Bold());
                     }
                     docRun.AppendChild(properties);
                     docRun.AppendChild(new Text
                     {
-                        Text = run,
-                        Space =
-                   SpaceProcessingModeValues.Preserve
+                        Text = run.Content + " ",
+                        Space = SpaceProcessingModeValues.Preserve
                     });
                     docParagraph.AppendChild(docRun);
                 }

@@ -42,21 +42,21 @@ namespace AbstractTravelCompanyBusinessLogic.BusinessLogics
                 {
                     Table = table,
                     Texts = new List<string> { order.TourName, 
-                        order.Components[0]?.Item1, order.Components[0]?.Item2.ToString() },
+                        order.ComponentName, order.ComponentCount.ToString() },
                     Style = "Normal",
                     ParagraphAlignment = ParagraphAlignment.Left
                 });
-                for (int i = 1; i < order.Components.Count; i++)
-                {
-                    CreateRow(new PdfRowParameters
-                    {
-                        Table = table,
-                        Texts = new List<string> { "",
-                        order.Components[i]?.Item1, order.Components[i]?.Item2.ToString() },
-                        Style = "Normal",
-                        ParagraphAlignment = ParagraphAlignment.Left
-                    });
-                }
+                //for (int i = 1; i < order.Components.Count; i++)
+                //{
+                //    CreateRow(new PdfRowParameters
+                //    {
+                //        Table = table,
+                //        Texts = new List<string> { "",
+                //        order.Components[i]?.Item1, order.Components[i]?.Item2.ToString() },
+                //        Style = "Normal",
+                //        ParagraphAlignment = ParagraphAlignment.Left
+                //    });
+                //}
             }
             PdfDocumentRenderer renderer = new PdfDocumentRenderer(true,
                 PdfSharp.Pdf.PdfFontEmbedding.Always)

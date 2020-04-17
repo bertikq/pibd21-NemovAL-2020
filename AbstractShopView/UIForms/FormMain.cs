@@ -1,7 +1,9 @@
 ﻿using AbstractShopBusinessLogic.BindingModels;
 using AbstractShopBusinessLogic.BusinessLogics;
 using AbstractShopBusinessLogic.Interfaces;
-using AbstractShopBusinessLogic.ViewModels;
+using AbstractTravelCompanyBusinessLogic.BindingModels;
+using AbstractTravelCompanyBusinessLogic.BusinessLogics;
+using AbstractTravelCompanyBusinessLogic.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -23,11 +25,13 @@ namespace AbstractShopView.UIForms
         private readonly MainLogic logic;
 
         private readonly IOrderLogic orderLogic;
-        public FormMain(MainLogic logic, IOrderLogic orderLogic)
+        private readonly ReportLogic reportLogic;
+        public FormMain(MainLogic logic, IOrderLogic orderLogic, ReportLogic reportLogic)
         {
             InitializeComponent();
             this.logic = logic;
             this.orderLogic = orderLogic;
+            this.reportLogic = reportLogic;
         }
 
         private void FormMain_Load(object sender, EventArgs e)
@@ -131,5 +135,32 @@ namespace AbstractShopView.UIForms
         {
             LoadData();
         }
+        private void ToWord(object sender, EventArgs e)
+        {
+            using (var dialog = new SaveFileDialog { Filter = "docx|*.docx" })
+            {
+                if (dialog.ShowDialog() == DialogResult.OK)
+                {
+                    reportLogic.SaveComponentsToWordFile(new ReportBindingModel
+                    {
+                        FileName =
+                   dialog.FileName
+                    });
+                    MessageBox.Show("Выполнено", "Успех", MessageBoxButtons.OK,
+                   MessageBoxIcon.Information);
+                }
+            }
+        }
+        private void ToExcel(object sender, EventArgs e)
+        {
+            var form = Container.Resolve<FormDateOrders>();
+            form.ShowDialog();
+        }
+        private void ToPdf(object sender, EventArgs e)
+        {
+            var form = Container.Resolve<FormReportTourComponent>();
+            form.ShowDialog();
+        }
+
     }
 }
