@@ -1,4 +1,4 @@
-﻿using AbstractShopBusinessLogic.BindingModels;
+﻿using AbstractTravelCompanyBusinessLogic.BindingModels;
 using AbstractTravelCompanyBusinessLogic.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -13,13 +13,13 @@ using Unity;
 
 namespace AbstractShopView.UIForms
 {
-    public partial class FormTours : Form
+    public partial class FormClients : Form
     {
         [Dependency]
         public new IUnityContainer Container { get; set; }
 
-        private readonly ITourLogic logic;
-        public FormTours(ITourLogic logic)
+        private readonly IClientLogic logic;
+        public FormClients(IClientLogic logic)
         {
             InitializeComponent();
             this.logic = logic;
@@ -48,29 +48,7 @@ namespace AbstractShopView.UIForms
             }
         }
 
-        private void ButtonAdd_Click(object sender, EventArgs e)
-        {
-            var form = Container.Resolve<FormTour>();
-            if (form.ShowDialog() == DialogResult.OK)
-            {
-                LoadData();
-            }
-        }
-
-        private void ButtonChange_Click(object sender, EventArgs e)
-        {
-            if (dataGridView.SelectedRows.Count == 1)
-            {
-                var form = Container.Resolve<FormTour>();
-                form.Id = Convert.ToInt32(dataGridView.SelectedRows[0].Cells[0].Value);
-                if (form.ShowDialog() == DialogResult.OK)
-                {
-                    LoadData();
-                }
-            }
-        }
-
-        private void ButtonDel_Click(object sender, EventArgs e)
+        private void buttonDel_Click(object sender, EventArgs e)
         {
             if (dataGridView.SelectedRows.Count == 1)
             {
@@ -80,7 +58,7 @@ namespace AbstractShopView.UIForms
                     int id = Convert.ToInt32(dataGridView.SelectedRows[0].Cells[0].Value);
                     try
                     {
-                        logic.Delete(new TourBindingModel { Id = id });
+                        logic.Delete(new ClientBindingModel { Id = id });
                     }
                     catch (Exception ex)
                     {
@@ -92,7 +70,7 @@ namespace AbstractShopView.UIForms
             }
         }
 
-        private void ButtonUpd_Click(object sender, EventArgs e)
+        private void buttonUpd_Click(object sender, EventArgs e)
         {
             LoadData();
         }

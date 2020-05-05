@@ -162,5 +162,10 @@ namespace AbstractShopView.UIForms
             form.ShowDialog();
         }
 
+        private void клиентыToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var form = Container.Resolve<FormClients>();
+            form.ShowDialog();
+        }
     }
 }

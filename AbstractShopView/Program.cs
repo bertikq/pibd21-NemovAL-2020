@@ -2,6 +2,7 @@
 using AbstractShopBusinessLogic.Interfaces;
 using AbstractShopView.UIForms;
 using AbstractTravelCompanyBusinessLogic.BusinessLogics;
+using AbstractTravelCompanyBusinessLogic.Interfaces;
 using AbstractTravelCompanyDatabaseImplement.Implements;
 using System;
 using System.Windows.Forms;
@@ -31,6 +32,8 @@ namespace AbstractShopView
             currentContainer.RegisterType<IOrderLogic, OrderLogic>(new
            HierarchicalLifetimeManager());
             currentContainer.RegisterType<ITourLogic, TourLogic>(new
+           HierarchicalLifetimeManager());
+            currentContainer.RegisterType<IClientLogic, ClientLogic>(new
            HierarchicalLifetimeManager());
             currentContainer.RegisterType<MainLogic>(new HierarchicalLifetimeManager());
             currentContainer.RegisterType<ReportLogic>(new HierarchicalLifetimeManager());

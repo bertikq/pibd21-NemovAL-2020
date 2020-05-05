@@ -12,5 +12,6 @@ namespace AbstractShopBusinessLogic.BindingModels
         public int TourId { get; set; }
         public int Count { get; set; }
         public decimal Sum { get; set; }
+        public int ClientId { get; set; }
     }
 }

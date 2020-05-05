@@ -1,6 +1,6 @@
 ﻿using AbstractShopBusinessLogic.BindingModels;
 using AbstractShopBusinessLogic.BusinessLogics;
-using AbstractShopBusinessLogic.Interfaces;
+using AbstractTravelCompanyBusinessLogic.Interfaces;
 using AbstractTravelCompanyBusinessLogic.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -22,12 +22,15 @@ namespace AbstractShopView.UIForms
 
         private readonly ITourLogic logicP;
 
+        private readonly IClientLogic _clientLogic;
+
         private readonly MainLogic logicM;
-        public FormCreateOrder(ITourLogic logicP, MainLogic logicM)
+        public FormCreateOrder(ITourLogic logicP, MainLogic logicM, IClientLogic clientLogic)
         {
             InitializeComponent();
             this.logicP = logicP;
             this.logicM = logicM;
+            _clientLogic = clientLogic;
         }
         private void FormCreateOrder_Load(object sender, EventArgs e)
         {
@@ -40,6 +43,15 @@ namespace AbstractShopView.UIForms
                     comboBoxTour.ValueMember = "Id";
                     comboBoxTour.DataSource = list;
                     comboBoxTour.SelectedItem = null;
+                }
+
+                List<ClientViewModel> clients = _clientLogic.Read(null);
+                if (clients != null)
+                {
+                    clientComboBox.DisplayMember = "FIO";
+                    clientComboBox.ValueMember = "Id";
+                    clientComboBox.DataSource = clients;
+                    clientComboBox.SelectedItem = null;
                 }
             }
             catch (Exception ex)
@@ -91,7 +103,8 @@ namespace AbstractShopView.UIForms
                 {
                     TourId = Convert.ToInt32(comboBoxTour.SelectedValue),
                     Count = Convert.ToInt32(textBoxCount.Text),
-                    Sum = Convert.ToDecimal(textBoxSumm.Text)
+                    Sum = Convert.ToDecimal(textBoxSumm.Text),
+                    ClientId = Convert.ToInt32(clientComboBox.SelectedValue)
                 });
                 MessageBox.Show("Сохранение прошло успешно", "Сообщение",
                MessageBoxButtons.OK, MessageBoxIcon.Information);
