@@ -106,7 +106,7 @@ namespace AbstractTravelCompanyListImplement.Implements
                 {
                     if (model != null)
                     {
-                        if (order.Id == model.Id)
+                        if (order.Id == model.Id || (model.ClientId.HasValue && model.ClientId.Value == order.ClientId))
                         {
                             result.Add(CreateViewModel(order));
                             break;
@@ -120,7 +120,9 @@ namespace AbstractTravelCompanyListImplement.Implements
             {
                 foreach (var order in source.Orders)
                 {
-                    if (order.DateCreate >= dateFrom && order.DateCreate <= dateTo)
+                    if ((model == null || order.Id == model.Id || 
+                        (model.ClientId.HasValue && model.ClientId.Value == order.ClientId)) && 
+                        order.DateCreate <= dateTo && order.DateCreate >= dateFrom)
                     {
                         if (model != null)
                         {
@@ -149,7 +151,9 @@ namespace AbstractTravelCompanyListImplement.Implements
                 DateImplement = order.DateImplement,
                 Status = order.Status,
                 TourId = order.TourId,
-                TourName = source.Tours.FirstOrDefault(a => a.Id == order.TourId).TourName
+                TourName = source.Tours.FirstOrDefault(a => a.Id == order.TourId).TourName,
+                ClientId = order.ClientId,
+                ClientFIO = source.Clients.FirstOrDefault(a => a.Id == order.ClientId).FIO
             };
         }
     }

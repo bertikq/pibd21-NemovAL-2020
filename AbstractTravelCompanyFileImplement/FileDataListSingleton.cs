@@ -20,12 +20,14 @@ namespace AbstractTravelCompanyFileImplement
         public List<Order> Orders { get; set; }
         public List<Tour> Tours { get; set; }
         public List<TourComponent> TourComponents { get; set; }
+        public List<Client> Clients { get; set; }
         private FileDataListSingleton()
         {
             Components = LoadComponents();
             Orders = LoadOrders();
             Tours = LoadTours();
             TourComponents = LoadTourComponents();
+            Clients = new List<Client>();
         }
         public static FileDataListSingleton GetInstance()
         {

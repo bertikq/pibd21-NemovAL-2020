@@ -77,7 +77,8 @@ namespace AbstractTravelCompanyDatabaseImplement.Implements
                 using (var context = new DataBaseContext())
                 {
                     return context.Orders
-                    .Where(rec => model == null || rec.Id == model.Id)
+                    .Where(rec => model == null || rec.Id == model.Id ||
+                    (model.ClientId.HasValue && model.ClientId.Value == rec.ClientId))
                     .Select(rec => new OrderViewModel
                     {
                         Id = rec.Id,
@@ -96,7 +97,8 @@ namespace AbstractTravelCompanyDatabaseImplement.Implements
                 using (var context = new DataBaseContext())
                 {
                     return context.Orders
-                    .Where(rec => (model == null || rec.Id == model.Id) && 
+                    .Where(rec => (model == null || rec.Id == model.Id ||
+                    (model.ClientId.HasValue && model.ClientId.Value == rec.ClientId)) && 
                     rec.DateCreate <= dateTo && rec.DateCreate >= dateFrom)
                     .Select(rec => new OrderViewModel
                     {
@@ -107,7 +109,9 @@ namespace AbstractTravelCompanyDatabaseImplement.Implements
                         DateImplement = rec.DateImplement,
                         Status = rec.Status,
                         TourId = rec.TourId,
-                        TourName = context.Tours.FirstOrDefault(a => a.Id == rec.TourId).TourName
+                        TourName = context.Tours.FirstOrDefault(a => a.Id == rec.TourId).TourName,
+                        ClientId = rec.ClientId,
+                        ClientFIO = rec.Client.FIO
                     }).ToList();
                 }
             }

@@ -71,7 +71,8 @@ namespace AbstractTravelCompanyFileImplement.Implements
         {
             if (dateFrom == null || dateTo == null) {
                 return source.Orders
-                .Where(rec => model == null || rec.Id == model.Id)
+                .Where(rec => model == null || rec.Id == model.Id || 
+                (model.ClientId.HasValue && model.ClientId.Value == rec.ClientId))
                 .Select(rec => new OrderViewModel
                 {
                     Id = rec.Id,
@@ -81,14 +82,17 @@ namespace AbstractTravelCompanyFileImplement.Implements
                     DateImplement = rec.DateImplement,
                     Status = rec.Status,
                     TourId = rec.TourId,
-                    TourName = source.Tours.FirstOrDefault(a => a.Id == rec.TourId)?.TourName
+                    TourName = source.Tours.FirstOrDefault(a => a.Id == rec.TourId)?.TourName,
+                    ClientId = rec.ClientId,
+                    ClientFIO = source.Clients.FirstOrDefault(a => a.Id == rec.ClientId).FIO
                 })
                 .ToList();
             }
             else
             {
                 return source.Orders
-                   .Where(rec => (model == null || rec.Id == model.Id) &&
+                   .Where(rec => (model == null || rec.Id == model.Id || 
+                   (model.ClientId.HasValue && model.ClientId.Value == rec.ClientId)) &&
                    rec.DateCreate <= dateTo && rec.DateCreate >= dateFrom)
                    .Select(rec => new OrderViewModel
                    {
@@ -99,7 +103,9 @@ namespace AbstractTravelCompanyFileImplement.Implements
                        DateImplement = rec.DateImplement,
                        Status = rec.Status,
                        TourId = rec.TourId,
-                       TourName = source.Tours.FirstOrDefault(a => a.Id == rec.TourId)?.TourName
+                       TourName = source.Tours.FirstOrDefault(a => a.Id == rec.TourId)?.TourName,
+                        ClientId = rec.ClientId,
+                       ClientFIO = source.Clients.FirstOrDefault(a => a.Id == rec.ClientId).FIO
                    })
                    .ToList();
             }
