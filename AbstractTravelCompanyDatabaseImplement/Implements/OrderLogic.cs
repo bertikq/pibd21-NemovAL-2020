@@ -6,6 +6,7 @@ using AbstractTravelCompanyFileImplement;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Microsoft.EntityFrameworkCore;
 
 namespace AbstractTravelCompanyDatabaseImplement.Implements
 {
@@ -76,7 +77,7 @@ namespace AbstractTravelCompanyDatabaseImplement.Implements
             {
                 using (var context = new DataBaseContext())
                 {
-                    return context.Orders
+                    return context.Orders.Include(x => x.Tour)
                     .Where(rec => model == null || rec.Id == model.Id)
                     .Select(rec => new OrderViewModel
                     {
@@ -87,7 +88,7 @@ namespace AbstractTravelCompanyDatabaseImplement.Implements
                         DateImplement = rec.DateImplement,
                         Status = rec.Status,
                         TourId = rec.TourId,
-                        TourName = context.Tours.FirstOrDefault(a => a.Id == rec.TourId).TourName
+                        TourName = rec.Tour.TourName
                     }).ToList();
                 }
             }
@@ -95,7 +96,7 @@ namespace AbstractTravelCompanyDatabaseImplement.Implements
             {
                 using (var context = new DataBaseContext())
                 {
-                    return context.Orders
+                    return context.Orders.Include(x => x.Tour)
                     .Where(rec => (model == null || rec.Id == model.Id) && 
                     rec.DateCreate <= dateTo && rec.DateCreate >= dateFrom)
                     .Select(rec => new OrderViewModel
@@ -109,6 +110,7 @@ namespace AbstractTravelCompanyDatabaseImplement.Implements
                           TourId = rec.TourId,
                           TourName = rec.Tour.TourName
                     }).ToList();
+                }
             }
         }
     }
