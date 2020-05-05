@@ -70,31 +70,17 @@ namespace AbstractTravelCompanyListImplement.Implements
                     throw new Exception("Уже есть склад с таким названием");
                 }
 
-                int newId = 0;
-                while (true)
-                {
-                    bool isNewId = true;
-                    foreach(Store store in source.Stores)
-                    {
-                        if (store.Id == newId)
-                        {
-                            newId++;
-                            isNewId = false;
-                            break;
-                        }
-                    }
+                int? newId = source.Stores.Max(s => (int?)s.Id) + 1;
+                if (!newId.HasValue)
+                    newId = 0;
 
-                    if (isNewId)
-                    {
-                        source.Stores.Add(new Store
-                        {
-                            Id = newId,
-                            Name = model.Name
-                        });
-                        model.Id = newId;
-                        return;
-                    }
-                }
+                source.Stores.Add(new Store
+                {
+                    Id = newId.Value,
+                    Name = model.Name
+                });
+                model.Id = newId;
+                return;
             }
 
             curStore.Name = model.Name;
