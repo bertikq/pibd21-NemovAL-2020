@@ -6,6 +6,7 @@ using AbstractTravelCompanyFileImplement;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Microsoft.EntityFrameworkCore;
 
 namespace AbstractTravelCompanyDatabaseImplement.Implements
 {
@@ -74,7 +75,7 @@ namespace AbstractTravelCompanyDatabaseImplement.Implements
         {
             using (var context = new DataBaseContext())
             {
-                return context.Orders
+                return context.Orders.Include(x => x.Tour)
                 .Where(rec => model == null || rec.Id == model.Id)
                 .Select(rec => new OrderViewModel
                 {
