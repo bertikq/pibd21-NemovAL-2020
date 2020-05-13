@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace AbstractTravelCompanyListImplement.Models
+namespace AbstractTravelCompanyFileImplement.Models
 {
     public class Tour
     {

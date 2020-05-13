@@ -1,12 +1,12 @@
-﻿using AbstractShopBusinessLogic.BindingModels;
+﻿using AbstractTravelCompanyBusinessLogic.BindingModels;
 using AbstractTravelCompanyBusinessLogic.Interfaces;
 using AbstractTravelCompanyBusinessLogic.ViewModels;
-using AbstractTravelCompanyListImplement.Models;
+using AbstractTravelCompanyFileImplement.Models;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace AbstractTravelCompanyListImplement.Implements
+namespace AbstractTravelCompanyFileImplement.Implements
 {
     public class ComponentLogic : IComponentLogic
     {

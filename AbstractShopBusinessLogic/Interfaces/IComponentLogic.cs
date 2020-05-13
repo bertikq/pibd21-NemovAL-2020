@@ -1,4 +1,4 @@
-﻿using AbstractShopBusinessLogic.BindingModels;
+﻿using AbstractTravelCompanyBusinessLogic.BindingModels;
 using AbstractTravelCompanyBusinessLogic.ViewModels;
 using System;
 using System.Collections.Generic;

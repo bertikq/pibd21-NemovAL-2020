@@ -1,9 +1,9 @@
-﻿using AbstractShopBusinessLogic.Enums;
+﻿using AbstractTravelCompanyBusinessLogic.Enums;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace AbstractShopBusinessLogic.BindingModels
+namespace AbstractTravelCompanyBusinessLogic.BindingModels
 {
     /// <summary>
     /// Заказ

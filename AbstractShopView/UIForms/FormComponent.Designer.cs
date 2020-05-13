@@ -1,4 +1,4 @@
-﻿namespace AbstractShopView
+﻿namespace AbstractTravelCompamyView
 {
     partial class FormComponent
     {

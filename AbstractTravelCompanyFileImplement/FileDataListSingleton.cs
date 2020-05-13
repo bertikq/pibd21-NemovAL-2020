@@ -1,5 +1,5 @@
-﻿using AbstractShopBusinessLogic.Enums;
-using AbstractTravelCompanyListImplement.Models;
+﻿using AbstractTravelCompanyBusinessLogic.Enums;
+using AbstractTravelCompanyFileImplement.Models;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -14,18 +14,24 @@ namespace AbstractTravelCompanyFileImplement
         private static FileDataListSingleton instance;
         private readonly string ComponentFileName = "Component.xml";
         private readonly string OrderFileName = "Order.xml";
-        private readonly string ProductFileName = "Product.xml";
-        private readonly string ProductComponentFileName = "ProductComponent.xml";
+        private readonly string TourFileName = "Tour.xml";
+        private readonly string TourComponentFileName = "TourComponent.xml";
+        private readonly string StoreFileName = "Store.xml";
+        private readonly string StoreComponentFileName = "StoreComponent.xml";
         public List<Component> Components { get; set; }
         public List<Order> Orders { get; set; }
         public List<Tour> Tours { get; set; }
         public List<TourComponent> TourComponents { get; set; }
+        public List<Store> Stores { get; set; }
+        public List<StoreComponent> StoreComponents { get; set; }
         private FileDataListSingleton()
         {
             Components = LoadComponents();
             Orders = LoadOrders();
             Tours = LoadTours();
             TourComponents = LoadTourComponents();
+            Stores = LoadStores();
+            StoreComponents = LoadStoreComponents();
         }
         public static FileDataListSingleton GetInstance()
         {
@@ -41,6 +47,8 @@ namespace AbstractTravelCompanyFileImplement
             SaveOrders();
             SaveTours();
             SaveToursComponents();
+            SaveStores();
+            SaveStoreComponents();
         }
         private List<Component> LoadComponents()
         {
@@ -90,17 +98,55 @@ namespace AbstractTravelCompanyFileImplement
         private List<Tour> LoadTours()
         {
             var list = new List<Tour>();
-            if (File.Exists(ProductFileName))
+            if (File.Exists(TourFileName))
             {
-                XDocument xDocument = XDocument.Load(ProductFileName);
-                var xElements = xDocument.Root.Elements("Product").ToList();
+                XDocument xDocument = XDocument.Load(TourFileName);
+                var xElements = xDocument.Root.Elements("Tour").ToList();
                 foreach (var elem in xElements)
                 {
                     list.Add(new Tour
                     {
                         Id = Convert.ToInt32(elem.Attribute("Id").Value),
-                        TourName = elem.Element("ProductName").Value,
+                        TourName = elem.Element("TourName").Value,
                         Price = Convert.ToDecimal(elem.Element("Price").Value)
+                    });
+                }
+            }
+            return list;
+        }
+        private List<Store> LoadStores()
+        {
+            var list = new List<Store>();
+            if (File.Exists(StoreFileName))
+            {
+                XDocument xDocument = XDocument.Load(StoreFileName);
+                var xElements = xDocument.Root.Elements("Store").ToList();
+                foreach (var elem in xElements)
+                {
+                    list.Add(new Store
+                    {
+                        Id = Convert.ToInt32(elem.Attribute("Id").Value),
+                        Name = elem.Element("StoreName").Value
+                    });
+                }
+            }
+            return list;
+        }
+        private List<StoreComponent> LoadStoreComponents()
+        {
+            var list = new List<StoreComponent>();
+            if (File.Exists(StoreComponentFileName))
+            {
+                XDocument xDocument = XDocument.Load(StoreComponentFileName);
+                var xElements = xDocument.Root.Elements("StoreComponent").ToList();
+                foreach (var elem in xElements)
+                {
+                    list.Add(new StoreComponent
+                    {
+                        Id = Convert.ToInt32(elem.Attribute("Id").Value),
+                        StoreId = Convert.ToInt32(elem.Element("StoreId").Value),
+                        ComponentId = Convert.ToInt32(elem.Element("ComponentId").Value),
+                        Count = Convert.ToInt32(elem.Element("Count").Value)
                     });
                 }
             }
@@ -109,9 +155,9 @@ namespace AbstractTravelCompanyFileImplement
         private List<TourComponent> LoadTourComponents()
         {
             var list = new List<TourComponent>();
-            if (File.Exists(ProductComponentFileName))
+            if (File.Exists(TourComponentFileName))
             {
-                XDocument xDocument = XDocument.Load(ProductComponentFileName);
+                XDocument xDocument = XDocument.Load(TourComponentFileName);
                 var xElements = xDocument.Root.Elements("ProductComponent").ToList();
                 foreach (var elem in xElements)
                 {
@@ -165,16 +211,48 @@ namespace AbstractTravelCompanyFileImplement
         {
             if (Tours != null)
             {
-                var xElement = new XElement("Products");
+                var xElement = new XElement("Tours");
                 foreach (var product in Tours)
                 {
-                    xElement.Add(new XElement("Product",
+                    xElement.Add(new XElement("Tour",
                     new XAttribute("Id", product.Id),
-                    new XElement("ProductName", product.TourName),
+                    new XElement("TourName", product.TourName),
                     new XElement("Price", product.Price)));
                 }
                 XDocument xDocument = new XDocument(xElement);
-                xDocument.Save(ProductFileName);
+                xDocument.Save(TourFileName);
+            }
+        }
+        private void SaveStores()
+        {
+            if (Tours != null)
+            {
+                var xElement = new XElement("Stores");
+                foreach (var store in Stores)
+                {
+                    xElement.Add(new XElement("Store",
+                    new XAttribute("Id", store.Id),
+                    new XElement("StoreName", store.Name)));
+                }
+                XDocument xDocument = new XDocument(xElement);
+                xDocument.Save(StoreFileName);
+            }
+        }
+        private void SaveStoreComponents()
+        {
+            if (TourComponents != null)
+            {
+                var xElement = new XElement("StoreComponents");
+                foreach (var storeComponent in StoreComponents)
+                {
+                    xElement.Add(new XElement("StoreComponent",
+                    new XAttribute("Id", storeComponent.Id),
+                    new XElement("StoreId", storeComponent.StoreId),
+                    new XElement("ComponentId", storeComponent.ComponentId),
+                    new XElement("Count", storeComponent.Count)));
+                }
+                XDocument xDocument = new XDocument(xElement);
+                xDocument.Save(StoreComponentFileName);
             }
         }
         private void SaveToursComponents()
@@ -191,7 +269,7 @@ namespace AbstractTravelCompanyFileImplement
                     new XElement("Count", productComponent.Count)));
                 }
                 XDocument xDocument = new XDocument(xElement);
-                xDocument.Save(ProductComponentFileName);
+                xDocument.Save(TourComponentFileName);
             }
         }
     }

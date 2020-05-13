@@ -11,20 +11,18 @@ namespace AbstractTravelCompanyFileImplement.Implements
 {
     public class StoreLogic : IStoreLogic
     {
-        private readonly DataListSingleton source;
+        private readonly FileDataListSingleton source;
         public StoreLogic()
         {
-            source = DataListSingleton.GetInstance();
+            source = FileDataListSingleton.GetInstance();
         }
-
         public void AddComponent(AddComponentInStoreBindingModel model)
         {
-            StoreComponent storeComponent = source.StoreComponents.FirstOrDefault(x => 
-                x.StoreId == model.StoreId && x.ComponentId == model.ComponentId);
+            StoreComponent storeComponent = source.StoreComponents.FirstOrDefault(x =>
+                   x.StoreId == model.StoreId && x.ComponentId == model.ComponentId);
 
             if (storeComponent == null)
             {
-
                 int? newId = source.Stores.Max(s => (int?)s.Id) + 1;
                 if (!newId.HasValue)
                     newId = 0;
@@ -84,45 +82,41 @@ namespace AbstractTravelCompanyFileImplement.Implements
 
             source.Stores.Remove(curStore);
 
-            for (int i = 0; i < source.StoreComponents.Count; i++)
-            {
-                if (source.StoreComponents[i].StoreId == curStore.Id)
-                {
-                    source.StoreComponents.RemoveAt(i);
-                }
-            }
+            source.StoreComponents.RemoveAll(sp => sp.StoreId == curStore.Id);
         }
 
         public List<StoreViewModel> Read(StoreBindingModel model)
         {
-            List<StoreViewModel> result = new List<StoreViewModel>();
-            foreach (var component in source.Stores)
+            return source.Stores
+            .Where(rec => model == null || rec.Id == model.Id)
+            .Select(rec => new StoreViewModel
             {
-                if (model != null)
-                {
-                    if (component.Id == model.Id)
-                    {
-                        result.Add(CreateStoreViewModel(component));
-                        break;
-                    }
-                    continue;
-                }
-                result.Add(CreateStoreViewModel(component));
-            }
-            return result;
+                Id = rec.Id,
+                Name = rec.Name,
+                StoreComponents = source.StoreComponents
+                .Where(sp => sp.StoreId == rec.Id)
+                .ToDictionary(recPC => recPC.ComponentId, recPC =>
+                (source.Components.FirstOrDefault(recC => recC.Id ==
+                recPC.ComponentId)?.ComponentName, recPC.Count))
+            })
+            .ToList();
         }
 
         public bool WriteOffComponents(int componentId, int count)
         {
+            List<StoreComponent> storeComponents = source.StoreComponents.Where(sc => sc.ComponentId == componentId).ToList();
             int curCount = 0;
-            curCount += ((StoreComponent)source.StoreComponents.Where(sc => sc.ComponentId == componentId)).Count;
+            foreach(StoreComponent storeComponent in storeComponents)
+            {
+                curCount += storeComponent.Count;
+            }
 
             if (curCount < count)
             {
                 return false;
             }
 
-            foreach (StoreComponent storeComponent in source.StoreComponents.Where(sc => sc.ComponentId == componentId))
+            foreach(StoreComponent storeComponent in source.StoreComponents.Where(sc => sc.ComponentId == componentId))
             {
                 if (count > 0)
                 {
@@ -142,28 +136,6 @@ namespace AbstractTravelCompanyFileImplement.Implements
             source.StoreComponents.RemoveAll(sc => sc.Count == 0);
 
             return true;
-        }
-
-        private StoreViewModel CreateStoreViewModel(Store model)
-        {
-            StoreViewModel storeViewModel = new StoreViewModel
-            {
-                Id = model.Id,
-                Name = model.Name,
-                StoreComponents = new Dictionary<int, (string, int)>()
-            };
-
-            foreach(StoreComponent storeComponent in source.StoreComponents)
-            {
-                if (storeComponent.StoreId == model.Id) {
-                    storeViewModel.StoreComponents.Add(
-                        storeComponent.ComponentId,
-                        (source.Components.FirstOrDefault(x => x.Id == storeComponent.ComponentId).ComponentName,
-                        storeComponent.Count));
-                }
-            }
-
-            return storeViewModel;
         }
     }
 }

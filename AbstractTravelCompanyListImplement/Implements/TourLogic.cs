@@ -1,12 +1,12 @@
-﻿using AbstractShopBusinessLogic.BindingModels;
-using AbstractShopBusinessLogic.ViewModels;
+﻿using AbstractTravelCompanyBusinessLogic.BindingModels;
 using AbstractTravelCompanyBusinessLogic.Interfaces;
-using AbstractTravelCompanyListImplement.Models;
+using AbstractTravelCompanyBusinessLogic.ViewModels;
+using AbstractTravelCompanyFileImplement.Models;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace AbstractTravelCompanyListImplement.Implements
+namespace AbstractTravelCompanyFileImplement.Implements
 {
     public class TourLogic : ITourLogic
     {

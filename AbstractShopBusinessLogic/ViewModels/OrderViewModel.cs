@@ -1,4 +1,4 @@
-﻿using AbstractShopBusinessLogic.Enums;
+﻿using AbstractTravelCompanyBusinessLogic.Enums;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;

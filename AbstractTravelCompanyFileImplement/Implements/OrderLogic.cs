@@ -1,11 +1,10 @@
-﻿using AbstractShopBusinessLogic.BindingModels;
-using AbstractShopBusinessLogic.Interfaces;
-using AbstractShopBusinessLogic.ViewModels;
-using AbstractTravelCompanyListImplement.Models;
+﻿using AbstractTravelCompanyBusinessLogic.BindingModels;
+using AbstractTravelCompanyBusinessLogic.Interfaces;
+using AbstractTravelCompanyBusinessLogic.ViewModels;
+using AbstractTravelCompanyFileImplement.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 namespace AbstractTravelCompanyFileImplement.Implements
 {
@@ -38,7 +37,7 @@ namespace AbstractTravelCompanyFileImplement.Implements
             }
             else
             {
-                int maxId = source.Components.Count > 0 ? source.Components.Max(rec =>
+                int maxId = source.Orders.Count > 0 ? source.Orders.Max(rec =>
                rec.Id) : 0;
                 element = new Order { 
                     Id = maxId + 1,

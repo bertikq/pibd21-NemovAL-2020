@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Unity;
 
-namespace AbstractShopView.UIForms
+namespace AbstractTravelCompamyView.UIForms
 {
     public partial class FormStore : Form
     {

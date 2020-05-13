@@ -1,5 +1,5 @@
-﻿using AbstractShopBusinessLogic.BusinessLogics;
-using AbstractTravelCompanyBusinessLogic.BindingModels;
+﻿using AbstractTravelCompanyBusinessLogic.BindingModels;
+using AbstractTravelCompanyBusinessLogic.BusinessLogics;
 using AbstractTravelCompanyBusinessLogic.Interfaces;
 using AbstractTravelCompanyBusinessLogic.ViewModels;
 using System;
@@ -13,7 +13,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Unity;
 
-namespace AbstractShopView.UIForms
+namespace AbstractTravelCompamyView.UIForms
 {
     public partial class AddComponentInStore : Form
     {

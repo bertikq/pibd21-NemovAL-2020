@@ -1,9 +1,9 @@
-﻿using AbstractTravelCompanyListImplement.Models;
+﻿using AbstractTravelCompanyFileImplement.Models;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace AbstractTravelCompanyListImplement
+namespace AbstractTravelCompanyFileImplement
 {
     public class DataListSingleton
     {

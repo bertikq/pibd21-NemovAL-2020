@@ -1,11 +1,10 @@
-﻿using AbstractShopBusinessLogic.BindingModels;
-using AbstractShopBusinessLogic.Interfaces;
-using AbstractShopBusinessLogic.ViewModels;
-using AbstractTravelCompanyListImplement.Models;
+﻿using AbstractTravelCompanyBusinessLogic.BindingModels;
+using AbstractTravelCompanyBusinessLogic.Interfaces;
+using AbstractTravelCompanyBusinessLogic.ViewModels;
+using AbstractTravelCompanyFileImplement.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 namespace AbstractTravelCompanyFileImplement.Implements
 {
@@ -87,19 +86,18 @@ namespace AbstractTravelCompanyFileImplement.Implements
         public List<TourViewModel> Read(TourBindingModel model)
         {
             return source.Tours
-                .Where(rec => model == null || rec.Id == model.Id)
-                .Select(rec => new TourViewModel
-                {
-                    Id = rec.Id,
-                    TourName = rec.TourName,
-                    Price = rec.Price,
-                    ProductComponents = source.TourComponents
+            .Where(rec => model == null || rec.Id == model.Id)
+            .Select(rec => new TourViewModel
+            {
+                Id = rec.Id,
+                TourName = rec.TourName,
+                Price = rec.Price,
+                ProductComponents = source.TourComponents
                 .Where(recPC => recPC.TourId == rec.Id)
-               .ToDictionary(recPC => recPC.ComponentId, recPC =>
+                .ToDictionary(recPC => recPC.ComponentId, recPC =>
                 (source.Components.FirstOrDefault(recC => recC.Id ==
-               recPC.ComponentId)?.ComponentName, recPC.Count))
-                })
-                .ToList();
+                recPC.ComponentId)?.ComponentName, recPC.Count))
+            }).ToList();
         }
     }
 }

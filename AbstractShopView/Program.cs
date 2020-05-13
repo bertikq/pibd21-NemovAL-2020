@@ -1,12 +1,13 @@
-﻿using AbstractShopBusinessLogic.BusinessLogics;
-using AbstractShopView.UIForms;
+﻿using AbstractTravelCompamyView.UIForms;
+using AbstractTravelCompanyBusinessLogic.BusinessLogics;
+using AbstractTravelCompanyBusinessLogic.Interfaces;
 using AbstractTravelCompanyFileImplement.Implements;
 using System;
 using System.Windows.Forms;
 using Unity;
 using Unity.Lifetime;
 
-namespace AbstractShopView
+namespace AbstractTravelCompamyView
 {
     static class Program
     {
