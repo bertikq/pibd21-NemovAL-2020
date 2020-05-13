@@ -24,32 +24,18 @@ namespace AbstractTravelCompanyListImplement.Implements
 
             if (storeComponent == null)
             {
-                int newId = 0;
-                while (true)
-                {
-                    bool isNewId = true;
-                    foreach (StoreComponent sc in source.StoreComponents)
-                    {
-                        if (sc.Id == newId)
-                        {
-                            newId++;
-                            isNewId = false;
-                            break;
-                        }
-                    }
+                int? newId = source.Stores.Max(s => (int?)s.Id) + 1;
+                if (!newId.HasValue)
+                    newId = 0;
 
-                    if (isNewId)
-                    {
-                        source.StoreComponents.Add(new StoreComponent
-                        {
-                            Id = newId,
-                            Count = model.Count,
-                            ComponentId = model.ComponentId,
-                            StoreId = model.StoreId
-                        });
-                        return;
-                    }
-                }
+                source.StoreComponents.Add(new StoreComponent
+                {
+                    Id = newId.Value,
+                    Count = model.Count,
+                    ComponentId = model.ComponentId,
+                    StoreId = model.StoreId
+                });
+                return;
             }
 
             storeComponent.Count += model.Count;
