@@ -1,6 +1,6 @@
 ﻿using AbstractShopBusinessLogic.BindingModels;
-using AbstractShopBusinessLogic.Interfaces;
 using AbstractShopBusinessLogic.ViewModels;
+using AbstractTravelCompanyBusinessLogic.Interfaces;
 using AbstractTravelCompanyListImplement.Models;
 using System;
 using System.Collections.Generic;

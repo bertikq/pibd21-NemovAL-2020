@@ -1,6 +1,6 @@
 ﻿namespace AbstractShopView.UIForms
 {
-    partial class FormTours
+    partial class FormStores
     {
         /// <summary>
         /// Required designer variable.
@@ -41,40 +41,40 @@
             this.buttonUpd.Location = new System.Drawing.Point(588, 159);
             this.buttonUpd.Name = "buttonUpd";
             this.buttonUpd.Size = new System.Drawing.Size(100, 30);
-            this.buttonUpd.TabIndex = 9;
+            this.buttonUpd.TabIndex = 14;
             this.buttonUpd.Text = "Обновить";
             this.buttonUpd.UseVisualStyleBackColor = true;
-            this.buttonUpd.Click += new System.EventHandler(this.ButtonUpd_Click);
+            this.buttonUpd.Click += new System.EventHandler(this.buttonUpd_Click);
             // 
             // buttonDel
             // 
             this.buttonDel.Location = new System.Drawing.Point(588, 123);
             this.buttonDel.Name = "buttonDel";
             this.buttonDel.Size = new System.Drawing.Size(100, 30);
-            this.buttonDel.TabIndex = 8;
+            this.buttonDel.TabIndex = 13;
             this.buttonDel.Text = "Удалить";
             this.buttonDel.UseVisualStyleBackColor = true;
-            this.buttonDel.Click += new System.EventHandler(this.ButtonDel_Click);
+            this.buttonDel.Click += new System.EventHandler(this.buttonDel_Click);
             // 
             // buttonChange
             // 
             this.buttonChange.Location = new System.Drawing.Point(588, 87);
             this.buttonChange.Name = "buttonChange";
             this.buttonChange.Size = new System.Drawing.Size(100, 30);
-            this.buttonChange.TabIndex = 7;
+            this.buttonChange.TabIndex = 12;
             this.buttonChange.Text = "Изменить";
             this.buttonChange.UseVisualStyleBackColor = true;
-            this.buttonChange.Click += new System.EventHandler(this.ButtonChange_Click);
+            this.buttonChange.Click += new System.EventHandler(this.buttonChange_Click);
             // 
             // buttonAdd
             // 
             this.buttonAdd.Location = new System.Drawing.Point(588, 52);
             this.buttonAdd.Name = "buttonAdd";
             this.buttonAdd.Size = new System.Drawing.Size(100, 30);
-            this.buttonAdd.TabIndex = 6;
+            this.buttonAdd.TabIndex = 11;
             this.buttonAdd.Text = "Добавить";
             this.buttonAdd.UseVisualStyleBackColor = true;
-            this.buttonAdd.Click += new System.EventHandler(this.ButtonAdd_Click);
+            this.buttonAdd.Click += new System.EventHandler(this.buttonAdd_Click);
             // 
             // dataGridView
             // 
@@ -84,9 +84,9 @@
             this.dataGridView.RowHeadersWidth = 51;
             this.dataGridView.RowTemplate.Height = 24;
             this.dataGridView.Size = new System.Drawing.Size(425, 425);
-            this.dataGridView.TabIndex = 5;
+            this.dataGridView.TabIndex = 10;
             // 
-            // FormTours
+            // FormStores
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -96,9 +96,9 @@
             this.Controls.Add(this.buttonChange);
             this.Controls.Add(this.buttonAdd);
             this.Controls.Add(this.dataGridView);
-            this.Name = "FormTours";
-            this.Text = "Туры";
-            this.Load += new System.EventHandler(this.FormComponents_Load);
+            this.Name = "FormStores";
+            this.Text = "Склады";
+            this.Load += new System.EventHandler(this.FormStores_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).EndInit();
             this.ResumeLayout(false);
 

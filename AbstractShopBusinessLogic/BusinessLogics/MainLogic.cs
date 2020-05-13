@@ -1,6 +1,8 @@
 ﻿using AbstractShopBusinessLogic.BindingModels;
 using AbstractShopBusinessLogic.Enums;
-using AbstractShopBusinessLogic.Interfaces;
+using AbstractTravelCompanyBusinessLogic.BindingModels;
+using AbstractTravelCompanyBusinessLogic.Interfaces;
+using AbstractTravelCompanyBusinessLogic.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -10,10 +12,14 @@ namespace AbstractShopBusinessLogic.BusinessLogics
     public class MainLogic
     {
         private readonly IOrderLogic orderLogic;
+        private readonly IStoreLogic _storeLogic;
+        private readonly IComponentLogic _componentLogic;
 
-        public MainLogic(IOrderLogic orderLogic)
+        public MainLogic(IOrderLogic orderLogic, IStoreLogic storeLogic, IComponentLogic componentLogic)
         {
             this.orderLogic = orderLogic;
+            _storeLogic = storeLogic;
+            _componentLogic = componentLogic;
         }
 
         public void CreateOrder(CreateOrderBindingModel model)
@@ -104,6 +110,11 @@ namespace AbstractShopBusinessLogic.BusinessLogics
                 DateImplement = order.DateImplement,
                 Status = OrderStatus.Оплачен
             });
+        }
+
+        public void AddComponentInStore(AddComponentInStoreBindingModel model)
+        {
+            _storeLogic.AddComponent(model);
         }
     }
 }

@@ -1,5 +1,6 @@
-﻿using AbstractShopBusinessLogic.BindingModels;
+﻿using AbstractTravelCompanyBusinessLogic.BindingModels;
 using AbstractTravelCompanyBusinessLogic.Interfaces;
+using AbstractTravelCompanyBusinessLogic.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -11,32 +12,41 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Unity;
 
-namespace AbstractShopView
+namespace AbstractShopView.UIForms
 {
-    public partial class FormComponent : Form
+    public partial class FormStore : Form
     {
         [Dependency]
         public new IUnityContainer Container { get; set; }
         public int Id { set { id = value; } }
 
-        private readonly IComponentLogic logic;
+        private readonly IStoreLogic logic;
 
         private int? id;
-        public FormComponent(IComponentLogic logic)
+
+        private Dictionary<int, (string, int)> storeComponents;
+        public FormStore(IStoreLogic service)
         {
             InitializeComponent();
-            this.logic = logic;
+            this.logic = service;
         }
-        private void FormComponent_Load(object sender, EventArgs e)
+
+        private void FormStore_Load(object sender, EventArgs e)
         {
             if (id.HasValue)
             {
                 try
                 {
-                    var view = logic.Read(new ComponentBindingModel { Id = id })?[0];
+                    StoreViewModel view = logic.Read(new StoreBindingModel
+                    {
+                        Id = id.Value
+                    })?[0];
+
                     if (view != null)
                     {
-                        textBoxName.Text = view.ComponentName;
+                        textBoxName.Text = view.Name;
+                        storeComponents = view.StoreComponents;
+                        LoadData();
                     }
                 }
                 catch (Exception ex)
@@ -45,9 +55,32 @@ namespace AbstractShopView
                    MessageBoxIcon.Error);
                 }
             }
+            else
+            {
+                storeComponents = new Dictionary<int, (string, int)>();
+            }
         }
 
-        private void ButtonSave_Click(object sender, EventArgs e)
+        private void LoadData()
+        {
+            try
+            {
+                if (storeComponents != null)
+                {
+                    dataGridView.Rows.Clear();
+                    foreach (var pc in storeComponents)
+                    {
+                        dataGridView.Rows.Add(new object[] { pc.Key, pc.Value.Item1, pc.Value.Item2 });
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void buttonSave_Click(object sender, EventArgs e)
         {
             if (string.IsNullOrEmpty(textBoxName.Text))
             {
@@ -57,10 +90,10 @@ namespace AbstractShopView
             }
             try
             {
-                logic.CreateOrUpdate(new ComponentBindingModel
+                logic.CreateOrUpdate(new StoreBindingModel
                 {
                     Id = id,
-                    ComponentName = textBoxName.Text
+                    Name = textBoxName.Text
                 });
                 MessageBox.Show("Сохранение прошло успешно", "Сообщение",
                MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -74,7 +107,7 @@ namespace AbstractShopView
             }
         }
 
-        private void ButtonCancel_Click(object sender, EventArgs e)
+        private void buttonCancel_Click(object sender, EventArgs e)
         {
             DialogResult = DialogResult.Cancel;
             Close();
