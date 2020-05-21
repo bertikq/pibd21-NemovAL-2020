@@ -1,12 +1,11 @@
-﻿using AbstractShopBusinessLogic.BindingModels;
-using AbstractShopBusinessLogic.Interfaces;
-using AbstractShopBusinessLogic.ViewModels;
-using AbstractTravelCompanyDatabaseImplement.Models;
-using AbstractTravelCompanyFileImplement;
+﻿using AbstractTravelCompanyDatabaseImplement.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
+using AbstractTravelCompanyBusinessLogic.Interfaces;
+using AbstractTravelCompanyBusinessLogic.BindingModels;
+using AbstractTravelCompanyBusinessLogic.ViewModels;
 
 namespace AbstractTravelCompanyDatabaseImplement.Implements
 {

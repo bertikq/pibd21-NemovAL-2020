@@ -1,5 +1,5 @@
-﻿using AbstractShopBusinessLogic.Interfaces;
-using AbstractShopBusinessLogic.ViewModels;
+﻿using AbstractTravelCompanyBusinessLogic.Interfaces;
+using AbstractTravelCompanyBusinessLogic.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Unity;
 
-namespace AbstractShopView.UIForms
+namespace AbstractTravelCompamyView.UIForms
 {
     public partial class FormTourComponent : Form
     {

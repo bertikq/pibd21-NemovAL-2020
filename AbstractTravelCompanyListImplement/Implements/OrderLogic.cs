@@ -1,13 +1,13 @@
-﻿using AbstractShopBusinessLogic.BindingModels;
-using AbstractShopBusinessLogic.Interfaces;
-using AbstractShopBusinessLogic.ViewModels;
-using AbstractTravelCompanyListImplement.Models;
+﻿using AbstractTravelCompanyBusinessLogic.BindingModels;
+using AbstractTravelCompanyBusinessLogic.Interfaces;
+using AbstractTravelCompanyBusinessLogic.ViewModels;
+using AbstractTravelCompanyFileImplement.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace AbstractTravelCompanyListImplement.Implements
+namespace AbstractTravelCompanyFileImplement.Implements
 {
     public class OrderLogic : IOrderLogic
     {
@@ -21,10 +21,6 @@ namespace AbstractTravelCompanyListImplement.Implements
             Order tempProduct = model.Id.HasValue ? null : new Order { Id = 1 };
             foreach (var order in source.Orders)
             {
-                if (order.TourId == model.TourId && order.Id != model.Id)
-                {
-                    throw new Exception("Уже есть изделие с таким названием");
-                }
                 if (!model.Id.HasValue && order.Id >= tempProduct.Id)
                 {
                     tempProduct.Id = order.Id + 1;

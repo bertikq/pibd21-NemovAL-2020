@@ -1,13 +1,13 @@
-﻿using AbstractShopBusinessLogic.BusinessLogics;
-using AbstractShopBusinessLogic.Interfaces;
-using AbstractShopView.UIForms;
+using AbstractTravelCompamyView.UIForms;
+using AbstractTravelCompanyBusinessLogic.BusinessLogics;
+using AbstractTravelCompanyBusinessLogic.Interfaces;
 using AbstractTravelCompanyDatabaseImplement.Implements;
 using System;
 using System.Windows.Forms;
 using Unity;
 using Unity.Lifetime;
 
-namespace AbstractShopView
+namespace AbstractTravelCompamyView
 {
     static class Program
     {
@@ -30,6 +30,8 @@ namespace AbstractShopView
             currentContainer.RegisterType<IOrderLogic, OrderLogic>(new
            HierarchicalLifetimeManager());
             currentContainer.RegisterType<ITourLogic, TourLogic>(new
+           HierarchicalLifetimeManager());
+            currentContainer.RegisterType<IStoreLogic, StoreLogic>(new
            HierarchicalLifetimeManager());
             currentContainer.RegisterType<MainLogic>(new HierarchicalLifetimeManager());
             return currentContainer;

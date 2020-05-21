@@ -1,4 +1,4 @@
-﻿namespace AbstractShopView.UIForms
+﻿namespace AbstractTravelCompamyView.UIForms
 {
     partial class FormCreateOrder
     {

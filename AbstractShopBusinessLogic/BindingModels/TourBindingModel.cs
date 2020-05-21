@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace AbstractShopBusinessLogic.BindingModels
+namespace AbstractTravelCompanyBusinessLogic.BindingModels
 {
     /// <summary>
     /// Туристические путевки

@@ -15,5 +15,8 @@ namespace AbstractTravelCompanyDatabaseImplement.Models
 
         [ForeignKey("ComponentId")]
         public virtual List<TourComponent> TourComponents { get; set; }
+
+        [ForeignKey("ComponentId")]
+        public virtual List<StoreComponent> StoreComponents { get; set; }
     }
 }

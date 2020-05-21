@@ -1,10 +1,10 @@
-﻿using AbstractShopBusinessLogic.BindingModels;
-using AbstractShopBusinessLogic.ViewModels;
+﻿using AbstractTravelCompanyBusinessLogic.BindingModels;
+using AbstractTravelCompanyBusinessLogic.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace AbstractShopBusinessLogic.Interfaces
+namespace AbstractTravelCompanyBusinessLogic.Interfaces
 {
     public interface IComponentLogic
     {

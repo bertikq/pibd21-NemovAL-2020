@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace AbstractShopBusinessLogic.Enums
+namespace AbstractTravelCompanyBusinessLogic.Enums
 {
     /// <summary>
     /// Статус заказа

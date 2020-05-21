@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace AbstractShopBusinessLogic.BindingModels
+namespace AbstractTravelCompanyBusinessLogic.BindingModels
 {
     /// <summary>
     /// Данные от клиента, для создания заказа

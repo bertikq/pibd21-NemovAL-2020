@@ -1,13 +1,7 @@
-﻿using AbstractShopBusinessLogic.Enums;
-using AbstractTravelCompanyDatabaseImplement.Models;
+﻿using AbstractTravelCompanyDatabaseImplement.Models;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Xml.Linq;
 
-namespace AbstractTravelCompanyFileImplement
+namespace AbstractTravelCompanyDatabaseImplement
 {
     public class DataBaseContext : DbContext
     {
@@ -15,7 +9,7 @@ namespace AbstractTravelCompanyFileImplement
         {
             if (optionsBuilder.IsConfigured == false)
             {
-                optionsBuilder.UseNpgsql(@"Host=localhost;Port=5432;Database=TravelCompany;Username=postgres;Password=postgres");
+                optionsBuilder.UseNpgsql(@"Host=localhost;Port=5432;Database=TravelCompany11;Username=postgres;Password=postgres");
             }
             base.OnConfiguring(optionsBuilder);
         }
@@ -23,5 +17,7 @@ namespace AbstractTravelCompanyFileImplement
         public virtual DbSet<Tour> Tours { set; get; }
         public virtual DbSet<TourComponent> TourComponents { set; get; }
         public virtual DbSet<Order> Orders { set; get; }
+        public virtual DbSet<Store> Stores { set; get; }
+        public virtual DbSet<StoreComponent> StoreComponents { set; get; }
     }
 }
