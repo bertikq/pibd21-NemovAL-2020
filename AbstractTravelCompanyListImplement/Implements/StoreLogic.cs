@@ -93,6 +93,19 @@ namespace AbstractTravelCompanyFileImplement.Implements
             }
         }
 
+        public bool IsWriteOffComponents(int componentId, int count)
+        {
+            int curCount = 0;
+            curCount += ((StoreComponent)source.StoreComponents.Where(sc => sc.ComponentId == componentId)).Count;
+
+            if (curCount < count)
+            {
+                return false;
+            }
+
+            return true;
+        }
+
         public List<StoreViewModel> Read(StoreBindingModel model)
         {
             List<StoreViewModel> result = new List<StoreViewModel>();
@@ -112,16 +125,8 @@ namespace AbstractTravelCompanyFileImplement.Implements
             return result;
         }
 
-        public bool WriteOffComponents(int componentId, int count)
+        public void WriteOffComponents(int componentId, int count)
         {
-            int curCount = 0;
-            curCount += ((StoreComponent)source.StoreComponents.Where(sc => sc.ComponentId == componentId)).Count;
-
-            if (curCount < count)
-            {
-                return false;
-            }
-
             foreach (StoreComponent storeComponent in source.StoreComponents.Where(sc => sc.ComponentId == componentId))
             {
                 if (count > 0)
@@ -140,8 +145,6 @@ namespace AbstractTravelCompanyFileImplement.Implements
             }
 
             source.StoreComponents.RemoveAll(sc => sc.Count == 0);
-
-            return true;
         }
 
         private StoreViewModel CreateStoreViewModel(Store model)

@@ -59,10 +59,15 @@ namespace AbstractTravelCompanyBusinessLogic.BusinessLogics
 
             foreach (int componentId in tour.ProductComponents.Keys)
             {
-                if (!_storeLogic.WriteOffComponents(componentId, tour.ProductComponents[componentId].Item2 * order.Count))
+                if (!_storeLogic.IsWriteOffComponents(componentId, tour.ProductComponents[componentId].Item2 * order.Count))
                 {
                     throw new Exception("Не хватает компонентов");
                 }
+            }
+
+            foreach (int componentId in tour.ProductComponents.Keys)
+            {
+                _storeLogic.WriteOffComponents(componentId, tour.ProductComponents[componentId].Item2 * order.Count);
             }
 
             orderLogic.CreateOrUpdate(new OrderBindingModel

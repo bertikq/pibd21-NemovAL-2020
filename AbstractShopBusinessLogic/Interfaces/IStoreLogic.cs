@@ -12,6 +12,7 @@ namespace AbstractTravelCompanyBusinessLogic.Interfaces
         void CreateOrUpdate(StoreBindingModel model);
         void AddComponent(AddComponentInStoreBindingModel model);
         void Delete(StoreBindingModel model);
-        bool WriteOffComponents(int componentId, int count);
+        bool IsWriteOffComponents(int componentId, int count);
+        void WriteOffComponents(int componentId, int count);
     }
 }
