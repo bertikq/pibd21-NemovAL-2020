@@ -101,21 +101,22 @@ namespace AbstractTravelCompanyFileImplement.Implements
             .ToList();
         }
 
-        public bool WriteOffComponents(int componentId, int count)
+        public bool IsWriteOffComponents(int componentId, int count)
         {
-            List<StoreComponent> storeComponents = source.StoreComponents.Where(sc => sc.ComponentId == componentId).ToList();
             int curCount = 0;
-            foreach(StoreComponent storeComponent in storeComponents)
-            {
-                curCount += storeComponent.Count;
-            }
+            curCount = source.StoreComponents.Where(sc => sc.ComponentId == componentId).Sum(x => x.Count);
 
             if (curCount < count)
             {
                 return false;
             }
 
-            foreach(StoreComponent storeComponent in source.StoreComponents.Where(sc => sc.ComponentId == componentId))
+            return true;
+        }
+
+        public void WriteOffComponents(int componentId, int count)
+        {
+            foreach (StoreComponent storeComponent in source.StoreComponents.Where(sc => sc.ComponentId == componentId))
             {
                 if (count > 0)
                 {
@@ -133,8 +134,6 @@ namespace AbstractTravelCompanyFileImplement.Implements
             }
 
             source.StoreComponents.RemoveAll(sc => sc.Count == 0);
-
-            return true;
         }
     }
 }
