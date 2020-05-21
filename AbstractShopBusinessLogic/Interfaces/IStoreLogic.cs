@@ -14,6 +14,6 @@ namespace AbstractTravelCompanyBusinessLogic.Interfaces
         void Delete(StoreBindingModel model);
         bool IsWriteOffComponents(int componentId, int count);
         void WriteOffComponents(int componentId, int count);
-
+        void WriteOffTour(int tourId, int count);
     }
 }

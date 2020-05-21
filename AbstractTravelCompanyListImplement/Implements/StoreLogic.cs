@@ -12,8 +12,12 @@ namespace AbstractTravelCompanyFileImplement.Implements
     public class StoreLogic : IStoreLogic
     {
         private readonly DataListSingleton source;
-        public StoreLogic()
+
+        private readonly ITourLogic _tourLogic;
+
+        public StoreLogic(ITourLogic tourLogic)
         {
+            _tourLogic = tourLogic;
             source = DataListSingleton.GetInstance();
         }
 
@@ -167,6 +171,46 @@ namespace AbstractTravelCompanyFileImplement.Implements
             }
 
             return storeViewModel;
+        }
+
+        public void WriteOffTour(int tourId, int count)
+        {
+            var tour = _tourLogic.Read(new TourBindingModel
+            {
+                Id = tourId
+            })?[0];
+
+            if (tour == null)
+            {
+                throw new Exception("Не найден тур");
+            }
+            foreach (var componentId in tour.ProductComponents.Keys)
+            {
+                int countComponent = tour.ProductComponents[componentId].Item2;
+                foreach (StoreComponent storeComponent in source.StoreComponents.Where(sc => sc.ComponentId == componentId))
+                {
+                    if (countComponent > 0)
+                    {
+                        if (storeComponent.Count >= countComponent)
+                        {
+                            storeComponent.Count -= countComponent;
+                            countComponent = 0;
+                        }
+                        else
+                        {
+                            countComponent -= storeComponent.Count;
+                            storeComponent.Count = 0;
+                        }
+                    }
+                }
+
+                if (countComponent > 0)
+                {
+                    throw new Exception("Недостаточно компонентов на складе");
+                }
+            }
+
+            source.StoreComponents.RemoveAll(x => x.Count == 0);
         }
     }
 }

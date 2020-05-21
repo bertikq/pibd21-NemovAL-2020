@@ -11,6 +11,13 @@ namespace AbstractTravelCompanyDatabaseImplement.Implements
 {
     public class StoreLogic : IStoreLogic
     {
+        private readonly ITourLogic _tourLogic;
+
+        public StoreLogic(ITourLogic tourLogic)
+        {
+            _tourLogic = tourLogic;
+        }
+
         public void AddComponent(AddComponentInStoreBindingModel model)
         {
             using (var context = new DataBaseContext())
@@ -94,41 +101,103 @@ namespace AbstractTravelCompanyDatabaseImplement.Implements
             }
         }
 
-        public bool WriteOffComponents(int componentId, int count)
+        public void WriteOffComponents(int componentId, int count)
         {
+            using (var context = new DataBaseContext())
+            {
+                foreach (StoreComponent storeComponent in context.StoreComponents.Where(sc => sc.ComponentId == componentId))
+                {
+                    if (count > 0)
+                    {
+                        if (storeComponent.Count >= count)
+                        {
+                            storeComponent.Count -= count;
+                            count = 0;
+                        }
+                        else
+                        {
+                            count -= storeComponent.Count;
+                            storeComponent.Count = 0;
+                        }
+                    }
+                }
+
+                context.StoreComponents.RemoveRange(context.StoreComponents.Where(x => x.Count == 0));
+            }
+        }
+
+
+        public bool IsWriteOffComponents(int componentId, int count)
+        {
+            using (var context = new DataBaseContext())
+            {
+                int curCount = 0;
+                curCount = context.StoreComponents.Where(sc => sc.ComponentId == componentId).Sum(x => x.Count);
+
+                if (curCount < count)
+                {
+                    return false;
+                }
+
+                return true;
+            }
+        }
+
+        public void WriteOffTour(int tourId, int countTours)
+        {
+
             using (var context = new DataBaseContext())
             {
                 using (var transaction = context.Database.BeginTransaction())
                 {
                     try
                     {
-                        foreach (StoreComponent storeComponent in context.StoreComponents.Where(sc => sc.ComponentId == componentId))
+                        var tour = _tourLogic.Read(new TourBindingModel
                         {
-                            if (count > 0)
+                            Id = tourId
+                        })?[0];
+
+                        if (tour == null)
+                        {
+                            throw new Exception("Не найден тур");
+                        }
+                        foreach (var componentId in tour.ProductComponents.Keys)
+                        {
+                            int countComponent = tour.ProductComponents[componentId].Item2;
+                            foreach (StoreComponent storeComponent in context.StoreComponents.Where(sc => sc.ComponentId == componentId))
                             {
-                                if (storeComponent.Count >= count)
+                                if (countComponent > 0)
                                 {
-                                    storeComponent.Count -= count;
-                                    count = 0;
+                                    if (storeComponent.Count >= countComponent)
+                                    {
+                                        storeComponent.Count -= countComponent;
+                                        countComponent = 0;
+                                    }
+                                    else
+                                    {
+                                        countComponent -= storeComponent.Count;
+                                        storeComponent.Count = 0;
+                                    }
                                 }
-                                else
-                                {
-                                    count -= storeComponent.Count;
-                                    storeComponent.Count = 0;
-                                }
+                            }
+
+                            if (countComponent > 0)
+                            {
+                                throw new Exception("Недостаточно компонентов на складе");
+                            }
+                        }
+                        foreach (var sc in context.StoreComponents)
+                        {
+                            if (sc.Count == 0)
+                            {
+                                context.StoreComponents.Remove(sc);
                             }
                         }
 
-                        context.StoreComponents.RemoveRange(context.StoreComponents.Where(x => x.Count == 0).ToList());
+                        
 
-                        if (count > 0)
-                        {
-                            throw new Exception("Недостаточно компонентов на складе");
-                        }
-
-                        context.SaveChanges(); 
+                        context.SaveChanges();
                         transaction.Commit();
-                        return true;
                     }
                     catch (Exception)
                     {

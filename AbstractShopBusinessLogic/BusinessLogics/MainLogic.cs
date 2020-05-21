@@ -47,28 +47,7 @@ namespace AbstractTravelCompanyBusinessLogic.BusinessLogics
                 throw new Exception("Заказ не в статусе \"Принят\"");
             }
 
-           var tour = _tourLogic.Read(new TourBindingModel
-            {
-                Id = order.TourId
-            })?[0];
-
-            if (tour == null)
-            {
-                throw new Exception("Не найден тур");
-            }
-
-            foreach (int componentId in tour.ProductComponents.Keys)
-            {
-                if (!_storeLogic.IsWriteOffComponents(componentId, tour.ProductComponents[componentId].Item2 * order.Count))
-                {
-                    throw new Exception("Не хватает компонентов");
-                }
-            }
-
-            foreach (int componentId in tour.ProductComponents.Keys)
-            {
-                _storeLogic.WriteOffComponents(componentId, tour.ProductComponents[componentId].Item2 * order.Count);
-            }
+            _storeLogic.WriteOffTour(order.TourId, order.Count);
 
             orderLogic.CreateOrUpdate(new OrderBindingModel
             {
