@@ -20,7 +20,7 @@ namespace TravelCompanyClientView.Forms
         {
             try
             {
-                comboBoxProduct.DisplayMember = "ProductName";
+                comboBoxProduct.DisplayMember = "TourName";
                 comboBoxProduct.ValueMember = "Id";
                 comboBoxProduct.DataSource = APIClient.GetRequest<List<TourViewModel>>("api/main/getproductlist");
                 comboBoxProduct.SelectedItem = null;
