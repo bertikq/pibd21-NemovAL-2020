@@ -5,6 +5,7 @@ using AbstractTravelCompanyBusinessLogic.Interfaces;
 using AbstractTravelCompanyBusinessLogic.ViewModels;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace AbstractTravelCompanyBusinessLogic.BusinessLogics
@@ -32,27 +33,26 @@ namespace AbstractTravelCompanyBusinessLogic.BusinessLogics
         {
             Dictionary<DateTime, List<ReportOrdersViewModel>> orders = new Dictionary<DateTime, List<ReportOrdersViewModel>>();
 
-            foreach (OrderViewModel orderViewModel in _orderLogic.Read(null, model.DateFrom, model.DateTo))
-            {
-                if (orderViewModel.DateCreate > model.DateFrom && orderViewModel.DateCreate < model.DateTo)
-                {
-                    if (!orders.ContainsKey(orderViewModel.DateCreate.Date))
-                    {
-                        orders.Add(orderViewModel.DateCreate.Date, new List<ReportOrdersViewModel>());
-                    }
+            var curOrders = _orderLogic.Read(null, model.DateFrom, model.DateTo).GroupBy(x => x.DateCreate);
 
-                    orders[orderViewModel.DateCreate.Date].Add(new ReportOrdersViewModel
+            foreach (var date in curOrders)
+            {
+                orders.Add(date.Key, new List<ReportOrdersViewModel>());
+                foreach(var value in date)
+                {
+                    orders[date.Key].Add(new ReportOrdersViewModel
                     {
-                        Count = orderViewModel.Count,
-                        DateCreate = orderViewModel.DateCreate,
+                        Count = value.Count,
+                        DateCreate = value.DateCreate,
                         DateFrom = model.DateFrom.Value,
                         DateTo = model.DateTo.Value,
-                        TourName = orderViewModel.TourName,
-                        Status = orderViewModel.Status,
-                        Sum = orderViewModel.Sum
-                    });
+                        TourName = value.TourName,
+                        Status = value.Status,
+                        Sum = value.Sum
+                    });              
                 }
             }
+
             return orders;
         }
 
