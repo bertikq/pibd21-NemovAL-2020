@@ -35,7 +35,8 @@ namespace AbstractShopBusinessLogic.BindingModels
 
         [DataMember]
         public int? ClientId { get; set; }
-
+        public int? ManagerId { get; set; }
+        public bool? FreeOrders { get; set; }
     }
 }
 

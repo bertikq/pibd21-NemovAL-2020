@@ -43,6 +43,10 @@ namespace AbstractShopBusinessLogic.BusinessLogics
             {
                 throw new Exception("Заказ не в статусе \"Принят\"");
             }
+            if (!model.ManagerId.HasValue)
+            {
+                throw new Exception("Не указан менеджер");
+            }
             orderLogic.CreateOrUpdate(new OrderBindingModel
             {
                 Id = order.Id,
@@ -51,7 +55,8 @@ namespace AbstractShopBusinessLogic.BusinessLogics
                 Sum = order.Sum,
                 DateCreate = order.DateCreate,
                 DateImplement = DateTime.Now,
-                Status = OrderStatus.Выполняется
+                Status = OrderStatus.Выполняется,
+                ManagerId = model.ManagerId
             });
         }
 

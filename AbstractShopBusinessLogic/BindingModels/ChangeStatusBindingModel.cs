@@ -10,6 +10,7 @@ namespace AbstractShopBusinessLogic.BindingModels
     public class ChangeStatusBindingModel
     {
         public int OrderId { get; set; }
+        public int? ManagerId { get; set; }
     }
 
 }

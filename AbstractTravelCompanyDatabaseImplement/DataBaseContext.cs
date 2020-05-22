@@ -24,5 +24,6 @@ namespace AbstractTravelCompanyDatabaseImplement
         public virtual DbSet<TourComponent> TourComponents { set; get; }
         public virtual DbSet<Order> Orders { set; get; }
         public virtual DbSet<Client> Clients { set; get; }
+        public virtual DbSet<Manager> Managers { get; set; }
     }
 }
