@@ -1,4 +1,4 @@
-﻿using AbstractTravelCompanyBusinessLogic.BindingModels;
+using AbstractTravelCompanyBusinessLogic.BindingModels;
 using AbstractTravelCompanyBusinessLogic.Interfaces;
 using AbstractTravelCompanyBusinessLogic.ViewModels;
 using AbstractTravelCompanyFileImplement.Models;
@@ -24,11 +24,9 @@ namespace AbstractTravelCompanyFileImplement.Implements
 
             if (storeComponent == null)
             {
-
                 int? newId = source.Stores.Max(s => (int?)s.Id) + 1;
                 if (!newId.HasValue)
                     newId = 0;
-
                 source.StoreComponents.Add(new StoreComponent
                 {
                     Id = newId.Value,
