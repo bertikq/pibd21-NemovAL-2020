@@ -46,17 +46,6 @@ namespace AbstractTravelCompanyBusinessLogic.BusinessLogics
                     Style = "Normal",
                     ParagraphAlignment = ParagraphAlignment.Left
                 });
-                //for (int i = 1; i < order.Components.Count; i++)
-                //{
-                //    CreateRow(new PdfRowParameters
-                //    {
-                //        Table = table,
-                //        Texts = new List<string> { "",
-                //        order.Components[i]?.Item1, order.Components[i]?.Item2.ToString() },
-                //        Style = "Normal",
-                //        ParagraphAlignment = ParagraphAlignment.Left
-                //    });
-                //}
             }
             PdfDocumentRenderer renderer = new PdfDocumentRenderer(true,
                 PdfSharp.Pdf.PdfFontEmbedding.Always)
