@@ -34,7 +34,7 @@ namespace AbstractTravelCompanyFileImplement.Implements
             }
             else
             {
-                int maxId = source.Tours.Count > 0 ? source.Components.Max(rec =>
+                int maxId = source.Tours.Count > 0 ? source.Tours.Max(rec =>
                rec.Id) : 0;
                 element = new Tour { Id = maxId + 1 };
                 source.Tours.Add(element);

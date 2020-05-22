@@ -163,7 +163,7 @@ namespace AbstractTravelCompanyDatabaseImplement.Implements
                         }
                         foreach (var componentId in tour.ProductComponents.Keys)
                         {
-                            int countComponent = tour.ProductComponents[componentId].Item2;
+                            int countComponent = tour.ProductComponents[componentId].Item2 * countTours;
                             foreach (StoreComponent storeComponent in context.StoreComponents.Where(sc => sc.ComponentId == componentId))
                             {
                                 if (countComponent > 0)
