@@ -11,11 +11,8 @@ namespace AbstractTravelCompanyDatabaseImplement.Implements
 {
     public class StoreLogic : IStoreLogic
     {
-        private readonly ITourLogic _tourLogic;
-
-        public StoreLogic(ITourLogic tourLogic)
+        public StoreLogic()
         {
-            _tourLogic = tourLogic;
         }
 
         public void AddComponent(AddComponentInStoreBindingModel model)
@@ -77,6 +74,19 @@ namespace AbstractTravelCompanyDatabaseImplement.Implements
         {
             using (var context = new DataBaseContext())
             {
+                Store curStore = context.Stores.FirstOrDefault(x => x.Id == model.Id);
+
+                if (curStore == null)
+                {
+                    throw new Exception("Элемент не найден");
+                }
+
+                context.Stores.Remove(curStore);
+
+                context.StoreComponents.RemoveRange(context.StoreComponents.Where(rec =>
+                                        rec.StoreId == model.Id));
+
+                context.SaveChanges();
             }
         }
 
@@ -152,19 +162,16 @@ namespace AbstractTravelCompanyDatabaseImplement.Implements
                 {
                     try
                     {
-                        var tour = _tourLogic.Read(new TourBindingModel
-                        {
-                            Id = tourId
-                        })?[0];
+                        var tour = context.Tours.FirstOrDefault(x => x.Id == tourId);
 
                         if (tour == null)
                         {
                             throw new Exception("Не найден тур");
                         }
-                        foreach (var componentId in tour.ProductComponents.Keys)
+                        foreach (var tourComponent in context.TourComponents.Where(x => x.TourId == tourId).ToList())
                         {
-                            int countComponent = tour.ProductComponents[componentId].Item2 * countTours;
-                            foreach (StoreComponent storeComponent in context.StoreComponents.Where(sc => sc.ComponentId == componentId))
+                            int countComponent = tourComponent.Count * countTours;
+                            foreach (var storeComponent in context.StoreComponents.Where(sc => sc.ComponentId == tourComponent.ComponentId))
                             {
                                 if (countComponent > 0)
                                 {
