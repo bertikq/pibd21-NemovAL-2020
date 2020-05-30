@@ -32,25 +32,18 @@ namespace AbstractTravelCompanyBusinessLogic.BusinessLogics
         {
             Dictionary<DateTime, List<ReportOrdersViewModel>> orders = new Dictionary<DateTime, List<ReportOrdersViewModel>>();
 
-            var curOrders = _orderLogic.Read(null, model.DateFrom, model.DateTo).GroupBy(x => x.DateCreate);
-
-            foreach (var date in curOrders)
-            {
-                orders.Add(date.Key, new List<ReportOrdersViewModel>());
-                foreach(var value in date)
+            orders = _orderLogic.Read(null, model.DateFrom, model.DateTo)
+                .GroupBy(x => x.DateCreate)
+                .ToDictionary(x => x.Key, y => y.Select(z => new ReportOrdersViewModel
                 {
-                    orders[date.Key].Add(new ReportOrdersViewModel
-                    {
-                        Count = value.Count,
-                        DateCreate = value.DateCreate,
-                        DateFrom = model.DateFrom.Value,
-                        DateTo = model.DateTo.Value,
-                        TourName = value.TourName,
-                        Status = value.Status,
-                        Sum = value.Sum
-                    });              
-                }
-            }
+                    Count = z.Count,
+                    DateCreate = z.DateCreate,
+                    DateFrom = model.DateFrom.Value,
+                    DateTo = model.DateTo.Value,
+                    TourName = z.TourName,
+                    Status = z.Status,
+                    Sum = z.Sum
+                }).ToList());
 
             return orders;
         }
