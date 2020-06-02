@@ -9,7 +9,8 @@ namespace AbstractShopBusinessLogic.BusinessLogics
 {
     public class MainLogic
     {
-        private readonly IOrderLogic orderLogic;
+        private readonly IOrderLogic orderLogic; 
+        private readonly object locker = new object();
 
         public MainLogic(IOrderLogic orderLogic)
         {
@@ -31,33 +32,37 @@ namespace AbstractShopBusinessLogic.BusinessLogics
 
         public void TakeOrderInWork(ChangeStatusBindingModel model)
         {
-            var order = orderLogic.Read(new OrderBindingModel
+            lock (locker)
             {
-                Id = model.OrderId
-            })?[0];
-            if (order == null)
-            {
-                throw new Exception("Не найден заказ");
+
+                var order = orderLogic.Read(new OrderBindingModel
+                {
+                    Id = model.OrderId
+                })?[0];
+                if (order == null)
+                {
+                    throw new Exception("Не найден заказ");
+                }
+                if (order.Status != OrderStatus.Принят)
+                {
+                    throw new Exception("Заказ не в статусе \"Принят\"");
+                }
+                if (!model.ManagerId.HasValue)
+                {
+                    throw new Exception("Не указан менеджер");
+                }
+                orderLogic.CreateOrUpdate(new OrderBindingModel
+                {
+                    Id = order.Id,
+                    TourId = order.TourId,
+                    Count = order.Count,
+                    Sum = order.Sum,
+                    DateCreate = order.DateCreate,
+                    DateImplement = DateTime.Now,
+                    Status = OrderStatus.Выполняется,
+                    ManagerId = model.ManagerId
+                });
             }
-            if (order.Status != OrderStatus.Принят)
-            {
-                throw new Exception("Заказ не в статусе \"Принят\"");
-            }
-            if (!model.ManagerId.HasValue)
-            {
-                throw new Exception("Не указан менеджер");
-            }
-            orderLogic.CreateOrUpdate(new OrderBindingModel
-            {
-                Id = order.Id,
-                TourId = order.TourId,
-                Count = order.Count,
-                Sum = order.Sum,
-                DateCreate = order.DateCreate,
-                DateImplement = DateTime.Now,
-                Status = OrderStatus.Выполняется,
-                ManagerId = model.ManagerId
-            });
         }
 
         public void FinishOrder(ChangeStatusBindingModel model)

@@ -26,12 +26,14 @@ namespace AbstractShopView.UIForms
 
         private readonly IOrderLogic orderLogic;
         private readonly ReportLogic reportLogic;
-        public FormMain(MainLogic logic, IOrderLogic orderLogic, ReportLogic reportLogic)
+        private readonly WorkModeling workModeling;
+        public FormMain(MainLogic logic, IOrderLogic orderLogic, ReportLogic reportLogic, WorkModeling workModeling)
         {
             InitializeComponent();
             this.logic = logic;
             this.orderLogic = orderLogic;
             this.reportLogic = reportLogic;
+            this.workModeling = workModeling;
         }
 
         private void FormMain_Load(object sender, EventArgs e)
@@ -166,6 +168,17 @@ namespace AbstractShopView.UIForms
         private void клиентыToolStripMenuItem_Click(object sender, EventArgs e)
         {
             var form = Container.Resolve<FormClients>();
+            form.ShowDialog();
+        }
+
+        private void запускРаботToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            workModeling.DoWork();
+        }
+
+        private void исполнителиToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var form = Container.Resolve<FormManagers>();
             form.ShowDialog();
         }
     }

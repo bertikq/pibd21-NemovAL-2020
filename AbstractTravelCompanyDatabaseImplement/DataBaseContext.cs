@@ -15,7 +15,7 @@ namespace AbstractTravelCompanyDatabaseImplement
         {
             if (optionsBuilder.IsConfigured == false)
             {
-                optionsBuilder.UseNpgsql(@"Host=localhost;Port=5432;Database=TravelCompany10;Username=postgres;Password=postgres");
+                optionsBuilder.UseNpgsql(@"Host=localhost;Port=5432;Database=TravelCompany50;Username=postgres;Password=postgres");
             }
             base.OnConfiguring(optionsBuilder);
         }
