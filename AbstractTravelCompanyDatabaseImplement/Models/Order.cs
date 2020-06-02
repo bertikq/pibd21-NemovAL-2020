@@ -13,5 +13,7 @@ namespace AbstractTravelCompanyDatabaseImplement.Models
         public DateTime? DateImplement { get; set; }
         public int TourId { get; set; }
         public virtual Tour Tour { get; set; }
+        public int ClientId { get; set; }
+        public virtual Client Client { get; set; }
     }
 }

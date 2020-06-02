@@ -205,6 +205,13 @@
     <Compile Include="UIForms\AddComponentInStore.Designer.cs">
       <DependentUpon>AddComponentInStore.cs</DependentUpon>
     </Compile>
+    <Compile Include="SqlServerTypes\Loader.cs" />
+    <Compile Include="UIForms\FormClients.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UIForms\FormClients.Designer.cs">
+      <DependentUpon>FormClients.cs</DependentUpon>
+    </Compile>
     <Compile Include="UIForms\FormComponent.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -276,6 +283,9 @@
       <DependentUpon>AddComponentInStore.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ReportTours.rdlc" />
+    <EmbeddedResource Include="UIForms\FormClients.resx">
+      <DependentUpon>FormClients.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UIForms\FormComponent.resx">
       <DependentUpon>FormComponent.cs</DependentUpon>
     </EmbeddedResource>

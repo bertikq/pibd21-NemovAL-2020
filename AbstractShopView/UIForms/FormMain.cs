@@ -48,6 +48,7 @@ namespace AbstractTravelCompamyView.UIForms
                     dataGridView.DataSource = list;
                     dataGridView.Columns[0].Visible = false;
                     dataGridView.Columns[1].Visible = false;
+                    dataGridView.Columns[8].Visible = false;
                 }
             }
             catch (Exception ex)
@@ -170,6 +171,11 @@ namespace AbstractTravelCompamyView.UIForms
         private void AddComponentInStoreToolStripMenuItem_Click(object sender, EventArgs e)
         {
             var form = Container.Resolve<AddComponentInStore>();
+            form.ShowDialog();
+        }
+        private void клиентыToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var form = Container.Resolve<FormClients>();
             form.ShowDialog();
         }
     }

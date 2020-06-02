@@ -32,6 +32,8 @@ namespace AbstractTravelCompanyDatabaseImplement.Implements
                         element.DateImplement = model.DateImplement;
                         element.Status = model.Status;
                         element.TourId = model.TourId;
+                        element.ClientId = model.ClientId.Value;
+                        element.Client = context.Clients.FirstOrDefault(c => c.Id == model.ClientId);
                     }
                 }
                 else
@@ -43,7 +45,9 @@ namespace AbstractTravelCompanyDatabaseImplement.Implements
                         DateCreate = model.DateCreate,
                         DateImplement = model.DateImplement,
                         Status = model.Status,
-                        TourId = model.TourId
+                        TourId = model.TourId,
+                        ClientId = model.ClientId.Value,
+                        Client = context.Clients.FirstOrDefault(c => c.Id == model.ClientId)
                     };
                     context.Orders.Add(element);
                 }
@@ -76,8 +80,11 @@ namespace AbstractTravelCompanyDatabaseImplement.Implements
             {
                 using (var context = new DataBaseContext())
                 {
-                    return context.Orders.Include(x => x.Tour)
-                    .Where(rec => model == null || rec.Id == model.Id)
+                    return context.Orders
+                    .Include(x => x.Tour)
+                    .Include(x => x.Client)
+                    .Where(rec => model == null || rec.Id == model.Id ||
+                    (model.ClientId.HasValue && model.ClientId.Value == rec.ClientId))
                     .Select(rec => new OrderViewModel
                     {
                         Id = rec.Id,
@@ -87,7 +94,9 @@ namespace AbstractTravelCompanyDatabaseImplement.Implements
                         DateImplement = rec.DateImplement,
                         Status = rec.Status,
                         TourId = rec.TourId,
-                        TourName = rec.Tour.TourName
+                        TourName = rec.Tour.TourName,
+                        ClientFIO = rec.Client.FIO,
+                        ClientId = rec.ClientId
                     }).ToList();
                 }
             }
@@ -95,19 +104,24 @@ namespace AbstractTravelCompanyDatabaseImplement.Implements
             {
                 using (var context = new DataBaseContext())
                 {
-                    return context.Orders.Include(x => x.Tour)
-                    .Where(rec => (model == null || rec.Id == model.Id) && 
+                    return context.Orders
+                    .Include(x => x.Tour)
+                    .Include(x => x.Client)
+                    .Where(rec => (model == null || rec.Id == model.Id ||
+                    (model.ClientId.HasValue && model.ClientId.Value == rec.ClientId)) && 
                     rec.DateCreate <= dateTo && rec.DateCreate >= dateFrom)
                     .Select(rec => new OrderViewModel
                     {
-                          Id = rec.Id,
-                          Count = rec.Count,
-                          Sum = rec.Sum,
-                          DateCreate = rec.DateCreate,
-                          DateImplement = rec.DateImplement,
-                          Status = rec.Status,
-                          TourId = rec.TourId,
-                          TourName = rec.Tour.TourName
+                        Id = rec.Id,
+                        Count = rec.Count,
+                        Sum = rec.Sum,
+                        DateCreate = rec.DateCreate,
+                        DateImplement = rec.DateImplement,
+                        Status = rec.Status,
+                        TourId = rec.TourId,
+                        TourName = rec.Tour.TourName,
+                        ClientId = rec.ClientId,
+                        ClientFIO = rec.Client.FIO
                     }).ToList();
                 }
             }

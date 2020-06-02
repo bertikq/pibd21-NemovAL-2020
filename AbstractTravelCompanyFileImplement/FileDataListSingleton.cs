@@ -32,6 +32,7 @@ namespace AbstractTravelCompanyFileImplement
             TourComponents = LoadTourComponents();
             Stores = LoadStores();
             StoreComponents = LoadStoreComponents();
+            Clients = new List<Client>();
         }
         public static FileDataListSingleton GetInstance()
         {
