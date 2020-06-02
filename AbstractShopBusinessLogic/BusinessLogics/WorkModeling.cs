@@ -75,14 +75,15 @@ namespace AbstractTravelCompanyBusinessLogic.BusinessLogics
                         // делаем работу
                         Thread.Sleep(implementer.WorkingTime * rnd.Next(1, 5) * order.Count);
 
-                         mainLogic.FinishOrder(new ChangeStatusBindingModel
+                        mainLogic.FinishOrder(new ChangeStatusBindingModel
                          {
                              OrderId =  order.Id
                          });
 
                         Thread.Sleep(implementer.PauseTime);
                     }
-                    catch (Exception) { }
+                    catch (Exception) {
+                    }
                 }
             });
         }

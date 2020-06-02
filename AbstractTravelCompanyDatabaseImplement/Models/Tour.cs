@@ -11,7 +11,7 @@ namespace AbstractTravelCompanyDatabaseImplement.Models
         public string TourName { get; set; }
         public decimal Price { get; set; }
 
-        [ForeignKey("ComponentId")]
+        [ForeignKey("TourId")]
         public virtual List<TourComponent> TourComponents { get; set; }
 
         [ForeignKey("TourId")]

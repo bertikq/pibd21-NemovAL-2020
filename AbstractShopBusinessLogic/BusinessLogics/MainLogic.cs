@@ -60,7 +60,8 @@ namespace AbstractShopBusinessLogic.BusinessLogics
                     DateCreate = order.DateCreate,
                     DateImplement = DateTime.Now,
                     Status = OrderStatus.Выполняется,
-                    ManagerId = model.ManagerId
+                    ManagerId = model.ManagerId,
+                    ClientId = order.ClientId
                 });
             }
         }
@@ -87,7 +88,9 @@ namespace AbstractShopBusinessLogic.BusinessLogics
                 Sum = order.Sum,
                 DateCreate = order.DateCreate,
                 DateImplement = order.DateImplement,
-                Status = OrderStatus.Готов
+                Status = OrderStatus.Готов,
+                ClientId = order.ClientId,
+                ManagerId = model.ManagerId
             });
         }
 
@@ -113,7 +116,9 @@ namespace AbstractShopBusinessLogic.BusinessLogics
                 Sum = order.Sum,
                 DateCreate = order.DateCreate,
                 DateImplement = order.DateImplement,
-                Status = OrderStatus.Оплачен
+                Status = OrderStatus.Оплачен,
+                ClientId = order.ClientId,
+                ManagerId = model.ManagerId
             });
         }
     }
