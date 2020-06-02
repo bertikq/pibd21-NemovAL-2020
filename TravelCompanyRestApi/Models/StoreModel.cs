@@ -1,19 +1,22 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
+using System.Linq;
 using System.Runtime.Serialization;
+using System.Threading.Tasks;
 
-namespace AbstractTravelCompanyBusinessLogic.ViewModels
+namespace TravelCompanyRestApi.Models
 {
     [DataContract]
-    public class StoreViewModel
+    public class StoreModel
     {
         [DataMember]
         public int Id { get; set; }
+
         [DataMember]
         [DisplayName("Название склада")]
         public string Name { get; set; }
-
         [DataMember]
-        public Dictionary<int, (string, int)> StoreComponents { get; set; }
+        public List<StoreComponentViewModel> StoreComponents { get; set; }
     }
 }

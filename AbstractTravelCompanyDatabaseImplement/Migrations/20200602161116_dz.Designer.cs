@@ -10,8 +10,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace AbstractTravelCompanyDatabaseImplement.Migrations
 {
     [DbContext(typeof(DataBaseContext))]
-    [Migration("20200521092900_AddCompanyMigration")]
-    partial class AddCompanyMigration
+    [Migration("20200602161116_dz")]
+    partial class dz
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -20,6 +20,27 @@ namespace AbstractTravelCompanyDatabaseImplement.Migrations
                 .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn)
                 .HasAnnotation("ProductVersion", "3.1.2")
                 .HasAnnotation("Relational:MaxIdentifierLength", 63);
+
+            modelBuilder.Entity("AbstractTravelCompanyDatabaseImplement.Models.Client", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+
+                    b.Property<string>("Email")
+                        .HasColumnType("text");
+
+                    b.Property<string>("FIO")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Password")
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Clients");
+                });
 
             modelBuilder.Entity("AbstractTravelCompanyDatabaseImplement.Models.Component", b =>
                 {
@@ -44,6 +65,9 @@ namespace AbstractTravelCompanyDatabaseImplement.Migrations
                         .HasColumnType("integer")
                         .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
 
+                    b.Property<int>("ClientId")
+                        .HasColumnType("integer");
+
                     b.Property<int>("Count")
                         .HasColumnType("integer");
 
@@ -63,6 +87,8 @@ namespace AbstractTravelCompanyDatabaseImplement.Migrations
                         .HasColumnType("integer");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("ClientId");
 
                     b.HasIndex("TourId");
 
@@ -154,6 +180,12 @@ namespace AbstractTravelCompanyDatabaseImplement.Migrations
 
             modelBuilder.Entity("AbstractTravelCompanyDatabaseImplement.Models.Order", b =>
                 {
+                    b.HasOne("AbstractTravelCompanyDatabaseImplement.Models.Client", "Client")
+                        .WithMany()
+                        .HasForeignKey("ClientId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("AbstractTravelCompanyDatabaseImplement.Models.Tour", "Tour")
                         .WithMany("Orders")
                         .HasForeignKey("TourId")

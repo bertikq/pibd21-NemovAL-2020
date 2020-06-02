@@ -86,7 +86,6 @@ namespace AbstractTravelCompanyDatabaseImplement.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("TourId");
                     b.HasIndex("ClientId");
 
                     b.HasIndex("TourId");

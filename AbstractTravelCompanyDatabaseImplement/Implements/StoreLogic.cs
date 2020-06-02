@@ -91,7 +91,7 @@ namespace AbstractTravelCompanyDatabaseImplement.Implements
         {
             using (var context = new DataBaseContext())
             {
-                return context.Stores
+                List< StoreViewModel> a = context.Stores
                .Where(rec => model == null || rec.Id == model.Id)
                .ToList()
                .Select(rec => new StoreViewModel
@@ -101,10 +101,11 @@ namespace AbstractTravelCompanyDatabaseImplement.Implements
                    StoreComponents = context.StoreComponents
                    .Include(x => x.Component)
                    .Where(sp => sp.StoreId == rec.Id)
-                   .ToDictionary(recPC => recPC.ComponentId, recPC => 
+                   .ToDictionary(recPC => recPC.ComponentId, recPC =>
                    (recPC.Component?.ComponentName, recPC.Count))
                })
                .ToList();
+                return a;
             }
         }
 

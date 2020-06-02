@@ -24,6 +24,7 @@ namespace AbstractTravelCompanyFileImplement
         public List<TourComponent> TourComponents { get; set; }
         public List<Store> Stores { get; set; }
         public List<StoreComponent> StoreComponents { get; set; }
+        public List<Client> Clients { get; set; }
         private FileDataListSingleton()
         {
             Components = LoadComponents();

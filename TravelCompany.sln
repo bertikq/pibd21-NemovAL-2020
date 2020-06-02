@@ -15,7 +15,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AbstractTravelCompanyDataba
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TravelCompanyRestApi", "TravelCompanyRestApi\TravelCompanyRestApi.csproj", "{8596CA3B-A3E6-44E7-BF97-1DD29436F9DB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TravelCompanyClientView", "TravelCompanyClientView\TravelCompanyClientView.csproj", "{086A12F2-1FF3-40D6-AD53-F2CC955C37A1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TravelCompanyClientView", "TravelCompanyClientView\TravelCompanyClientView.csproj", "{086A12F2-1FF3-40D6-AD53-F2CC955C37A1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TravelCompanyAdminView", "TravelCompanyAdminView\TravelCompanyAdminView.csproj", "{6F7058CF-CCE1-4FED-B219-2E2975B3F333}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -51,6 +53,10 @@ Global
 		{086A12F2-1FF3-40D6-AD53-F2CC955C37A1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{086A12F2-1FF3-40D6-AD53-F2CC955C37A1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{086A12F2-1FF3-40D6-AD53-F2CC955C37A1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6F7058CF-CCE1-4FED-B219-2E2975B3F333}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6F7058CF-CCE1-4FED-B219-2E2975B3F333}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6F7058CF-CCE1-4FED-B219-2E2975B3F333}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6F7058CF-CCE1-4FED-B219-2E2975B3F333}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
