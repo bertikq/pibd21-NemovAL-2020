@@ -39,7 +39,7 @@ namespace AbstractTravelCompanyFileImplement.Implements
             {
                 int maxId = source.Orders.Count > 0 ? source.Orders.Max(rec =>
                rec.Id) : 0;
-                element = new Order { 
+                element = new Order {
                     Id = maxId + 1,
                     Count = model.Count,
                     Sum = model.Sum,
@@ -66,22 +66,42 @@ namespace AbstractTravelCompanyFileImplement.Implements
             }
         }
 
-        public List<OrderViewModel> Read(OrderBindingModel model)
+        public List<OrderViewModel> Read(OrderBindingModel model, DateTime? dateFrom = null, DateTime? dateTo = null)
         {
-            return source.Orders
-            .Where(rec => model == null || rec.Id == model.Id)
-            .Select(rec => new OrderViewModel
+            if (dateFrom == null || dateTo == null) {
+                return source.Orders
+                .Where(rec => model == null || rec.Id == model.Id)
+                .Select(rec => new OrderViewModel
+                {
+                    Id = rec.Id,
+                    Count = rec.Count,
+                    Sum = rec.Sum,
+                    DateCreate = rec.DateCreate,
+                    DateImplement = rec.DateImplement,
+                    Status = rec.Status,
+                    TourId = rec.TourId,
+                    TourName = source.Tours.FirstOrDefault(a => a.Id == rec.TourId)?.TourName
+                })
+                .ToList();
+            }
+            else
             {
-                Id = rec.Id,
-                Count = rec.Count,
-                Sum = rec.Sum,
-                DateCreate = rec.DateCreate,
-                DateImplement = rec.DateImplement,
-                Status = rec.Status,
-                TourId = rec.TourId,
-                TourName = source.Tours.FirstOrDefault(a => a.Id == rec.TourId)?.TourName
-            })
-            .ToList();
+                return source.Orders
+                   .Where(rec => (model == null || rec.Id == model.Id) &&
+                   rec.DateCreate <= dateTo && rec.DateCreate >= dateFrom)
+                   .Select(rec => new OrderViewModel
+                   {
+                       Id = rec.Id,
+                       Count = rec.Count,
+                       Sum = rec.Sum,
+                       DateCreate = rec.DateCreate,
+                       DateImplement = rec.DateImplement,
+                       Status = rec.Status,
+                       TourId = rec.TourId,
+                       TourName = source.Tours.FirstOrDefault(a => a.Id == rec.TourId)?.TourName
+                   })
+                   .ToList();
+            }
         }
     }
 }

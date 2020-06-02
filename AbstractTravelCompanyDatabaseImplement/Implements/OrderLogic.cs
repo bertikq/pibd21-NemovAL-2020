@@ -70,23 +70,46 @@ namespace AbstractTravelCompanyDatabaseImplement.Implements
             }
         }
 
-        public List<OrderViewModel> Read(OrderBindingModel model)
+        public List<OrderViewModel> Read(OrderBindingModel model, DateTime? dateFrom = null, DateTime? dateTo = null)
         {
-            using (var context = new DataBaseContext())
+            if (dateFrom == null || dateTo == null)
             {
-                return context.Orders.Include(x => x.Tour)
-                .Where(rec => model == null || rec.Id == model.Id)
-                .Select(rec => new OrderViewModel
+                using (var context = new DataBaseContext())
                 {
-                    Id = rec.Id,
-                    Count = rec.Count,
-                    Sum = rec.Sum,
-                    DateCreate = rec.DateCreate,
-                    DateImplement = rec.DateImplement,
-                    Status = rec.Status,
-                    TourId = rec.TourId,
-                    TourName = rec.Tour.TourName
-                }).ToList();
+                    return context.Orders.Include(x => x.Tour)
+                    .Where(rec => model == null || rec.Id == model.Id)
+                    .Select(rec => new OrderViewModel
+                    {
+                        Id = rec.Id,
+                        Count = rec.Count,
+                        Sum = rec.Sum,
+                        DateCreate = rec.DateCreate,
+                        DateImplement = rec.DateImplement,
+                        Status = rec.Status,
+                        TourId = rec.TourId,
+                        TourName = rec.Tour.TourName
+                    }).ToList();
+                }
+            }
+            else
+            {
+                using (var context = new DataBaseContext())
+                {
+                    return context.Orders.Include(x => x.Tour)
+                    .Where(rec => (model == null || rec.Id == model.Id) && 
+                    rec.DateCreate <= dateTo && rec.DateCreate >= dateFrom)
+                    .Select(rec => new OrderViewModel
+                    {
+                          Id = rec.Id,
+                          Count = rec.Count,
+                          Sum = rec.Sum,
+                          DateCreate = rec.DateCreate,
+                          DateImplement = rec.DateImplement,
+                          Status = rec.Status,
+                          TourId = rec.TourId,
+                          TourName = rec.Tour.TourName
+                    }).ToList();
+                }
             }
         }
     }

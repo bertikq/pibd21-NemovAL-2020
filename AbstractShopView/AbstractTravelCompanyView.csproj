@@ -36,6 +36,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="DocumentFormat.OpenXml, Version=2.10.1.0, Culture=neutral, PublicKeyToken=8fb06cb64d019a17, processorArchitecture=MSIL">
+      <HintPath>..\packages\DocumentFormat.OpenXml.2.10.1\lib\net46\DocumentFormat.OpenXml.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.Bcl.AsyncInterfaces, Version=1.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Bcl.AsyncInterfaces.1.1.0\lib\net461\Microsoft.Bcl.AsyncInterfaces.dll</HintPath>
     </Reference>
@@ -87,11 +90,50 @@
     <Reference Include="Microsoft.Extensions.Primitives, Version=3.1.2.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Extensions.Primitives.3.1.2\lib\netstandard2.0\Microsoft.Extensions.Primitives.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.ReportViewer.Common, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ReportViewer.11.0.3366.16\lib\Microsoft.ReportViewer.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.ReportViewer.DataVisualization, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ReportViewer.11.0.3366.16\lib\Microsoft.ReportViewer.DataVisualization.DLL</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.ReportViewer.Design, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ReportViewer.11.0.3366.16\lib\Microsoft.ReportViewer.Design.DLL</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.ReportViewer.ProcessingObjectModel, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ReportViewer.11.0.3366.16\lib\Microsoft.ReportViewer.ProcessingObjectModel.DLL</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.ReportViewer.WebDesign, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ReportViewer.11.0.3366.16\lib\Microsoft.ReportViewer.WebDesign.DLL</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.ReportViewer.WebForms, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ReportViewer.11.0.3366.16\lib\Microsoft.ReportViewer.WebForms.DLL</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.ReportViewer.WinForms, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ReportViewer.11.0.3366.16\lib\Microsoft.ReportViewer.WinForms.DLL</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.SqlServer.Types, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.SqlServer.Types.11.0.1\lib\net20\Microsoft.SqlServer.Types.dll</HintPath>
+    </Reference>
+    <Reference Include="MigraDoc.DocumentObjectModel, Version=1.50.5147.0, Culture=neutral, PublicKeyToken=f94615aa0424f9eb, processorArchitecture=MSIL">
+      <HintPath>..\packages\PDFsharp-MigraDoc.1.50.5147\lib\net20\MigraDoc.DocumentObjectModel.dll</HintPath>
+    </Reference>
+    <Reference Include="MigraDoc.Rendering, Version=1.50.5147.0, Culture=neutral, PublicKeyToken=f94615aa0424f9eb, processorArchitecture=MSIL">
+      <HintPath>..\packages\PDFsharp-MigraDoc.1.50.5147\lib\net20\MigraDoc.Rendering.dll</HintPath>
+    </Reference>
+    <Reference Include="MigraDoc.RtfRendering, Version=1.50.5147.0, Culture=neutral, PublicKeyToken=f94615aa0424f9eb, processorArchitecture=MSIL">
+      <HintPath>..\packages\PDFsharp-MigraDoc.1.50.5147\lib\net20\MigraDoc.RtfRendering.dll</HintPath>
+    </Reference>
     <Reference Include="Npgsql, Version=4.1.3.0, Culture=neutral, PublicKeyToken=5d8b90d52f46fda7, processorArchitecture=MSIL">
       <HintPath>..\packages\Npgsql.4.1.3\lib\net461\Npgsql.dll</HintPath>
     </Reference>
     <Reference Include="Npgsql.EntityFrameworkCore.PostgreSQL, Version=3.1.2.0, Culture=neutral, PublicKeyToken=5d8b90d52f46fda7, processorArchitecture=MSIL">
       <HintPath>..\packages\Npgsql.EntityFrameworkCore.PostgreSQL.3.1.2\lib\netstandard2.0\Npgsql.EntityFrameworkCore.PostgreSQL.dll</HintPath>
+    </Reference>
+    <Reference Include="PdfSharp, Version=1.50.5147.0, Culture=neutral, PublicKeyToken=f94615aa0424f9eb, processorArchitecture=MSIL">
+      <HintPath>..\packages\PDFsharp-MigraDoc.1.50.5147\lib\net20\PdfSharp.dll</HintPath>
+    </Reference>
+    <Reference Include="PdfSharp.Charting, Version=1.50.5147.0, Culture=neutral, PublicKeyToken=f94615aa0424f9eb, processorArchitecture=MSIL">
+      <HintPath>..\packages\PDFsharp-MigraDoc.1.50.5147\lib\net20\PdfSharp.Charting.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Buffers, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
@@ -107,6 +149,14 @@
     <Reference Include="System.Core" />
     <Reference Include="System.Diagnostics.DiagnosticSource, Version=4.0.5.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Diagnostics.DiagnosticSource.4.7.0\lib\net46\System.Diagnostics.DiagnosticSource.dll</HintPath>
+    </Reference>
+    <Reference Include="System.IO.FileSystem.Primitives, Version=4.0.2.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.IO.FileSystem.Primitives.4.3.0\lib\net46\System.IO.FileSystem.Primitives.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.IO.Packaging, Version=4.0.5.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.IO.Packaging.4.7.0\lib\net46\System.IO.Packaging.dll</HintPath>
     </Reference>
     <Reference Include="System.Memory, Version=4.0.1.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Memory.4.5.3\lib\netstandard2.0\System.Memory.dll</HintPath>
@@ -145,8 +195,10 @@
     <Reference Include="Unity.Container, Version=5.11.5.0, Culture=neutral, PublicKeyToken=489b6accfaf20ef0, processorArchitecture=MSIL">
       <HintPath>..\packages\Unity.5.11.3\lib\net47\Unity.Container.dll</HintPath>
     </Reference>
+    <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Program.cs" />
     <Compile Include="UIForms\AddComponentInStore.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -165,13 +217,18 @@
     <Compile Include="UIForms\FormComponents.Designer.cs">
       <DependentUpon>FormComponents.cs</DependentUpon>
     </Compile>
-    <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UIForms\FormCreateOrder.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="UIForms\FormCreateOrder.Designer.cs">
       <DependentUpon>FormCreateOrder.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UIForms\FormDateOrders.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UIForms\FormDateOrders.Designer.cs">
+      <DependentUpon>FormDateOrders.cs</DependentUpon>
     </Compile>
     <Compile Include="UIForms\FormMain.cs">
       <SubType>Form</SubType>
@@ -190,6 +247,12 @@
     </Compile>
     <Compile Include="UIForms\FormStores.Designer.cs">
       <DependentUpon>FormStores.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UIForms\FormReportTourComponent.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UIForms\FormReportTourComponent.Designer.cs">
+      <DependentUpon>FormReportTourComponent.cs</DependentUpon>
     </Compile>
     <Compile Include="UIForms\FormTour.cs">
       <SubType>Form</SubType>
@@ -212,6 +275,7 @@
     <EmbeddedResource Include="UIForms\AddComponentInStore.resx">
       <DependentUpon>AddComponentInStore.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="ReportTours.rdlc" />
     <EmbeddedResource Include="UIForms\FormComponent.resx">
       <DependentUpon>FormComponent.cs</DependentUpon>
     </EmbeddedResource>
@@ -230,6 +294,9 @@
     <EmbeddedResource Include="UIForms\FormCreateOrder.resx">
       <DependentUpon>FormCreateOrder.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="UIForms\FormDateOrders.resx">
+      <DependentUpon>FormDateOrders.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UIForms\FormMain.resx">
       <DependentUpon>FormMain.cs</DependentUpon>
     </EmbeddedResource>
@@ -238,6 +305,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UIForms\FormStores.resx">
       <DependentUpon>FormStores.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UIForms\FormReportTourComponent.resx">
+      <DependentUpon>FormReportTourComponent.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UIForms\FormTour.resx">
       <DependentUpon>FormTour.cs</DependentUpon>
@@ -249,6 +319,13 @@
       <DependentUpon>FormTours.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="packages.config" />
+    <None Include="Properties\DataSources\AbstractTravelCompanyBusinessLogic.ViewModels.ComponentViewModel.datasource" />
+    <None Include="Properties\DataSources\AbstractTravelCompanyBusinessLogic.ViewModels.OrderViewModel.datasource" />
+    <None Include="Properties\DataSources\AbstractTravelCompanyBusinessLogic.ViewModels.ReportComponentStoresViewModel.datasource" />
+    <None Include="Properties\DataSources\AbstractTravelCompanyBusinessLogic.ViewModels.ReportOrdersViewModel.datasource" />
+    <None Include="Properties\DataSources\AbstractTravelCompanyBusinessLogic.ViewModels.ReportToursComponentsViewModel.datasource" />
+    <None Include="Properties\DataSources\AbstractTravelCompanyBusinessLogic.ViewModels.StoreViewModel.datasource" />
+    <None Include="Properties\DataSources\AbstractTravelCompanyBusinessLogic.ViewModels.TourViewModel.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -271,6 +348,25 @@
       <Project>{bef3505a-2cea-44ed-b6dc-9408f791a4cd}</Project>
       <Name>AbstractTravelCompanyDatabaseImplement</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="..\packages\Microsoft.SqlServer.Types.11.0.1\nativeBinaries\x64\msvcr100.dll">
+      <Link>SqlServerTypes\x64\msvcr100.dll</Link>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\packages\Microsoft.SqlServer.Types.11.0.1\nativeBinaries\x64\SqlServerSpatial110.dll">
+      <Link>SqlServerTypes\x64\SqlServerSpatial110.dll</Link>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\packages\Microsoft.SqlServer.Types.11.0.1\nativeBinaries\x86\msvcr100.dll">
+      <Link>SqlServerTypes\x86\msvcr100.dll</Link>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\packages\Microsoft.SqlServer.Types.11.0.1\nativeBinaries\x86\SqlServerSpatial110.dll">
+      <Link>SqlServerTypes\x86\SqlServerSpatial110.dll</Link>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="SqlServerTypes\readme.htm" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

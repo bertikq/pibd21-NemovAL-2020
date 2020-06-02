@@ -11,9 +11,6 @@ namespace AbstractTravelCompanyDatabaseImplement.Implements
 {
     public class StoreLogic : IStoreLogic
     {
-        public StoreLogic()
-        {
-        }
 
         public void AddComponent(AddComponentInStoreBindingModel model)
         {
