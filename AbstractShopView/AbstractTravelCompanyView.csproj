@@ -291,11 +291,9 @@
     <Compile Include="UIForms\FormTours.Designer.cs">
       <DependentUpon>FormTours.cs</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="ReportTours.rdlc" />
     <EmbeddedResource Include="UIForms\AddComponentInStore.resx">
       <DependentUpon>AddComponentInStore.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="ReportTours.rdlc" />
     <EmbeddedResource Include="UIForms\FormClients.resx">
       <DependentUpon>FormClients.cs</DependentUpon>
     </EmbeddedResource>
