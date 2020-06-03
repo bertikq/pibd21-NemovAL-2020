@@ -24,7 +24,63 @@ namespace AbstractTravelCompanyBusinessLogic.BusinessLogics
             _storeLogic = storeLogic;
         }
 
+        public Dictionary<DateTime, List<ReportOrdersViewModel>> GetOrders(ReportBindingModel model)
+        {
+            Dictionary<DateTime, List<ReportOrdersViewModel>> orders = new Dictionary<DateTime, List<ReportOrdersViewModel>>();
+
+            orders = _orderLogic.Read(null, model.DateFrom, model.DateTo)
+                .GroupBy(x => x.DateCreate)
+                .ToDictionary(x => x.Key, y => y.Select(z => new ReportOrdersViewModel
+                {
+                    Count = z.Count,
+                    DateCreate = z.DateCreate,
+                    DateFrom = model.DateFrom.Value,
+                    DateTo = model.DateTo.Value,
+                    TourName = z.TourName,
+                    Status = z.Status,
+                    Sum = z.Sum
+                }).ToList());
+
+            return orders;
+        }
+
+        public List<ReportToursComponentsViewModel> GetTours()
+        {
+            List<ReportToursComponentsViewModel> result = new List<ReportToursComponentsViewModel>();
+
+            List<TourViewModel> tours = _tourLogic.Read(null);
+
+            foreach (TourViewModel tour in tours)
+            {
+
+                foreach ((string, int) component in tour.ProductComponents.Values)
+                {
+                    ReportToursComponentsViewModel report = new ReportToursComponentsViewModel
+                    {
+                        TourName = tour.TourName,
+                        ComponentCount = component.Item2,
+                        ComponentName = component.Item1
+                    };
+                    result.Add(report);
+                }
+            }
+
+            return result;
+        }
+
         public void SaveComponentsToWordFile(ReportBindingModel model)
+        {
+            SaveToWord.CreateDoc(new WordInfo
+            {
+                FileName = model.FileName,
+                Title = "Список туров",
+                Tours = _tourLogic.Read(null)
+            });
+        }
+
+
+
+        public void SaveStoresToWordFile(ReportBindingModel model)
         {
             StoreSaveToWord.CreateDoc(new StoreWordInfo
             {
@@ -35,6 +91,18 @@ namespace AbstractTravelCompanyBusinessLogic.BusinessLogics
         }
 
         public void SaveOrdersToExcelFile(ReportBindingModel model)
+        {
+            SaveToExcel.CreateDoc(new ExcelInfo
+            {
+                FileName = model.FileName,
+                Title = "Список заказов",
+                Orders = GetOrders(model)
+            });
+        }
+
+
+
+        public void SaveStoresToExcelFile(ReportBindingModel model)
         {
             StoreSaveToExcel.CreateDoc(new StoreExcelInfo
             {
@@ -97,13 +165,24 @@ namespace AbstractTravelCompanyBusinessLogic.BusinessLogics
         /// </summary>
         /// <param name="model"></param>
         [Obsolete]
-        public void SaveToursComponentsToPdfFile(ReportBindingModel model)
+        public void SaveStoresComponentsToPdfFile(ReportBindingModel model)
         {
             StoreSaveToPdf.CreateDoc(new StorePdfInfo
             {
                 FileName = model.FileName,
                 Title = "Список компонентов и складов",
                 ComponentStores = GetComponentStores()
+            });
+        }
+
+        [Obsolete]
+        public void SaveToursComponentsToPdfFile(ReportBindingModel model)
+        {
+            SaveToPdf.CreateDoc(new PdfInfo
+            {
+                FileName = model.FileName,
+                Title = "Список заказов",
+                Tours = GetTours()
             });
         }
     }

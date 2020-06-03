@@ -11,9 +11,9 @@ using System.Text;
 
 namespace AbstractTravelCompanyBusinessLogic.BusinessLogics
 {
-    public static class StoreSaveToExcel
+    public static class SaveToExcel
     {
-        public static void CreateDoc(StoreExcelInfo info)
+        public static void CreateDoc(ExcelInfo info)
         {
             using (SpreadsheetDocument spreadsheetDocument =
            SpreadsheetDocument.Create(info.FileName, SpreadsheetDocumentType.Workbook))
@@ -64,27 +64,27 @@ namespace AbstractTravelCompanyBusinessLogic.BusinessLogics
                 });
                 uint rowIndex = 2;
 
-                foreach (var store in info.Stores)
+                foreach (DateTime date in info.Orders.Keys)
                 {
+                    var orders = info.Orders[date];
                     InsertCellInWorksheet(new ExcelCellParameters
                     {
                         Worksheet = worksheetPart.Worksheet,
                         ShareStringPart = shareStringPart,
                         ColumnName = "A",
                         RowIndex = rowIndex,
-                        Text = store.Name.ToString(),
+                        Text = date.ToString(),
                         StyleIndex = 0U
                     });
-                    rowIndex++;
-                    foreach (var storeComponent in store.StoreComponents.Values)
+                    for (int i = 0; i < orders.Count; i++)
                     {
                         InsertCellInWorksheet(new ExcelCellParameters
                         {
                             Worksheet = worksheetPart.Worksheet,
                             ShareStringPart = shareStringPart,
                             ColumnName = "B",
-                            RowIndex = rowIndex,
-                            Text = storeComponent.Item1,
+                            RowIndex = rowIndex + (uint)i,
+                            Text = orders[i].TourName,
                             StyleIndex = 0U
                         });
                         InsertCellInWorksheet(new ExcelCellParameters
@@ -92,19 +92,18 @@ namespace AbstractTravelCompanyBusinessLogic.BusinessLogics
                             Worksheet = worksheetPart.Worksheet,
                             ShareStringPart = shareStringPart,
                             ColumnName = "C",
-                            RowIndex = rowIndex,
-                            Text = storeComponent.Item2.ToString(),
+                            RowIndex = rowIndex + (uint)i,
+                            Text = orders[i].Sum.ToString(),
                             StyleIndex = 0U
                         });
-                        rowIndex++;
                     }
                     InsertCellInWorksheet(new ExcelCellParameters
                     {
                         Worksheet = worksheetPart.Worksheet,
                         ShareStringPart = shareStringPart,
                         ColumnName = "B",
-                        RowIndex = rowIndex,
-                        Text = "Общее количество",
+                        RowIndex = rowIndex + (uint)orders.Count + 1,
+                        Text = "Общая сумма",
                         StyleIndex = 0U
                     });
                     InsertCellInWorksheet(new ExcelCellParameters
@@ -112,11 +111,11 @@ namespace AbstractTravelCompanyBusinessLogic.BusinessLogics
                         Worksheet = worksheetPart.Worksheet,
                         ShareStringPart = shareStringPart,
                         ColumnName = "C",
-                        RowIndex = rowIndex,
-                        Text = store.StoreComponents.Sum(x => x.Value.Item2).ToString(),
+                        RowIndex = rowIndex + (uint)orders.Count + 1,
+                        Text = info.Orders[date].Sum(x => x.Sum).ToString(),
                         StyleIndex = 0U
                     });
-                    rowIndex++;
+                    rowIndex += (uint)orders.Count + 2;
                 }
                 workbookpart.Workbook.Save();
             }

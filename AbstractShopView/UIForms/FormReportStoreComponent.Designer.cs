@@ -1,6 +1,6 @@
 ﻿namespace AbstractShopView.UIForms
 {
-    partial class FormReportTourComponent
+    partial class FormReportStoreComponent
     {
         /// <summary>
         /// Required designer variable.
@@ -29,11 +29,10 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            Microsoft.Reporting.WinForms.ReportDataSource reportDataSource1 = new Microsoft.Reporting.WinForms.ReportDataSource();
             this.buttonInPdf = new System.Windows.Forms.Button();
             this.buttonGenerate = new System.Windows.Forms.Button();
             this.reportViewer = new Microsoft.Reporting.WinForms.ReportViewer();
-            this.ReportToursComponentsViewModelBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            ((System.ComponentModel.ISupportInitialize)(this.ReportToursComponentsViewModelBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // buttonInPdf
@@ -44,6 +43,7 @@
             this.buttonInPdf.TabIndex = 0;
             this.buttonInPdf.Text = "В pdf";
             this.buttonInPdf.UseVisualStyleBackColor = true;
+            this.buttonInPdf.UseWaitCursor = true;
             this.buttonInPdf.Click += new System.EventHandler(this.ButtonSaveToPdf_Click);
             // 
             // buttonGenerate
@@ -54,20 +54,21 @@
             this.buttonGenerate.TabIndex = 4;
             this.buttonGenerate.Text = "Сформировать";
             this.buttonGenerate.UseVisualStyleBackColor = true;
+            this.buttonGenerate.UseWaitCursor = true;
             this.buttonGenerate.Click += new System.EventHandler(this.FormReportProductComponents_Load);
             // 
             // reportViewer
             // 
-            this.reportViewer.LocalReport.ReportEmbeddedResource = "AbstractShopView.ReportTours.rdlc";
+            reportDataSource1.Name = "DataSetComponentStores";
+            this.reportViewer.LocalReport.DataSources.Add(reportDataSource1);
+            this.reportViewer.LocalReport.ReportEmbeddedResource = "AbstractShopView.ReportStores.rdlc";
             this.reportViewer.Location = new System.Drawing.Point(12, 49);
             this.reportViewer.Name = "reportViewer";
             this.reportViewer.Size = new System.Drawing.Size(773, 378);
             this.reportViewer.TabIndex = 5;
+            this.reportViewer.UseWaitCursor = true;
             // 
-            // ReportToursComponentsViewModelBindingSource
-            // 
-            // 
-            // FormReportTourComponent
+            // FormReportStoreComponent
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -75,9 +76,9 @@
             this.Controls.Add(this.reportViewer);
             this.Controls.Add(this.buttonGenerate);
             this.Controls.Add(this.buttonInPdf);
-            this.Name = "FormReportTourComponent";
-            this.Text = "Отчет туров и их составляющих";
-            ((System.ComponentModel.ISupportInitialize)(this.ReportToursComponentsViewModelBindingSource)).EndInit();
+            this.Name = "FormReportStoreComponent";
+            this.Text = "Отчет компонентов и складов";
+            this.UseWaitCursor = true;
             this.ResumeLayout(false);
 
         }
@@ -87,6 +88,5 @@
         private System.Windows.Forms.Button buttonInPdf;
         private System.Windows.Forms.Button buttonGenerate;
         private Microsoft.Reporting.WinForms.ReportViewer reportViewer;
-        private System.Windows.Forms.BindingSource ReportToursComponentsViewModelBindingSource;
     }
 }

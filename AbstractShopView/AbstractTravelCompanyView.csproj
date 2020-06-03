@@ -230,6 +230,18 @@
     <Compile Include="UIForms\FormDateOrders.Designer.cs">
       <DependentUpon>FormDateOrders.cs</DependentUpon>
     </Compile>
+    <Compile Include="UIForms\FormReportTourComponent.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UIForms\FormReportTourComponent.Designer.cs">
+      <DependentUpon>FormReportTourComponent.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UIForms\FormStoreOrders.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UIForms\FormStoreOrders.Designer.cs">
+      <DependentUpon>FormStoreOrders.cs</DependentUpon>
+    </Compile>
     <Compile Include="UIForms\FormMain.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -248,11 +260,11 @@
     <Compile Include="UIForms\FormStores.Designer.cs">
       <DependentUpon>FormStores.cs</DependentUpon>
     </Compile>
-    <Compile Include="UIForms\FormReportTourComponent.cs">
+    <Compile Include="UIForms\FormReportStoreComponent.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="UIForms\FormReportTourComponent.Designer.cs">
-      <DependentUpon>FormReportTourComponent.cs</DependentUpon>
+    <Compile Include="UIForms\FormReportStoreComponent.Designer.cs">
+      <DependentUpon>FormReportStoreComponent.cs</DependentUpon>
     </Compile>
     <Compile Include="UIForms\FormTour.cs">
       <SubType>Form</SubType>
@@ -272,10 +284,11 @@
     <Compile Include="UIForms\FormTours.Designer.cs">
       <DependentUpon>FormTours.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="ReportTours.rdlc" />
     <EmbeddedResource Include="UIForms\AddComponentInStore.resx">
       <DependentUpon>AddComponentInStore.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="ReportTours.rdlc" />
+    <EmbeddedResource Include="ReportStores.rdlc" />
     <EmbeddedResource Include="UIForms\FormComponent.resx">
       <DependentUpon>FormComponent.cs</DependentUpon>
     </EmbeddedResource>
@@ -294,8 +307,11 @@
     <EmbeddedResource Include="UIForms\FormCreateOrder.resx">
       <DependentUpon>FormCreateOrder.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UIForms\FormDateOrders.resx">
-      <DependentUpon>FormDateOrders.cs</DependentUpon>
+    <EmbeddedResource Include="UIForms\FormReportTourComponent.resx">
+      <DependentUpon>FormReportTourComponent.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UIForms\FormStoreOrders.resx">
+      <DependentUpon>FormStoreOrders.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UIForms\FormMain.resx">
       <DependentUpon>FormMain.cs</DependentUpon>
@@ -306,8 +322,8 @@
     <EmbeddedResource Include="UIForms\FormStores.resx">
       <DependentUpon>FormStores.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UIForms\FormReportTourComponent.resx">
-      <DependentUpon>FormReportTourComponent.cs</DependentUpon>
+    <EmbeddedResource Include="UIForms\FormReportStoreComponent.resx">
+      <DependentUpon>FormReportStoreComponent.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UIForms\FormTour.resx">
       <DependentUpon>FormTour.cs</DependentUpon>

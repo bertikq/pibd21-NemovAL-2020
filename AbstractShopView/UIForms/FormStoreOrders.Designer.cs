@@ -1,6 +1,6 @@
 ﻿namespace AbstractShopView.UIForms
 {
-    partial class FormDateOrders
+    partial class FormStoreOrders
     {
         /// <summary>
         /// Required designer variable.
@@ -33,8 +33,6 @@
             this.tourColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.componentColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.countColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dateTimePickerFrom = new System.Windows.Forms.DateTimePicker();
-            this.dateTimePickerTo = new System.Windows.Forms.DateTimePicker();
             this.buttonGenerateData = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).BeginInit();
             this.SuspendLayout();
@@ -84,20 +82,6 @@
             this.countColumn.Name = "countColumn";
             this.countColumn.Width = 125;
             // 
-            // dateTimePickerFrom
-            // 
-            this.dateTimePickerFrom.Location = new System.Drawing.Point(28, 12);
-            this.dateTimePickerFrom.Name = "dateTimePickerFrom";
-            this.dateTimePickerFrom.Size = new System.Drawing.Size(200, 22);
-            this.dateTimePickerFrom.TabIndex = 0;
-            // 
-            // dateTimePickerTo
-            // 
-            this.dateTimePickerTo.Location = new System.Drawing.Point(257, 12);
-            this.dateTimePickerTo.Name = "dateTimePickerTo";
-            this.dateTimePickerTo.Size = new System.Drawing.Size(200, 22);
-            this.dateTimePickerTo.TabIndex = 1;
-            // 
             // buttonGenerateData
             // 
             this.buttonGenerateData.Location = new System.Drawing.Point(478, 14);
@@ -116,10 +100,8 @@
             this.Controls.Add(this.dataGridView);
             this.Controls.Add(this.buttonInExcel);
             this.Controls.Add(this.buttonGenerateData);
-            this.Controls.Add(this.dateTimePickerTo);
-            this.Controls.Add(this.dateTimePickerFrom);
             this.Name = "FormDateOrders";
-            this.Text = "Отчет по заказам";
+            this.Text = "Отчет по складам и компонентам";
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).EndInit();
             this.ResumeLayout(false);
 
@@ -131,8 +113,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn tourColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn componentColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn countColumn;
-        private System.Windows.Forms.DateTimePicker dateTimePickerFrom;
-        private System.Windows.Forms.DateTimePicker dateTimePickerTo;
         private System.Windows.Forms.Button buttonGenerateData;
     }
 }
