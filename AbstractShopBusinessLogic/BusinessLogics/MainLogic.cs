@@ -1,6 +1,10 @@
 ﻿using AbstractShopBusinessLogic.BindingModels;
 using AbstractShopBusinessLogic.Enums;
 using AbstractShopBusinessLogic.Interfaces;
+using AbstractTravelCompanyBusinessLogic.BindingModels;
+using AbstractTravelCompanyBusinessLogic.BusinessLogics;
+using AbstractTravelCompanyBusinessLogic.HelperModels;
+using AbstractTravelCompanyBusinessLogic.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -9,12 +13,14 @@ namespace AbstractShopBusinessLogic.BusinessLogics
 {
     public class MainLogic
     {
-        private readonly IOrderLogic orderLogic; 
+        private readonly IOrderLogic orderLogic;
+        private readonly IClientLogic clientLogic;
         private readonly object locker = new object();
 
-        public MainLogic(IOrderLogic orderLogic)
+        public MainLogic(IOrderLogic orderLogic, IClientLogic clientLogic)
         {
             this.orderLogic = orderLogic;
+            this.clientLogic = clientLogic;
         }
 
         public void CreateOrder(CreateOrderBindingModel model)
@@ -27,6 +33,16 @@ namespace AbstractShopBusinessLogic.BusinessLogics
                 DateCreate = DateTime.Now,
                 Status = OrderStatus.Принят,
                 ClientId = model.ClientId
+            });
+
+            MailLogic.MailSendAsync(new MailSendInfo
+            {
+                MailAddress = clientLogic.Read(new ClientBindingModel
+                {
+                    Id = model.ClientId
+                })?[0]?.Email,
+                Subject = $"Новый заказ",
+                Text = $"Заказ принят."
             });
         }
 
@@ -63,6 +79,16 @@ namespace AbstractShopBusinessLogic.BusinessLogics
                     ManagerId = model.ManagerId,
                     ClientId = order.ClientId
                 });
+
+                MailLogic.MailSendAsync(new MailSendInfo
+                {
+                    MailAddress = clientLogic.Read(new ClientBindingModel
+                    {
+                        Id = order.ClientId
+                    })?[0]?.Email,
+                    Subject = $"Заказ №{order.Id}",
+                    Text = $"Заказ №{order.Id} передан в работу."
+                });
             }
         }
 
@@ -92,6 +118,16 @@ namespace AbstractShopBusinessLogic.BusinessLogics
                 ClientId = order.ClientId,
                 ManagerId = model.ManagerId
             });
+
+            MailLogic.MailSendAsync(new MailSendInfo
+            {
+                MailAddress = clientLogic.Read(new ClientBindingModel
+                {
+                    Id = order.ClientId
+                })?[0]?.Email,
+                Subject = $"Заказ №{order.Id}",
+                Text = $"Заказ №{order.Id} готов."
+            });
         }
 
         public void PayOrder(ChangeStatusBindingModel model)
@@ -119,6 +155,16 @@ namespace AbstractShopBusinessLogic.BusinessLogics
                 Status = OrderStatus.Оплачен,
                 ClientId = order.ClientId,
                 ManagerId = model.ManagerId
+            });
+
+            MailLogic.MailSendAsync(new MailSendInfo
+            {
+                MailAddress = clientLogic.Read(new ClientBindingModel
+                {
+                    Id = order.ClientId
+                })?[0]?.Email,
+                Subject = $"Заказ №{order.Id}",
+                Text = $"Заказ №{order.Id} оплачен."
             });
         }
     }
