@@ -12,7 +12,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\AbstractShopBusinessLogic\AbstractTravelCompanyBusinessLogic.csproj" />
-    <ProjectReference Include="..\TravelCompanyRestApi\TravelCompanyRestApi.csproj" />
   </ItemGroup>
 
   <ItemGroup>

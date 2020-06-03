@@ -4,7 +4,6 @@ using AbstractTravelCompanyBusinessLogic.BindingModels;
 using AbstractTravelCompanyBusinessLogic.Interfaces;
 using AbstractTravelCompanyBusinessLogic.ViewModels;
 using Microsoft.AspNetCore.Mvc;
-using TravelCompanyRestApi.Models;
 
 namespace TravelCompanyRestApi.Controllers
 {
@@ -20,9 +19,9 @@ namespace TravelCompanyRestApi.Controllers
         }
 
         [HttpGet]
-        public List<StoreModel> Read() => storeLogic.Read(null).Select(rec => Convert(rec)).ToList();
+        public List<StoreApiViewModel> Read() => storeLogic.Read(null).Select(rec => Convert(rec)).ToList();
         [HttpGet]
-        public List<StoreModel> ReadStoreById(int storeId) => storeLogic.Read(new StoreBindingModel
+        public List<StoreApiViewModel> ReadStoreById(int storeId) => storeLogic.Read(new StoreBindingModel
         {
             Id = storeId
         }).Select(rec => Convert(rec)).ToList();
@@ -36,10 +35,10 @@ namespace TravelCompanyRestApi.Controllers
         [HttpPost]
         public void WriteOffTour(int tourId, int count) => storeLogic.WriteOffTour(tourId, count);
 
-        private StoreModel Convert(StoreViewModel model)
+        private StoreApiViewModel Convert(StoreViewModel model)
         {
             if (model == null) return null;
-            return new StoreModel
+            return new StoreApiViewModel
             {
                 Id = model.Id,
                 Name = model.Name,

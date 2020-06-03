@@ -5,10 +5,10 @@ using System.Linq;
 using System.Runtime.Serialization;
 using System.Threading.Tasks;
 
-namespace TravelCompanyRestApi.Models
+namespace AbstractTravelCompanyBusinessLogic.ViewModels
 {
     [DataContract]
-    public class StoreModel
+    public class StoreApiViewModel
     {
         [DataMember]
         public int Id { get; set; }

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Runtime.Serialization;
 using System.Threading.Tasks;
 
-namespace TravelCompanyRestApi.Models
+namespace AbstractTravelCompanyBusinessLogic.ViewModels
 {
     [DataContract]
     public class StoreComponentViewModel

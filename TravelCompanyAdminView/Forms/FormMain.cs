@@ -5,7 +5,6 @@ using System.Collections.Generic;
 using System.Windows.Forms;
 using TravelCompanyAdminView;
 using TravelCompanyAdminView.Forms;
-using TravelCompanyRestApi.Models;
 
 namespace TravelCompanyClientView.Forms
 {
@@ -21,7 +20,7 @@ namespace TravelCompanyClientView.Forms
         {
             try
             {
-                var list = APIAdmin.GetRequest<List<StoreModel>>($"api/store/Read");
+                var list = APIAdmin.GetRequest<List<StoreApiViewModel>>($"api/store/Read");
                 if (list != null)
                 {
                     dataGridView.DataSource = list;

@@ -7,7 +7,6 @@ using System.Data;
 using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
-using TravelCompanyRestApi.Models;
 
 namespace TravelCompanyAdminView.Forms
 {
@@ -29,7 +28,7 @@ namespace TravelCompanyAdminView.Forms
             {
                 try
                 {
-                    var view = APIAdmin.GetRequest<List<StoreModel>>($"api/store/ReadStoreById?storeId={id.Value}")?[0];
+                    var view = APIAdmin.GetRequest<List<StoreApiViewModel>>($"api/store/ReadStoreById?storeId={id.Value}")?[0];
 
                     if (view != null)
                     {

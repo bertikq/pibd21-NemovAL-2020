@@ -7,7 +7,6 @@ using System.Data;
 using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
-using TravelCompanyRestApi.Models;
 
 namespace TravelCompanyAdminView.Forms
 {
@@ -22,7 +21,7 @@ namespace TravelCompanyAdminView.Forms
         {
             try
             {
-                var stores = APIAdmin.GetRequest<List<StoreModel>>($"api/store/Read");
+                var stores = APIAdmin.GetRequest<List<StoreApiViewModel>>($"api/store/Read");
                 if (stores != null)
                 {
                     comboBoxStores.DisplayMember = "Name";
@@ -73,7 +72,7 @@ namespace TravelCompanyAdminView.Forms
             {
                 Count = int.Parse(textBoxCount.Text),
                 ComponentId = ((ComponentViewModel)comboBoxComponents.SelectedItem).Id,
-                StoreId = ((StoreModel)comboBoxStores.SelectedItem).Id
+                StoreId = ((StoreApiViewModel)comboBoxStores.SelectedItem).Id
             });
 
             MessageBox.Show("Сохранение прошло успешно", "Сообщение",
