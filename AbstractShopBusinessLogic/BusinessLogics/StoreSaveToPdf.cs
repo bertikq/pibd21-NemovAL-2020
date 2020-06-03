@@ -4,14 +4,15 @@ using MigraDoc.DocumentObjectModel.Tables;
 using MigraDoc.Rendering;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace AbstractTravelCompanyBusinessLogic.BusinessLogics
 {
-    public class SaveToPdf
+    public class StoreSaveToPdf
     {
         [Obsolete]
-        public static void CreateDoc(PdfInfo info)
+        public static void CreateDoc(StorePdfInfo info)
         {
             Document document = new Document();
             DefineStyles(document);
@@ -32,17 +33,35 @@ namespace AbstractTravelCompanyBusinessLogic.BusinessLogics
             CreateRow(new PdfRowParameters
             {
                 Table = table,
-                Texts = new List<string> { "Изделие", "Компонент изделия", "Количество" },
+                Texts = new List<string> { "Компонент", "Склад", "Количество" },
                 Style = "NormalTitle",
                 ParagraphAlignment = ParagraphAlignment.Center
             });
-            foreach (var order in info.Tours)
+            foreach (var component in info.ComponentStores)
             {
                 CreateRow(new PdfRowParameters
                 {
                     Table = table,
-                    Texts = new List<string> { order.TourName,
-                        order.ComponentName, order.ComponentCount.ToString() },
+                    Texts = new List<string> { component.Key.ComponentName, "", "" },
+                    Style = "Normal",
+                    ParagraphAlignment = ParagraphAlignment.Left
+                });
+
+                foreach (var store in component.Value)
+                {
+                    CreateRow(new PdfRowParameters
+                    {
+                        Table = table,
+                        Texts = new List<string> { "", store.Item1, store.Item2.ToString() },
+                        Style = "Normal",
+                        ParagraphAlignment = ParagraphAlignment.Left
+                    });
+                }
+
+                CreateRow(new PdfRowParameters
+                {
+                    Table = table,
+                    Texts = new List<string> { "", "", component.Value.Sum(x => x.Item2).ToString() },
                     Style = "Normal",
                     ParagraphAlignment = ParagraphAlignment.Left
                 });

@@ -1,5 +1,6 @@
 ﻿using AbstractTravelCompanyBusinessLogic.BindingModels;
 using AbstractTravelCompanyBusinessLogic.BusinessLogics;
+using AbstractTravelCompanyBusinessLogic.ViewModels;
 using Microsoft.Reporting.WinForms;
 using System;
 using System.Collections.Generic;
@@ -14,12 +15,12 @@ using Unity;
 
 namespace AbstractShopView.UIForms
 {
-    public partial class FormReportTourComponent : Form
+    public partial class FormReportStoreComponent : Form
     {
         [Dependency]
         public new IUnityContainer Container { get; set; }
         private readonly ReportLogic logic;
-        public FormReportTourComponent(ReportLogic logic)
+        public FormReportStoreComponent(ReportLogic logic)
         {
             InitializeComponent();
             this.logic = logic;
@@ -28,8 +29,9 @@ namespace AbstractShopView.UIForms
         {
             try
             {
-                var dataSource = logic.GetTours();
-                ReportDataSource source = new ReportDataSource("DataSetTours", dataSource);
+                var dataSource = logic.GetListComponentStores();
+
+                ReportDataSource source = new ReportDataSource("DataSetComponentStores", dataSource);
                 reportViewer.LocalReport.DataSources.Add(source);
                 reportViewer.RefreshReport();
             }
@@ -49,7 +51,7 @@ namespace AbstractShopView.UIForms
                 {
                     try
                     {
-                        logic.SaveToursComponentsToPdfFile(new ReportBindingModel
+                        logic.SaveStoresComponentsToPdfFile(new ReportBindingModel
                         {
                             FileName = dialog.FileName
                         });

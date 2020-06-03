@@ -141,7 +141,7 @@ namespace AbstractTravelCompamyView.UIForms
             {
                 if (dialog.ShowDialog() == DialogResult.OK)
                 {
-                    reportLogic.SaveComponentsToWordFile(new ReportBindingModel
+                    reportLogic.SaveStoresToWordFile(new ReportBindingModel
                     {
                         FileName = dialog.FileName
                     });
@@ -152,12 +152,12 @@ namespace AbstractTravelCompamyView.UIForms
         }
         private void ToExcel(object sender, EventArgs e)
         {
-            var form = Container.Resolve<FormDateOrders>();
+            var form = Container.Resolve<FormStoreOrders>();
             form.ShowDialog();
         }
         private void ToPdf(object sender, EventArgs e)
         {
-            var form = Container.Resolve<FormReportTourComponent>();
+            var form = Container.Resolve<FormReportStoreComponent>();
             form.ShowDialog();
         }
 
@@ -176,6 +176,35 @@ namespace AbstractTravelCompamyView.UIForms
         private void клиентыToolStripMenuItem_Click(object sender, EventArgs e)
         {
             var form = Container.Resolve<FormClients>();
+            form.ShowDialog();
+        }
+
+        private void списокТуровToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            using (var dialog = new SaveFileDialog { Filter = "docx|*.docx" })
+            {
+                if (dialog.ShowDialog() == DialogResult.OK)
+                {
+                    reportLogic.SaveComponentsToWordFile(new ReportBindingModel
+                    {
+                        FileName =
+                   dialog.FileName
+                    });
+                    MessageBox.Show("Выполнено", "Успех", MessageBoxButtons.OK,
+                   MessageBoxIcon.Information);
+                }
+            }
+        }
+
+        private void заказыПоДатеToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            var form = Container.Resolve<FormDateOrders>();
+            form.ShowDialog();
+        }
+
+        private void изделияСКомпонентамиToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            var form = Container.Resolve<FormReportTourComponent>();
             form.ShowDialog();
         }
     }

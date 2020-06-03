@@ -1,16 +1,14 @@
 ﻿using AbstractTravelCompanyBusinessLogic.HelperModels;
+using System.Collections.Generic;
 using DocumentFormat.OpenXml;
 using DocumentFormat.OpenXml.Packaging;
 using DocumentFormat.OpenXml.Wordprocessing;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace AbstractTravelCompanyBusinessLogic.BusinessLogics
 {
-    public static class SaveToWord
+    public static class StoreSaveToWord
     {
-        public static void CreateDoc(WordInfo info)
+        public static void CreateDoc(StoreWordInfo info)
         {
             using (WordprocessingDocument wordDocument =
            WordprocessingDocument.Create(info.FileName, WordprocessingDocumentType.Document))
@@ -29,30 +27,36 @@ namespace AbstractTravelCompanyBusinessLogic.BusinessLogics
                         JustificationValues = JustificationValues.Center
                     }
                 }));
-                foreach (var tour in info.Tours)
+
+                Table table = new Table();
+                TableProperties props = new TableProperties(
+                    new TableBorders(
+                        new TopBorder { Val = new EnumValue<BorderValues>(BorderValues.Single), Size = 12 },
+                        new BottomBorder { Val = new EnumValue<BorderValues>(BorderValues.Single), Size = 12 },
+                        new LeftBorder { Val = new EnumValue<BorderValues>(BorderValues.Single), Size = 12 },
+                        new RightBorder { Val = new EnumValue<BorderValues>(BorderValues.Single), Size = 12 },
+                        new InsideHorizontalBorder { Val = new EnumValue<BorderValues>(BorderValues.Single), Size = 12 },
+                        new InsideVerticalBorder { Val = new EnumValue<BorderValues>(BorderValues.Single), Size = 12 }
+                ));
+                table.AppendChild(props);
+                foreach (var store in info.Stores)
                 {
-                    StringWord name = new StringWord
+                    var tableRow = new TableRow();
+                    var tableCell = new TableCell();
+                    tableCell.Append(CreateParagraph(new WordParagraph
                     {
-                        Bold = true,
-                        Content = tour.TourName
-                    };
-                    StringWord price = new StringWord
-                    {
-                        Bold = false,
-                        Content = tour.Price.ToString()
-                    };
-
-
-                    docBody.AppendChild(CreateParagraph(new WordParagraph
-                    {
-                        Texts = new List<StringWord> { name, price },
+                        Texts = new List<StringWord> { new StringWord { Content = store.Name, Bold = false } },
                         TextProperties = new WordParagraphProperties
                         {
+                            Bold = false,
                             Size = "24",
                             JustificationValues = JustificationValues.Both
                         }
                     }));
+                    tableRow.AppendChild(tableCell);
+                    table.AppendChild(tableRow);
                 }
+                docBody.AppendChild(table);
                 docBody.AppendChild(CreateSectionProperties());
                 wordDocument.MainDocumentPart.Document.Save();
             }

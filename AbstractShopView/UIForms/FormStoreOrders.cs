@@ -1,5 +1,8 @@
 ﻿using AbstractTravelCompanyBusinessLogic.BindingModels;
 using AbstractTravelCompanyBusinessLogic.BusinessLogics;
+using AbstractTravelCompanyBusinessLogic.Interfaces;
+using AbstractTravelCompanyBusinessLogic.ViewModels;
+using Microsoft.Reporting.WinForms;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -13,42 +16,35 @@ using Unity;
 
 namespace AbstractShopView.UIForms
 {
-    public partial class FormDateOrders : Form
+    public partial class FormStoreOrders : Form
     {
         [Dependency]
         public new IUnityContainer Container { get; set; }
-        private readonly ReportLogic logic;
-        public FormDateOrders(ReportLogic logic)
+        private readonly ReportLogic reportLogic;
+        private readonly IStoreLogic _storeLogic;
+        public FormStoreOrders(ReportLogic reportLogic, IStoreLogic storeLogic)
         {
             InitializeComponent();
-            this.logic = logic;
+            this.reportLogic = reportLogic;
+            _storeLogic = storeLogic;
         }
         private void ButtonMake_Click(object sender, EventArgs e)
         {
-            if (dateTimePickerFrom.Value.Date >= dateTimePickerTo.Value.Date)
-            {
-                MessageBox.Show("Дата начала должна быть меньше даты окончания",
-               "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
             try
             {
-                var dict = logic.GetOrders(new ReportBindingModel
-                {
-                    DateFrom = dateTimePickerFrom.Value,
-                    DateTo = dateTimePickerTo.Value
-                });
-                if (dict != null)
+                var stores = _storeLogic.Read(null);
+                if (stores != null)
                 {
                     dataGridView.Rows.Clear();
-                    foreach (var elem in dict.Keys)
+                    foreach (var store in stores)
                     {
-                        dataGridView.Rows.Add(new object[] { elem, "", "" });
-                        foreach (var listElem in dict[elem])
+                        dataGridView.Rows.Add(new object[] { store.Name, "", "" });
+                        foreach (var storeComponent in store.StoreComponents.Values)
                         {
-                            dataGridView.Rows.Add(new object[] { "", listElem.TourName, listElem.Sum });
+                            dataGridView.Rows.Add(new object[] { "", storeComponent.Item1, storeComponent.Item2 });
                         }
-                        dataGridView.Rows.Add(new object[] { "", "Сумма", dict[elem].Sum(x => x.Sum) });
+                        dataGridView.Rows.Add(new object[] { "", "Сумма компонентов", 
+                            store.StoreComponents.Values.Sum(x => x.Item2) });
                         dataGridView.Rows.Add(new object[] { });
                     }
                 }
@@ -67,11 +63,9 @@ namespace AbstractShopView.UIForms
                 {
                     try
                     {
-                        logic.SaveOrdersToExcelFile(new ReportBindingModel
+                        reportLogic.SaveStoresToExcelFile(new ReportBindingModel
                         {
                             FileName = dialog.FileName,
-                            DateFrom = dateTimePickerFrom.Value,
-                            DateTo = dateTimePickerTo.Value
                         });
                         MessageBox.Show("Выполнено", "Успех", MessageBoxButtons.OK,
                         MessageBoxIcon.Information);

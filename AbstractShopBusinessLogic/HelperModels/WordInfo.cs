@@ -9,6 +9,6 @@ namespace AbstractTravelCompanyBusinessLogic.HelperModels
     {
         public string FileName { get; set; }
         public string Title { get; set; }
-        public List<StoreViewModel> Stores { get; set; }
+        public List<TourViewModel> Tours { get; set; }
     }
 }
