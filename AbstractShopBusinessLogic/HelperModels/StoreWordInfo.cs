@@ -5,7 +5,7 @@ using System.Text;
 
 namespace AbstractTravelCompanyBusinessLogic.HelperModels
 {
-    public class ExcelInfo
+    public class StoreWordInfo
     {
         public string FileName { get; set; }
         public string Title { get; set; }

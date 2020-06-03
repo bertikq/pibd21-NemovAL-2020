@@ -8,7 +8,7 @@ namespace AbstractTravelCompanyBusinessLogic.BusinessLogics
 {
     public static class SaveToWord
     {
-        public static void CreateDoc(WordInfo info)
+        public static void CreateDoc(StoreWordInfo info)
         {
             using (WordprocessingDocument wordDocument =
            WordprocessingDocument.Create(info.FileName, WordprocessingDocumentType.Document))

@@ -9,10 +9,10 @@ using System.Text;
 
 namespace AbstractTravelCompanyBusinessLogic.BusinessLogics
 {
-    public class SaveToPdf
+    public class StoreSaveToPdf
     {
         [Obsolete]
-        public static void CreateDoc(PdfInfo info)
+        public static void CreateDoc(StorePdfInfo info)
         {
             Document document = new Document();
             DefineStyles(document);

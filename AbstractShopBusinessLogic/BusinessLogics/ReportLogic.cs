@@ -26,7 +26,7 @@ namespace AbstractTravelCompanyBusinessLogic.BusinessLogics
 
         public void SaveComponentsToWordFile(ReportBindingModel model)
         {
-            SaveToWord.CreateDoc(new WordInfo
+            StoreSaveToWord.CreateDoc(new StoreWordInfo
             {
                 FileName = model.FileName,
                 Title = "Список складов",
@@ -36,7 +36,7 @@ namespace AbstractTravelCompanyBusinessLogic.BusinessLogics
 
         public void SaveOrdersToExcelFile(ReportBindingModel model)
         {
-            SaveToExcel.CreateDoc(new ExcelInfo
+            StoreSaveToExcel.CreateDoc(new StoreExcelInfo
             {
                 FileName = model.FileName,
                 Title = "Список заказов",
@@ -99,7 +99,7 @@ namespace AbstractTravelCompanyBusinessLogic.BusinessLogics
         [Obsolete]
         public void SaveToursComponentsToPdfFile(ReportBindingModel model)
         {
-            SaveToPdf.CreateDoc(new PdfInfo
+            StoreSaveToPdf.CreateDoc(new StorePdfInfo
             {
                 FileName = model.FileName,
                 Title = "Список компонентов и складов",

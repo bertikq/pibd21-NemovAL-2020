@@ -13,7 +13,7 @@ namespace AbstractTravelCompanyBusinessLogic.BusinessLogics
 {
     public static class SaveToExcel
     {
-        public static void CreateDoc(ExcelInfo info)
+        public static void CreateDoc(StoreExcelInfo info)
         {
             using (SpreadsheetDocument spreadsheetDocument =
            SpreadsheetDocument.Create(info.FileName, SpreadsheetDocumentType.Workbook))
