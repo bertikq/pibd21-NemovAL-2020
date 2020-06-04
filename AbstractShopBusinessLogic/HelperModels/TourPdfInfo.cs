@@ -5,10 +5,10 @@ using System.Text;
 
 namespace AbstractTravelCompanyBusinessLogic.HelperModels
 {
-    public class ExcelInfo
+    public class TourPdfInfo
     {
         public string FileName { get; set; }
         public string Title { get; set; }
-        public Dictionary<DateTime, List<ReportOrdersViewModel>> Orders { get; set; }
+        public List<ReportToursComponentsViewModel> Tours { get; set; }
     }
 }
