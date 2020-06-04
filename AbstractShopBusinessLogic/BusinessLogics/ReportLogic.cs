@@ -70,7 +70,7 @@ namespace AbstractTravelCompanyBusinessLogic.BusinessLogics
 
         public void SaveComponentsToWordFile(ReportBindingModel model)
         {
-            SaveToWord.CreateDoc(new WordInfo
+            SaveToWord.CreateDoc(new TourWordInfo
             {
                 FileName = model.FileName,
                 Title = "Список туров",
@@ -82,7 +82,7 @@ namespace AbstractTravelCompanyBusinessLogic.BusinessLogics
 
         public void SaveStoresToWordFile(ReportBindingModel model)
         {
-            StoreSaveToWord.CreateDoc(new StoreWordInfo
+            SaveToWord.CreateDoc(new StoreWordInfo
             {
                 FileName = model.FileName,
                 Title = "Список складов",
@@ -92,7 +92,7 @@ namespace AbstractTravelCompanyBusinessLogic.BusinessLogics
 
         public void SaveOrdersToExcelFile(ReportBindingModel model)
         {
-            SaveToExcel.CreateDoc(new ExcelInfo
+            SaveToExcel.CreateDoc(new TourExcelInfo
             {
                 FileName = model.FileName,
                 Title = "Список заказов",
@@ -104,7 +104,7 @@ namespace AbstractTravelCompanyBusinessLogic.BusinessLogics
 
         public void SaveStoresToExcelFile(ReportBindingModel model)
         {
-            StoreSaveToExcel.CreateDoc(new StoreExcelInfo
+            SaveToExcel.CreateDoc(new StoreExcelInfo
             {
                 FileName = model.FileName,
                 Title = "Список заказов",
@@ -167,7 +167,7 @@ namespace AbstractTravelCompanyBusinessLogic.BusinessLogics
         [Obsolete]
         public void SaveStoresComponentsToPdfFile(ReportBindingModel model)
         {
-            StoreSaveToPdf.CreateDoc(new StorePdfInfo
+            SaveToPdf.CreateDoc(new StorePdfInfo
             {
                 FileName = model.FileName,
                 Title = "Список компонентов и складов",
@@ -178,7 +178,7 @@ namespace AbstractTravelCompanyBusinessLogic.BusinessLogics
         [Obsolete]
         public void SaveToursComponentsToPdfFile(ReportBindingModel model)
         {
-            SaveToPdf.CreateDoc(new PdfInfo
+            SaveToPdf.CreateDoc(new TourPdfInfo
             {
                 FileName = model.FileName,
                 Title = "Список заказов",
