@@ -49,5 +49,6 @@ namespace AbstractTravelCompanyBusinessLogic.ViewModels
         [DataMember]
         [DisplayName("Клиент")]
         public string ClientFIO { get; set; }
+        public string ManagerFIO { get; set; }
     }
 }

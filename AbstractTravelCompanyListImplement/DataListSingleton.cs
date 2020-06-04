@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace AbstractTravelCompanyFileImplement
+namespace AbstractTravelCompanyListImplement
 {
     public class DataListSingleton
     {
@@ -15,6 +15,7 @@ namespace AbstractTravelCompanyFileImplement
         public List<Store> Stores { get; set; }
         public List<StoreComponent> StoreComponents { get; set; }
         public List<Client> Clients { get; set; }
+        public List<Manager> Managers { get; set; }
 
         private DataListSingleton()
         {
@@ -25,6 +26,7 @@ namespace AbstractTravelCompanyFileImplement
             Stores = new List<Store>();
             StoreComponents = new List<StoreComponent>();
             Clients = new List<Client>();
+            Managers = new List<Manager>();
         }
         public static DataListSingleton GetInstance()
         {

@@ -18,6 +18,9 @@ namespace AbstractTravelCompanyFileImplement
         private readonly string TourComponentFileName = "TourComponent.xml";
         private readonly string StoreFileName = "Store.xml";
         private readonly string StoreComponentFileName = "StoreComponent.xml";
+        private readonly string ProductFileName = "Product.xml";
+        private readonly string ProductComponentFileName = "ProductComponent.xml";
+        private readonly string ManagerFileName = "Manager.xml";
         public List<Component> Components { get; set; }
         public List<Order> Orders { get; set; }
         public List<Tour> Tours { get; set; }
@@ -25,6 +28,7 @@ namespace AbstractTravelCompanyFileImplement
         public List<Store> Stores { get; set; }
         public List<StoreComponent> StoreComponents { get; set; }
         public List<Client> Clients { get; set; }
+        public List<Manager> Managers { get; set; }
         private FileDataListSingleton()
         {
             Components = LoadComponents();
@@ -34,6 +38,7 @@ namespace AbstractTravelCompanyFileImplement
             Stores = LoadStores();
             StoreComponents = LoadStoreComponents();
             Clients = new List<Client>();
+            Managers = LoadManagers();
         }
         public static FileDataListSingleton GetInstance()
         {
@@ -51,6 +56,7 @@ namespace AbstractTravelCompanyFileImplement
             SaveToursComponents();
             SaveStores();
             SaveStoreComponents();
+            SaveManagers();
         }
         private List<Component> LoadComponents()
         {
@@ -149,6 +155,26 @@ namespace AbstractTravelCompanyFileImplement
                         StoreId = Convert.ToInt32(elem.Element("StoreId").Value),
                         ComponentId = Convert.ToInt32(elem.Element("ComponentId").Value),
                         Count = Convert.ToInt32(elem.Element("Count").Value)
+                    });
+                }
+            }
+            return list;
+        }
+        private List<Manager> LoadManagers()
+        {
+            var list = new List<Manager>();
+            if (File.Exists(ManagerFileName))
+            {
+                XDocument xDocument = XDocument.Load(ManagerFileName);
+                var xElements = xDocument.Root.Elements("Manager").ToList();
+                foreach (var elem in xElements)
+                {
+                    list.Add(new Manager
+                    {
+                        Id = Convert.ToInt32(elem.Attribute("Id").Value),
+                        ManagerFIO = elem.Element("ManagerFIO").Value,
+                        PauseTime = Convert.ToInt32(elem.Element("PauseTime").Value),
+                        WorkingTime = Convert.ToInt32(elem.Element("WorkingTime").Value)
                     });
                 }
             }
@@ -255,6 +281,24 @@ namespace AbstractTravelCompanyFileImplement
                 }
                 XDocument xDocument = new XDocument(xElement);
                 xDocument.Save(StoreComponentFileName);
+            }
+        }
+
+        private void SaveManagers()
+        {
+            if (Managers != null)
+            {
+                var xElement = new XElement("Managers");
+                foreach (var manager in Managers)
+                {
+                    xElement.Add(new XElement("Manager",
+                    new XAttribute("Id", manager.Id),
+                    new XElement("ManagerFIO", manager.ManagerFIO),
+                    new XElement("PauseTime", manager.PauseTime)),
+                    new XElement("WorkingTime", manager.WorkingTime));
+                }
+                XDocument xDocument = new XDocument(xElement);
+                xDocument.Save(ManagerFileName);
             }
         }
         private void SaveToursComponents()

@@ -25,18 +25,21 @@ namespace AbstractTravelCompamyView
         private static IUnityContainer BuildUnityContainer()
         {
             var currentContainer = new UnityContainer();
-            currentContainer.RegisterType<IComponentLogic, ComponentLogic>(new
-           HierarchicalLifetimeManager());
-            currentContainer.RegisterType<IOrderLogic, OrderLogic>(new
-           HierarchicalLifetimeManager());
-            currentContainer.RegisterType<ITourLogic, TourLogic>(new
-           HierarchicalLifetimeManager());
+            currentContainer.RegisterType<IComponentLogic, ComponentLogic>(new 
+                HierarchicalLifetimeManager());
+            currentContainer.RegisterType<IOrderLogic, OrderLogic>(new 
+                HierarchicalLifetimeManager());
+            currentContainer.RegisterType<ITourLogic, TourLogic>(new 
+                HierarchicalLifetimeManager());
+            currentContainer.RegisterType<IClientLogic, ClientLogic>(new 
+                HierarchicalLifetimeManager());
             currentContainer.RegisterType<IStoreLogic, StoreLogic>(new
            HierarchicalLifetimeManager());
-            currentContainer.RegisterType<IClientLogic, ClientLogic>(new
-           HierarchicalLifetimeManager());
+            currentContainer.RegisterType<IManagerLogic, ManagerLogic>(new 
+                HierarchicalLifetimeManager());
             currentContainer.RegisterType<MainLogic>(new HierarchicalLifetimeManager());
             currentContainer.RegisterType<ReportLogic>(new HierarchicalLifetimeManager());
+            currentContainer.RegisterType<WorkModeling>(new HierarchicalLifetimeManager());
             return currentContainer;
         }
     }

@@ -6,6 +6,7 @@ using Microsoft.EntityFrameworkCore;
 using AbstractTravelCompanyBusinessLogic.Interfaces;
 using AbstractTravelCompanyBusinessLogic.BindingModels;
 using AbstractTravelCompanyBusinessLogic.ViewModels;
+using AbstractTravelCompanyBusinessLogic.Enums;
 
 namespace AbstractTravelCompanyDatabaseImplement.Implements
 {
@@ -34,6 +35,7 @@ namespace AbstractTravelCompanyDatabaseImplement.Implements
                         element.TourId = model.TourId;
                         element.ClientId = model.ClientId.Value;
                         element.Client = context.Clients.FirstOrDefault(c => c.Id == model.ClientId);
+                        element.ManagerId = model.ManagerId;
                     }
                 }
                 else
@@ -47,8 +49,9 @@ namespace AbstractTravelCompanyDatabaseImplement.Implements
                         Status = model.Status,
                         TourId = model.TourId,
                         ClientId = model.ClientId.Value,
-                        Client = context.Clients.FirstOrDefault(c => c.Id == model.ClientId)
-                    };
+                        Client = context.Clients.FirstOrDefault(c => c.Id == model.ClientId),
+                        ManagerId = model.ManagerId
+                };
                     context.Orders.Add(element);
                 }
 
@@ -76,54 +79,32 @@ namespace AbstractTravelCompanyDatabaseImplement.Implements
 
         public List<OrderViewModel> Read(OrderBindingModel model, DateTime? dateFrom = null, DateTime? dateTo = null)
         {
-            if (dateFrom == null || dateTo == null)
+            using (var context = new DataBaseContext())
             {
-                using (var context = new DataBaseContext())
+                return context.Orders
+                .Include(x => x.Tour)
+                .Include(x => x.Client)
+                .Include(x => x.Manager)
+                .Where(rec => model == null || 
+                (rec.Id == model.Id && model.Id.HasValue) || 
+                (dateFrom.HasValue && dateTo.HasValue && rec.DateCreate >= dateFrom && rec.DateCreate <= dateTo) || 
+                (model.ClientId.HasValue && rec.ClientId == model.ClientId) || 
+                (model.FreeOrders.HasValue && model.FreeOrders.Value && !rec.ManagerId.HasValue) || 
+                (model.ManagerId.HasValue && rec.ManagerId == model.ManagerId && rec.Status == OrderStatus.Выполняется))
+                .Select(rec => new OrderViewModel
                 {
-                    return context.Orders
-                    .Include(x => x.Tour)
-                    .Include(x => x.Client)
-                    .Where(rec => model == null || rec.Id == model.Id ||
-                    (model.ClientId.HasValue && model.ClientId.Value == rec.ClientId))
-                    .Select(rec => new OrderViewModel
-                    {
-                        Id = rec.Id,
-                        Count = rec.Count,
-                        Sum = rec.Sum,
-                        DateCreate = rec.DateCreate,
-                        DateImplement = rec.DateImplement,
-                        Status = rec.Status,
-                        TourId = rec.TourId,
-                        TourName = rec.Tour.TourName,
-                        ClientFIO = rec.Client.FIO,
-                        ClientId = rec.ClientId
-                    }).ToList();
-                }
-            }
-            else
-            {
-                using (var context = new DataBaseContext())
-                {
-                    return context.Orders
-                    .Include(x => x.Tour)
-                    .Include(x => x.Client)
-                    .Where(rec => (model == null || rec.Id == model.Id ||
-                    (model.ClientId.HasValue && model.ClientId.Value == rec.ClientId)) && 
-                    rec.DateCreate <= dateTo && rec.DateCreate >= dateFrom)
-                    .Select(rec => new OrderViewModel
-                    {
-                        Id = rec.Id,
-                        Count = rec.Count,
-                        Sum = rec.Sum,
-                        DateCreate = rec.DateCreate,
-                        DateImplement = rec.DateImplement,
-                        Status = rec.Status,
-                        TourId = rec.TourId,
-                        TourName = rec.Tour.TourName,
-                        ClientId = rec.ClientId,
-                        ClientFIO = rec.Client.FIO
-                    }).ToList();
-                }
+                    Id = rec.Id,
+                    Count = rec.Count,
+                    Sum = rec.Sum,
+                    DateCreate = rec.DateCreate,
+                    DateImplement = rec.DateImplement,
+                    Status = rec.Status,
+                    TourId = rec.TourId,
+                    TourName = rec.Tour.TourName,
+                    ClientFIO = rec.Client.FIO,
+                    ClientId = rec.ClientId,
+                    ManagerFIO = rec.ManagerId.HasValue ? rec.Manager.ManagerFIO : string.Empty,
+                }).ToList();
             }
         }
     }

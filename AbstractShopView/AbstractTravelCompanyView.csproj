@@ -255,6 +255,13 @@
     <Compile Include="UIForms\FormMain.Designer.cs">
       <DependentUpon>FormMain.cs</DependentUpon>
     </Compile>
+    <Compile Include="UIForms\FormManagers.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UIForms\FormManagers.Designer.cs">
+      <DependentUpon>FormManagers.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UIForms\FormReportTourComponent.cs">
     <Compile Include="UIForms\FormStore.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -272,6 +279,12 @@
     </Compile>
     <Compile Include="UIForms\FormReportStoreComponent.Designer.cs">
       <DependentUpon>FormReportStoreComponent.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UIForms\FormSettingManager.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UIForms\FormSettingManager.Designer.cs">
+      <DependentUpon>FormSettingManager.cs</DependentUpon>
     </Compile>
     <Compile Include="UIForms\FormTour.cs">
       <SubType>Form</SubType>
@@ -325,6 +338,11 @@
     <EmbeddedResource Include="UIForms\FormMain.resx">
       <DependentUpon>FormMain.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="UIForms\FormManagers.resx">
+      <DependentUpon>FormManagers.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UIForms\FormReportTourComponent.resx">
+      <DependentUpon>FormReportTourComponent.cs</DependentUpon>
     <EmbeddedResource Include="UIForms\FormStore.resx">
       <DependentUpon>FormStore.cs</DependentUpon>
     </EmbeddedResource>
@@ -333,6 +351,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UIForms\FormReportStoreComponent.resx">
       <DependentUpon>FormReportStoreComponent.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UIForms\FormSettingManager.resx">
+      <DependentUpon>FormSettingManager.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UIForms\FormTour.resx">
       <DependentUpon>FormTour.cs</DependentUpon>

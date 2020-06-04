@@ -11,6 +11,7 @@ namespace AbstractTravelCompanyBusinessLogic.BusinessLogics
         private readonly IStoreLogic _storeLogic;
         private readonly IComponentLogic _componentLogic;
         private readonly ITourLogic _tourLogic;
+        private readonly object locker = new object();
 
         public MainLogic(IOrderLogic orderLogic, IStoreLogic storeLogic, IComponentLogic componentLogic, ITourLogic tourLogic)
         {
@@ -35,31 +36,38 @@ namespace AbstractTravelCompanyBusinessLogic.BusinessLogics
 
         public void TakeOrderInWork(ChangeStatusBindingModel model)
         {
-            var order = orderLogic.Read(new OrderBindingModel
+            lock (locker)
             {
-                Id = model.OrderId
-            })?[0];
-            if (order == null)
-            {
-                throw new Exception("Не найден заказ");
-            }
-            if (order.Status != OrderStatus.Принят)
-            {
-                throw new Exception("Заказ не в статусе \"Принят\"");
-            }
 
-            _storeLogic.WriteOffTour(order.TourId, order.Count);
-
-            orderLogic.CreateOrUpdate(new OrderBindingModel
-            {
-                Id = order.Id,
-                TourId = order.TourId,
-                Count = order.Count,
-                Sum = order.Sum,
-                DateCreate = order.DateCreate,
-                DateImplement = DateTime.Now,
-                Status = OrderStatus.Выполняется
-            });
+                var order = orderLogic.Read(new OrderBindingModel
+                {
+                    Id = model.OrderId
+                })?[0];
+                if (order == null)
+                {
+                    throw new Exception("Не найден заказ");
+                }
+                if (order.Status != OrderStatus.Принят)
+                {
+                    throw new Exception("Заказ не в статусе \"Принят\"");
+                }
+                if (!model.ManagerId.HasValue)
+                {
+                    throw new Exception("Не указан менеджер");
+                }
+                orderLogic.CreateOrUpdate(new OrderBindingModel
+                {
+                    Id = order.Id,
+                    TourId = order.TourId,
+                    Count = order.Count,
+                    Sum = order.Sum,
+                    DateCreate = order.DateCreate,
+                    DateImplement = DateTime.Now,
+                    Status = OrderStatus.Выполняется,
+                    ManagerId = model.ManagerId,
+                    ClientId = order.ClientId
+                });
+            }
         }
 
         public void FinishOrder(ChangeStatusBindingModel model)
@@ -84,7 +92,9 @@ namespace AbstractTravelCompanyBusinessLogic.BusinessLogics
                 Sum = order.Sum,
                 DateCreate = order.DateCreate,
                 DateImplement = order.DateImplement,
-                Status = OrderStatus.Готов
+                Status = OrderStatus.Готов,
+                ClientId = order.ClientId,
+                ManagerId = model.ManagerId
             });
         }
 
@@ -110,7 +120,9 @@ namespace AbstractTravelCompanyBusinessLogic.BusinessLogics
                 Sum = order.Sum,
                 DateCreate = order.DateCreate,
                 DateImplement = order.DateImplement,
-                Status = OrderStatus.Оплачен
+                Status = OrderStatus.Оплачен,
+                ClientId = order.ClientId,
+                ManagerId = model.ManagerId
             });
         }
 

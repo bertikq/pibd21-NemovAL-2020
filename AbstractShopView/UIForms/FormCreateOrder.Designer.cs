@@ -76,6 +76,7 @@
             this.labelCount.Size = new System.Drawing.Size(90, 17);
             this.labelCount.TabIndex = 8;
             this.labelCount.Text = "Количество:";
+            this.labelCount.Click += new System.EventHandler(this.labelCount_Click);
             // 
             // labelComponent
             // 
@@ -103,6 +104,7 @@
             this.labelSumm.Size = new System.Drawing.Size(54, 17);
             this.labelSumm.TabIndex = 12;
             this.labelSumm.Text = "Сумма:";
+            this.labelSumm.Click += new System.EventHandler(this.labelSumm_Click);
             // 
             // textBoxSumm
             // 
@@ -110,6 +112,7 @@
             this.textBoxSumm.Name = "textBoxSumm";
             this.textBoxSumm.Size = new System.Drawing.Size(261, 22);
             this.textBoxSumm.TabIndex = 13;
+            this.textBoxSumm.TextChanged += new System.EventHandler(this.textBoxSumm_TextChanged);
             // 
             // label1
             // 
@@ -119,6 +122,7 @@
             this.label1.Size = new System.Drawing.Size(60, 17);
             this.label1.TabIndex = 15;
             this.label1.Text = "Клиент:";
+            this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
             // clientComboBox
             // 
@@ -127,6 +131,7 @@
             this.clientComboBox.Name = "clientComboBox";
             this.clientComboBox.Size = new System.Drawing.Size(261, 24);
             this.clientComboBox.TabIndex = 14;
+            this.clientComboBox.SelectedIndexChanged += new System.EventHandler(this.clientComboBox_SelectedIndexChanged);
             // 
             // FormCreateOrder
             // 
