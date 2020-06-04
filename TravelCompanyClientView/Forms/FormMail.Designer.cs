@@ -28,20 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.buttonUpd = new System.Windows.Forms.Button();
             this.dataGridView = new System.Windows.Forms.DataGridView();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).BeginInit();
             this.SuspendLayout();
-            // 
-            // buttonUpd
-            // 
-            this.buttonUpd.Location = new System.Drawing.Point(444, 12);
-            this.buttonUpd.Name = "buttonUpd";
-            this.buttonUpd.Size = new System.Drawing.Size(100, 30);
-            this.buttonUpd.TabIndex = 6;
-            this.buttonUpd.Text = "Обновить";
-            this.buttonUpd.UseVisualStyleBackColor = true;
-            this.buttonUpd.Click += new System.EventHandler(this.buttonUpd_Click);
             // 
             // dataGridView
             // 
@@ -58,7 +47,6 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(557, 450);
-            this.Controls.Add(this.buttonUpd);
             this.Controls.Add(this.dataGridView);
             this.Name = "FormMail";
             this.Text = "Письма";
@@ -70,7 +58,6 @@
 
         #endregion
 
-        private System.Windows.Forms.Button buttonUpd;
         private System.Windows.Forms.DataGridView dataGridView;
     }
 }

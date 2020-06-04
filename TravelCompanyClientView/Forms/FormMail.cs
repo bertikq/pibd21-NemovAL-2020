@@ -25,12 +25,11 @@ namespace TravelCompanyClientView.Forms
         {
             try
             {
-                var list = APIClient.GetRequest<List<MessageInfoViewModel>>($"api/client/ReadMessage?clientId={Program.Client.Email}");
+                var list = APIClient.GetRequest<List<MessageInfoViewModel>>($"api/client/ReadMessage?clientId={Program.Client.Id}");
                 if (list != null)
                 {
                     dataGridView.DataSource = list;
                     dataGridView.Columns[0].Visible = false;
-                    dataGridView.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
                 }
             }
             catch (Exception ex)
@@ -38,11 +37,6 @@ namespace TravelCompanyClientView.Forms
                 MessageBox.Show(ex.Message, "Ошибка", MessageBoxButtons.OK,
                MessageBoxIcon.Error);
             }
-        }
-
-        private void buttonUpd_Click(object sender, EventArgs e)
-        {
-            LoadData();
         }
     }
 }

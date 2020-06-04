@@ -57,8 +57,7 @@ namespace AbstractTravelCompanyBusinessLogic.BusinessLogics
                         objSmtpClient.DeliveryMethod = SmtpDeliveryMethod.Network;
                         objSmtpClient.Credentials = new NetworkCredential(mailLogin,
                         mailPassword);
-                        await Task.Run(() => objSmtpClient.SendAsync(objMailMessage,
-                       null));
+                        await Task.Run(() => objSmtpClient.Send(objMailMessage));
                     }
                     catch (Exception)
                     {

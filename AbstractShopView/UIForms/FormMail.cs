@@ -8,11 +8,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Unity;
 
 namespace AbstractShopView.UIForms
 {
     public partial class FormMail : Form
     {
+        [Dependency]
+        public new IUnityContainer Container { get; set; }
+
         private readonly IMessageInfoLogic messageInfoLogic;
         public FormMail(IMessageInfoLogic messageInfoLogic)
         {
@@ -34,7 +38,6 @@ namespace AbstractShopView.UIForms
                 {
                     dataGridView.DataSource = list;
                     dataGridView.Columns[0].Visible = false;
-                    dataGridView.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
                 }
             }
             catch (Exception ex)
@@ -42,11 +45,6 @@ namespace AbstractShopView.UIForms
                 MessageBox.Show(ex.Message, "Ошибка", MessageBoxButtons.OK,
                MessageBoxIcon.Error);
             }
-        }
-
-        private void buttonUpd_Click(object sender, EventArgs e)
-        {
-            LoadData();
         }
     }
 }
