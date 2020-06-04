@@ -35,12 +35,14 @@ namespace AbstractTravelCompanyDatabaseImplement.Implements
                 context.SaveChanges();
             }
         }
-        public List<MessageInfoViewModel> Read(MessageInfoBindingModel model)
+        public List<MessageInfoViewModel> Read(MessageInfoBindingModel model, int NumPage, int CountElemntsOnPage)
         {
             using (var context = new DataBaseContext())
             {
                 return context.MessageInfos
                 .Where(rec => model == null || rec.ClientId == model.ClientId)
+                .Skip(NumPage * CountElemntsOnPage)
+                .Take(CountElemntsOnPage)
                 .Select(rec => new MessageInfoViewModel
                 {
                     MessageId = rec.MessageId,
@@ -48,8 +50,7 @@ namespace AbstractTravelCompanyDatabaseImplement.Implements
                     DateDelivery = rec.DateDelivery,
                     Subject = rec.Subject,
                     Body = rec.Body
-                })
-               .ToList();
+                }).ToList();
             }
         }
     }

@@ -8,7 +8,7 @@ namespace AbstractTravelCompanyBusinessLogic.Interfaces
 {
     public interface IMessageInfoLogic
     {
-        List<MessageInfoViewModel> Read(MessageInfoBindingModel model);
+        List<MessageInfoViewModel> Read(MessageInfoBindingModel model, int NumPage, int CountElemntsOnPage);
         void Create(MessageInfoBindingModel model);
     }
 }

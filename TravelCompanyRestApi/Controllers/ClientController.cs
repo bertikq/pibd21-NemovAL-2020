@@ -46,10 +46,10 @@ namespace TravelCompanyRestApi.Controllers
         }
 
         [HttpGet]
-        public List<MessageInfoViewModel> ReadMessage(int clientId) => messageInfoLogic.Read(new MessageInfoBindingModel
+        public List<MessageInfoViewModel> ReadMessage(int clientId, int numPage, int countElements) => messageInfoLogic.Read(new MessageInfoBindingModel
         {
             ClientId = clientId
-        });
+        }, numPage, countElements);
 
         private void CheckData(ClientBindingModel model)
         {

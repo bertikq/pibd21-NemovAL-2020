@@ -25,7 +25,10 @@ namespace TravelCompanyClientView.Forms
         {
             try
             {
-                var list = APIClient.GetRequest<List<MessageInfoViewModel>>($"api/client/ReadMessage?clientId={Program.Client.Id}");
+                var list = APIClient.GetRequest<List<MessageInfoViewModel>>
+                       ($"api/client/ReadMessage?clientId={Program.Client.Id}&" +
+                       $"numPage={int.Parse(textBoxNumPage.Text)}&" +
+                       $"countElements={int.Parse(textBoxCountElements.Text)}");
                 if (list != null)
                 {
                     dataGridView.DataSource = list;
@@ -37,6 +40,11 @@ namespace TravelCompanyClientView.Forms
                 MessageBox.Show(ex.Message, "Ошибка", MessageBoxButtons.OK,
                MessageBoxIcon.Error);
             }
+        }
+
+        private void buttonShow_Click(object sender, EventArgs e)
+        {
+            LoadData();
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using AbstractTravelCompanyBusinessLogic.Interfaces;
+﻿using AbstractTravelCompanyBusinessLogic.BindingModels;
+using AbstractTravelCompanyBusinessLogic.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -31,9 +32,21 @@ namespace AbstractShopView.UIForms
 
         private void LoadData()
         {
+            if (string.IsNullOrEmpty(textBoxNumPage.Text))
+            {
+                MessageBox.Show("Заполните номер страницы", "Ошибка", MessageBoxButtons.OK,
+               MessageBoxIcon.Error);
+                return;
+            }
+            if (string.IsNullOrEmpty(textBoxCountElements.Text))
+            {
+                MessageBox.Show("Заполните Количество", "Ошибка", MessageBoxButtons.OK,
+               MessageBoxIcon.Error);
+                return;
+            }
             try
             {
-                var list = messageInfoLogic.Read(null);
+                var list = messageInfoLogic.Read(null, int.Parse(textBoxNumPage.Text), int.Parse(textBoxCountElements.Text));
                 if (list != null)
                 {
                     dataGridView.DataSource = list;
@@ -45,6 +58,11 @@ namespace AbstractShopView.UIForms
                 MessageBox.Show(ex.Message, "Ошибка", MessageBoxButtons.OK,
                MessageBoxIcon.Error);
             }
+        }
+
+        private void buttonShow_Click(object sender, EventArgs e)
+        {
+            LoadData();
         }
     }
 }
