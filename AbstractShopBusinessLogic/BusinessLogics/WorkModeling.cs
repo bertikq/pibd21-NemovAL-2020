@@ -77,7 +77,8 @@ namespace AbstractTravelCompanyBusinessLogic.BusinessLogics
 
                         mainLogic.FinishOrder(new ChangeStatusBindingModel
                          {
-                             OrderId =  order.Id
+                             OrderId =  order.Id,
+                             ManagerId = implementer.Id
                          });
 
                         Thread.Sleep(implementer.PauseTime);
