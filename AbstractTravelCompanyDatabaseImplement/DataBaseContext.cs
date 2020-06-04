@@ -9,7 +9,7 @@ namespace AbstractTravelCompanyDatabaseImplement
         {
             if (optionsBuilder.IsConfigured == false)
             {
-                optionsBuilder.UseNpgsql(@"Host=localhost;Port=5432;Database=TravelCompany15;Username=postgres;Password=postgres");
+                optionsBuilder.UseNpgsql(@"Host=localhost;Port=5432;Database=TravelCompany50;Username=postgres;Password=postgres");
             }
             base.OnConfiguring(optionsBuilder);
         }
@@ -21,5 +21,6 @@ namespace AbstractTravelCompanyDatabaseImplement
         public virtual DbSet<StoreComponent> StoreComponents { set; get; }
         public virtual DbSet<Client> Clients { set; get; }
         public virtual DbSet<Manager> Managers { get; set; }
+        public virtual DbSet<MessageInfo> MessageInfos { get; set; }
     }
 }

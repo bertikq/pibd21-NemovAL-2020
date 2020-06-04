@@ -1,5 +1,6 @@
 ﻿using AbstractTravelCompanyBusinessLogic.BindingModels;
 using AbstractTravelCompanyBusinessLogic.Enums;
+using AbstractTravelCompanyBusinessLogic.HelperModels;
 using AbstractTravelCompanyBusinessLogic.Interfaces;
 using System;
 
@@ -11,14 +12,16 @@ namespace AbstractTravelCompanyBusinessLogic.BusinessLogics
         private readonly IStoreLogic _storeLogic;
         private readonly IComponentLogic _componentLogic;
         private readonly ITourLogic _tourLogic;
+        private readonly IClientLogic clientLogic;
         private readonly object locker = new object();
 
-        public MainLogic(IOrderLogic orderLogic, IStoreLogic storeLogic, IComponentLogic componentLogic, ITourLogic tourLogic)
+        public MainLogic(IOrderLogic orderLogic, IStoreLogic storeLogic, IComponentLogic componentLogic, ITourLogic tourLogic, IClientLogic clientLogic)
         {
             this.orderLogic = orderLogic;
             _storeLogic = storeLogic;
             _componentLogic = componentLogic;
             _tourLogic = tourLogic;
+            this.clientLogic = clientLogic;
         }
 
         public void CreateOrder(CreateOrderBindingModel model)
@@ -31,6 +34,16 @@ namespace AbstractTravelCompanyBusinessLogic.BusinessLogics
                 DateCreate = DateTime.Now,
                 Status = OrderStatus.Принят,
                 ClientId = model.ClientId
+            });
+
+            MailLogic.MailSendAsync(new MailSendInfo
+            {
+                MailAddress = clientLogic.Read(new ClientBindingModel
+                {
+                    Id = model.ClientId
+                })?[0]?.Email,
+                Subject = $"Новый заказ",
+                Text = $"Заказ принят."
             });
         }
 
@@ -114,6 +127,16 @@ namespace AbstractTravelCompanyBusinessLogic.BusinessLogics
                 ClientId = order.ClientId,
                 ManagerId = model.ManagerId
             });
+
+            MailLogic.MailSendAsync(new MailSendInfo
+            {
+                MailAddress = clientLogic.Read(new ClientBindingModel
+                {
+                    Id = order.ClientId
+                })?[0]?.Email,
+                Subject = $"Заказ №{order.Id}",
+                Text = $"Заказ №{order.Id} готов."
+            });
         }
 
         public void PayOrder(ChangeStatusBindingModel model)
@@ -141,6 +164,16 @@ namespace AbstractTravelCompanyBusinessLogic.BusinessLogics
                 Status = OrderStatus.Оплачен,
                 ClientId = order.ClientId,
                 ManagerId = model.ManagerId
+            });
+
+            MailLogic.MailSendAsync(new MailSendInfo
+            {
+                MailAddress = clientLogic.Read(new ClientBindingModel
+                {
+                    Id = order.ClientId
+                })?[0]?.Email,
+                Subject = $"Заказ №{order.Id}",
+                Text = $"Заказ №{order.Id} оплачен."
             });
         }
 

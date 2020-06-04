@@ -24,6 +24,7 @@ namespace TravelCompanyRestApi
             services.AddTransient<ITourLogic, TourLogic>();
             services.AddTransient<IStoreLogic, StoreLogic>();
             services.AddTransient<IComponentLogic, ComponentLogic>();
+            services.AddTransient<IMessageInfoLogic, MessageInfoLogic>();
             services.AddTransient<MainLogic>();
             services.AddControllers();
         }

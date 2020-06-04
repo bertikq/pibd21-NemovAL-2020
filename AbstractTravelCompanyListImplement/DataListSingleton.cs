@@ -16,6 +16,7 @@ namespace AbstractTravelCompanyListImplement
         public List<StoreComponent> StoreComponents { get; set; }
         public List<Client> Clients { get; set; }
         public List<Manager> Managers { get; set; }
+        public List<MessageInfo> MessageInfos { get; set; }
 
         private DataListSingleton()
         {
@@ -27,6 +28,7 @@ namespace AbstractTravelCompanyListImplement
             StoreComponents = new List<StoreComponent>();
             Clients = new List<Client>();
             Managers = new List<Manager>();
+            MessageInfos = new List<MessageInfo>();
         }
         public static DataListSingleton GetInstance()
         {

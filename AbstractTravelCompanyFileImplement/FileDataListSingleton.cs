@@ -21,6 +21,7 @@ namespace AbstractTravelCompanyFileImplement
         private readonly string ProductFileName = "Product.xml";
         private readonly string ProductComponentFileName = "ProductComponent.xml";
         private readonly string ManagerFileName = "Manager.xml";
+        private readonly string MessageInfoFileName = "MessageInfo.xml";
         public List<Component> Components { get; set; }
         public List<Order> Orders { get; set; }
         public List<Tour> Tours { get; set; }
@@ -29,6 +30,7 @@ namespace AbstractTravelCompanyFileImplement
         public List<StoreComponent> StoreComponents { get; set; }
         public List<Client> Clients { get; set; }
         public List<Manager> Managers { get; set; }
+        public List<MessageInfo> MessageInfos { get; set; }
         private FileDataListSingleton()
         {
             Components = LoadComponents();
@@ -39,6 +41,7 @@ namespace AbstractTravelCompanyFileImplement
             StoreComponents = LoadStoreComponents();
             Clients = new List<Client>();
             Managers = LoadManagers();
+            MessageInfos = LoadMessageInfos();
         }
         public static FileDataListSingleton GetInstance()
         {
@@ -57,6 +60,7 @@ namespace AbstractTravelCompanyFileImplement
             SaveStores();
             SaveStoreComponents();
             SaveManagers();
+            SaveMessageInfo();
         }
         private List<Component> LoadComponents()
         {
@@ -175,6 +179,28 @@ namespace AbstractTravelCompanyFileImplement
                         ManagerFIO = elem.Element("ManagerFIO").Value,
                         PauseTime = Convert.ToInt32(elem.Element("PauseTime").Value),
                         WorkingTime = Convert.ToInt32(elem.Element("WorkingTime").Value)
+                    });
+                }
+            }
+            return list;
+        }
+        private List<MessageInfo> LoadMessageInfos()
+        {
+            var list = new List<MessageInfo>();
+            if (File.Exists(MessageInfoFileName))
+            {
+                XDocument xDocument = XDocument.Load(MessageInfoFileName);
+                var xElements = xDocument.Root.Elements("MessageInfo").ToList();
+                foreach (var elem in xElements)
+                {
+                    list.Add(new MessageInfo
+                    {
+                        MessageId = elem.Element("MessageId").Value,
+                        ClientId = Convert.ToInt32(elem.Attribute("ClientId").Value),
+                        DateDelivery = DateTime.Parse(elem.Attribute("DateDelivery").Value),
+                        Body = elem.Element("Body").Value,
+                        SenderName = elem.Element("SenderName").Value,
+                        Subject = elem.Element("Subject").Value
                     });
                 }
             }
@@ -299,6 +325,26 @@ namespace AbstractTravelCompanyFileImplement
                 }
                 XDocument xDocument = new XDocument(xElement);
                 xDocument.Save(ManagerFileName);
+            }
+        }
+
+        private void SaveMessageInfo()
+        {
+            if (MessageInfos != null)
+            {
+                var xElement = new XElement("MessageInfos");
+                foreach (var messageInfo in MessageInfos)
+                {
+                    xElement.Add(new XElement("MessageInfo",
+                    new XAttribute("MessageId", messageInfo.MessageId),
+                    new XElement("ClientId", messageInfo.ClientId),
+                    new XElement("SenderName", messageInfo.SenderName)),
+                    new XElement("DateDelivery", messageInfo.DateDelivery),
+                    new XElement("Body", messageInfo.Body),
+                    new XElement("Subject", messageInfo.Subject));
+                }
+                XDocument xDocument = new XDocument(xElement);
+                xDocument.Save(MessageInfoFileName);
             }
         }
         private void SaveToursComponents()

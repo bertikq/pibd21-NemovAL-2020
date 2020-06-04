@@ -51,5 +51,11 @@ namespace TravelCompanyClientView.Forms
         {
             LoadList();
         }
+
+        private void почтаToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var form = new FormMail();
+            form.ShowDialog();
+        }
     }
 }
