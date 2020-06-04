@@ -4,6 +4,7 @@ using MigraDoc.DocumentObjectModel.Tables;
 using MigraDoc.Rendering;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace AbstractTravelCompanyBusinessLogic.BusinessLogics
@@ -11,7 +12,7 @@ namespace AbstractTravelCompanyBusinessLogic.BusinessLogics
     public class SaveToPdf
     {
         [Obsolete]
-        public static void CreateDoc(PdfInfo info)
+        public static void CreateDoc(TourPdfInfo info)
         {
             Document document = new Document();
             DefineStyles(document);
@@ -43,6 +44,71 @@ namespace AbstractTravelCompanyBusinessLogic.BusinessLogics
                     Table = table,
                     Texts = new List<string> { order.TourName,
                         order.ComponentName, order.ComponentCount.ToString() },
+                    Style = "Normal",
+                    ParagraphAlignment = ParagraphAlignment.Left
+                });
+            }
+            PdfDocumentRenderer renderer = new PdfDocumentRenderer(true,
+                PdfSharp.Pdf.PdfFontEmbedding.Always)
+            {
+                Document = document
+            };
+            renderer.RenderDocument();
+            renderer.PdfDocument.Save(info.FileName);
+        }
+
+
+        [Obsolete]
+        public static void CreateDoc(StorePdfInfo info)
+        {
+            Document document = new Document();
+            DefineStyles(document);
+            Section section = document.AddSection();
+            Paragraph paragraph = section.AddParagraph(info.Title);
+            paragraph.Format.SpaceAfter = "1cm";
+            paragraph.Format.Alignment = ParagraphAlignment.Center;
+            paragraph.Style = "NormalTitle";
+            paragraph.Format.SpaceAfter = "1cm";
+            paragraph.Format.Alignment = ParagraphAlignment.Center;
+            paragraph.Style = "Normal";
+            var table = document.LastSection.AddTable();
+            List<string> columns = new List<string> { "6cm", "6cm", "3cm" };
+            foreach (var elem in columns)
+            {
+                table.AddColumn(elem);
+            }
+            CreateRow(new PdfRowParameters
+            {
+                Table = table,
+                Texts = new List<string> { "Компонент", "Склад", "Количество" },
+                Style = "NormalTitle",
+                ParagraphAlignment = ParagraphAlignment.Center
+            });
+            foreach (var component in info.ComponentStores)
+            {
+                CreateRow(new PdfRowParameters
+                {
+                    Table = table,
+                    Texts = new List<string> { component.Key.ComponentName, "", "" },
+                    Style = "Normal",
+                    ParagraphAlignment = ParagraphAlignment.Left
+                });
+
+                foreach (var store in component.Value)
+                {
+                    CreateRow(new PdfRowParameters
+                    {
+                        Table = table,
+                        Texts = new List<string> { "", store.Item1, store.Item2.ToString() },
+                        Style = "Normal",
+                        ParagraphAlignment = ParagraphAlignment.Left
+                    });
+                }
+
+                CreateRow(new PdfRowParameters
+                {
+                    Table = table,
+                    Texts = new List<string> { "", "", component.Value.Sum(x => x.Item2).ToString() },
                     Style = "Normal",
                     ParagraphAlignment = ParagraphAlignment.Left
                 });
