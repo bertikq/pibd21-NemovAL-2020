@@ -9,10 +9,11 @@ namespace AbstractTravelCompanyBusinessLogic.Enums
     /// </summary>
     public enum OrderStatus
     {
-        Принят = 0,
-        Выполняется = 1,
+        Принят = 5,
+        Выполняется = 0,
         Готов = 2,
-        Оплачен = 3
+        Оплачен = 3,
+        ТребуютсяМатериалы = 4
     }
 }
 

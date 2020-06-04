@@ -3,6 +3,7 @@ using AbstractTravelCompanyBusinessLogic.Interfaces;
 using AbstractTravelCompanyBusinessLogic.ViewModels;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -12,14 +13,16 @@ namespace AbstractTravelCompanyBusinessLogic.BusinessLogics
     {
         private readonly IManagerLogic managerLogic;
         private readonly IOrderLogic orderLogic;
+        private readonly IStoreLogic storeLogic;
         private readonly MainLogic mainLogic;
         private readonly Random rnd;
         public WorkModeling(IManagerLogic managerLogic, IOrderLogic orderLogic,
-       MainLogic mainLogic)
+       MainLogic mainLogic, IStoreLogic storeLogic)
         {
             this.managerLogic = managerLogic;
             this.orderLogic = orderLogic;
             this.mainLogic = mainLogic;
+            this.storeLogic = storeLogic;
             rnd = new Random(1000);
         }
         /// <summary>
@@ -59,6 +62,7 @@ namespace AbstractTravelCompanyBusinessLogic.BusinessLogics
             }
             await Task.Run(() =>
             {
+                orders = orders.OrderByDescending(x => x.Status).ToList();
                 foreach (var order in orders)
                 {
                     // пытаемся назначить заказ на исполнителя

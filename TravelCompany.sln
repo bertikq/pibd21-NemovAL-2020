@@ -3,8 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29709.97
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AbstractTravelCompanyView", "AbstractShopView\AbstractTravelCompanyView.csproj", "{4EC6417C-D3F0-4C68-80A7-12980D9D9FAE}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AbstractTravelCompanyBusinessLogic", "AbstractShopBusinessLogic\AbstractTravelCompanyBusinessLogic.csproj", "{A9E44F2C-3A4D-4832-9924-42D777ED0172}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AbstractTravelCompanyListImplement", "AbstractTravelCompanyListImplement\AbstractTravelCompanyListImplement.csproj", "{3143B811-8E98-4265-AE8C-553195EC1573}"
@@ -17,7 +15,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TravelCompanyRestApi", "Tra
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TravelCompanyClientView", "TravelCompanyClientView\TravelCompanyClientView.csproj", "{086A12F2-1FF3-40D6-AD53-F2CC955C37A1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TravelCompanyAdminView", "TravelCompanyAdminView\TravelCompanyAdminView.csproj", "{6F7058CF-CCE1-4FED-B219-2E2975B3F333}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TravelCompanyAdminView", "TravelCompanyAdminView\TravelCompanyAdminView.csproj", "{6F7058CF-CCE1-4FED-B219-2E2975B3F333}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AbstractTravelCompanyView", "AbstractShopView\AbstractTravelCompanyView.csproj", "{4EC6417C-D3F0-4C68-80A7-12980D9D9FAE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -25,10 +25,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{4EC6417C-D3F0-4C68-80A7-12980D9D9FAE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{4EC6417C-D3F0-4C68-80A7-12980D9D9FAE}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{4EC6417C-D3F0-4C68-80A7-12980D9D9FAE}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{4EC6417C-D3F0-4C68-80A7-12980D9D9FAE}.Release|Any CPU.Build.0 = Release|Any CPU
 		{A9E44F2C-3A4D-4832-9924-42D777ED0172}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{A9E44F2C-3A4D-4832-9924-42D777ED0172}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A9E44F2C-3A4D-4832-9924-42D777ED0172}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -57,6 +53,10 @@ Global
 		{6F7058CF-CCE1-4FED-B219-2E2975B3F333}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6F7058CF-CCE1-4FED-B219-2E2975B3F333}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6F7058CF-CCE1-4FED-B219-2E2975B3F333}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4EC6417C-D3F0-4C68-80A7-12980D9D9FAE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4EC6417C-D3F0-4C68-80A7-12980D9D9FAE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4EC6417C-D3F0-4C68-80A7-12980D9D9FAE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4EC6417C-D3F0-4C68-80A7-12980D9D9FAE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

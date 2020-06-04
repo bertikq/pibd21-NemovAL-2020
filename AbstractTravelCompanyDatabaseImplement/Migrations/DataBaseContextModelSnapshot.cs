@@ -205,7 +205,7 @@ namespace AbstractTravelCompanyDatabaseImplement.Migrations
             modelBuilder.Entity("AbstractTravelCompanyDatabaseImplement.Models.Order", b =>
                 {
                     b.HasOne("AbstractTravelCompanyDatabaseImplement.Models.Client", "Client")
-                        .WithMany()
+                        .WithMany("Orders")
                         .HasForeignKey("ClientId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();

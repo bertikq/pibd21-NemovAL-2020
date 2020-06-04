@@ -38,35 +38,53 @@ namespace AbstractTravelCompanyBusinessLogic.BusinessLogics
         {
             lock (locker)
             {
+                    var order = orderLogic.Read(new OrderBindingModel
+                    {
+                        Id = model.OrderId
+                    })?[0];
+                    if (order == null)
+                    {
+                        throw new Exception("Не найден заказ");
+                    }
+                    if (order.Status != OrderStatus.Принят && order.Status != OrderStatus.ТребуютсяМатериалы)
+                    {
+                        throw new Exception("Заказ не в статусе \"Принят\"");
+                    }
+                    if (!model.ManagerId.HasValue)
+                    {
+                        throw new Exception("Не указан менеджер");
+                    }
 
-                var order = orderLogic.Read(new OrderBindingModel
+                try
                 {
-                    Id = model.OrderId
-                })?[0];
-                if (order == null)
-                {
-                    throw new Exception("Не найден заказ");
+                    _storeLogic.WriteOffTour(order.TourId, order.Count);
+
+                    orderLogic.CreateOrUpdate(new OrderBindingModel
+                    {
+                        Id = order.Id,
+                        TourId = order.TourId,
+                        Count = order.Count,
+                        Sum = order.Sum,
+                        DateCreate = order.DateCreate,
+                        DateImplement = DateTime.Now,
+                        Status = OrderStatus.Выполняется,
+                        ManagerId = model.ManagerId,
+                        ClientId = order.ClientId
+                    });
                 }
-                if (order.Status != OrderStatus.Принят)
+                catch (Exception)
                 {
-                    throw new Exception("Заказ не в статусе \"Принят\"");
+                    orderLogic.CreateOrUpdate(new OrderBindingModel
+                    {
+                        Id = order.Id,
+                        TourId = order.TourId,
+                        Count = order.Count,
+                        Sum = order.Sum,
+                        DateCreate = order.DateCreate,
+                        Status = OrderStatus.ТребуютсяМатериалы,
+                        ClientId = order.ClientId
+                    });
                 }
-                if (!model.ManagerId.HasValue)
-                {
-                    throw new Exception("Не указан менеджер");
-                }
-                orderLogic.CreateOrUpdate(new OrderBindingModel
-                {
-                    Id = order.Id,
-                    TourId = order.TourId,
-                    Count = order.Count,
-                    Sum = order.Sum,
-                    DateCreate = order.DateCreate,
-                    DateImplement = DateTime.Now,
-                    Status = OrderStatus.Выполняется,
-                    ManagerId = model.ManagerId,
-                    ClientId = order.ClientId
-                });
             }
         }
 
