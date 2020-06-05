@@ -33,12 +33,7 @@ namespace AbstractShopView.UIForms
         {
             try
             {
-                var list = messageInfoLogic.Read(null);
-                if (list != null)
-                {
-                    dataGridView.DataSource = list;
-                    dataGridView.Columns[0].Visible = false;
-                }
+                Program.ConfigGrid(messageInfoLogic.Read(null), dataGridView);
             }
             catch (Exception ex)
             {

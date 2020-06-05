@@ -82,13 +82,7 @@ namespace AbstractShopView.UIForms
         {
             try
             {
-                var list = managerLogic.Read(null);
-                if (list != null)
-                {
-                    dataGridView.DataSource = list;
-                    dataGridView.Columns[0].Visible = false;
-                    dataGridView.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-                }
+                Program.ConfigGrid(managerLogic.Read(null), dataGridView);
             }
             catch (Exception ex)
             {
