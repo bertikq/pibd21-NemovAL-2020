@@ -28,8 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.toolStripLabel1 = new System.Windows.Forms.ToolStripLabel();
-            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.toolStripLabel = new System.Windows.Forms.ToolStripLabel();
+            this.menuStrip = new System.Windows.Forms.MenuStrip();
             this.AddComponentInStoreToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.buttonUpd = new System.Windows.Forms.Button();
             this.buttonDel = new System.Windows.Forms.Button();
@@ -37,7 +37,7 @@
             this.buttonAdd = new System.Windows.Forms.Button();
             this.dataGridView = new System.Windows.Forms.DataGridView();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).BeginInit();
-            this.menuStrip1.SuspendLayout();
+            this.menuStrip.SuspendLayout();
             this.SuspendLayout();
             // 
             // buttonUpd
@@ -62,20 +62,20 @@
             // 
             // toolStripLabel1
             // 
-            this.toolStripLabel1.Name = "toolStripLabel1";
-            this.toolStripLabel1.Size = new System.Drawing.Size(23, 23);
+            this.toolStripLabel.Name = "toolStripLabel1";
+            this.toolStripLabel.Size = new System.Drawing.Size(23, 23);
             // 
             // 
             // menuStrip1
             // 
-            this.menuStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
-            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.menuStrip.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.menuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.AddComponentInStoreToolStripMenuItem});
-            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
-            this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(824, 28);
-            this.menuStrip1.TabIndex = 0;
-            this.menuStrip1.Text = "menuStrip1";
+            this.menuStrip.Location = new System.Drawing.Point(0, 0);
+            this.menuStrip.Name = "menuStrip1";
+            this.menuStrip.Size = new System.Drawing.Size(824, 28);
+            this.menuStrip.TabIndex = 0;
+            this.menuStrip.Text = "menuStrip1";
             // 
             // AddComponentInStoreToolStripMenuItem
             // 
@@ -124,13 +124,13 @@
             this.Controls.Add(this.buttonChange);
             this.Controls.Add(this.buttonAdd);
             this.Controls.Add(this.dataGridView);
-            this.Controls.Add(this.menuStrip1);
-            this.MainMenuStrip = this.menuStrip1;
+            this.Controls.Add(this.menuStrip);
+            this.MainMenuStrip = this.menuStrip;
             this.Name = "FormStores";
             this.Text = "Склады";
             this.Load += new System.EventHandler(this.FormStores_Load);
-            this.menuStrip1.ResumeLayout(false);
-            this.menuStrip1.PerformLayout();
+            this.menuStrip.ResumeLayout(false);
+            this.menuStrip.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).EndInit();
             this.ResumeLayout(false);
 
@@ -138,8 +138,8 @@
 
         #endregion
 
-        private System.Windows.Forms.ToolStripLabel toolStripLabel1;
-        private System.Windows.Forms.MenuStrip menuStrip1;
+        private System.Windows.Forms.ToolStripLabel toolStripLabel;
+        private System.Windows.Forms.MenuStrip menuStrip;
         private System.Windows.Forms.ToolStripMenuItem AddComponentInStoreToolStripMenuItem;
         private System.Windows.Forms.Button buttonUpd;
         private System.Windows.Forms.Button buttonDel;
