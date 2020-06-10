@@ -76,54 +76,28 @@ namespace AbstractTravelCompanyDatabaseImplement.Implements
 
         public List<OrderViewModel> Read(OrderBindingModel model, DateTime? dateFrom = null, DateTime? dateTo = null)
         {
-            if (dateFrom == null || dateTo == null)
+            using (var context = new DataBaseContext())
             {
-                using (var context = new DataBaseContext())
+                return context.Orders
+                .Include(x => x.Tour)
+                .Include(x => x.Client)
+                .Where(rec => model == null ||
+                (model.Id.HasValue && rec.Id == model.Id) ||
+                (dateFrom.HasValue && dateTo.HasValue && rec.DateCreate >= dateFrom && rec.DateCreate <= dateTo) ||
+                (model.ClientId.HasValue && rec.ClientId == model.ClientId))
+                .Select(rec => new OrderViewModel
                 {
-                    return context.Orders
-                    .Include(x => x.Tour)
-                    .Include(x => x.Client)
-                    .Where(rec => model == null || rec.Id == model.Id ||
-                    (model.ClientId.HasValue && model.ClientId.Value == rec.ClientId))
-                    .Select(rec => new OrderViewModel
-                    {
-                        Id = rec.Id,
-                        Count = rec.Count,
-                        Sum = rec.Sum,
-                        DateCreate = rec.DateCreate,
-                        DateImplement = rec.DateImplement,
-                        Status = rec.Status,
-                        TourId = rec.TourId,
-                        TourName = rec.Tour.TourName,
-                        ClientFIO = rec.Client.FIO,
-                        ClientId = rec.ClientId
-                    }).ToList();
-                }
-            }
-            else
-            {
-                using (var context = new DataBaseContext())
-                {
-                    return context.Orders
-                    .Include(x => x.Tour)
-                    .Include(x => x.Client)
-                    .Where(rec => (model == null || rec.Id == model.Id ||
-                    (model.ClientId.HasValue && model.ClientId.Value == rec.ClientId)) && 
-                    rec.DateCreate <= dateTo && rec.DateCreate >= dateFrom)
-                    .Select(rec => new OrderViewModel
-                    {
-                        Id = rec.Id,
-                        Count = rec.Count,
-                        Sum = rec.Sum,
-                        DateCreate = rec.DateCreate,
-                        DateImplement = rec.DateImplement,
-                        Status = rec.Status,
-                        TourId = rec.TourId,
-                        TourName = rec.Tour.TourName,
-                        ClientId = rec.ClientId,
-                        ClientFIO = rec.Client.FIO
-                    }).ToList();
-                }
+                    Id = rec.Id,
+                    Count = rec.Count,
+                    Sum = rec.Sum,
+                    DateCreate = rec.DateCreate,
+                    DateImplement = rec.DateImplement,
+                    Status = rec.Status,
+                    TourId = rec.TourId,
+                    TourName = rec.Tour.TourName,
+                    ClientFIO = rec.Client.FIO,
+                    ClientId = rec.ClientId
+                }).ToList();
             }
         }
     }
