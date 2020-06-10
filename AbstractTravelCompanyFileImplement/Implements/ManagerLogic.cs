@@ -18,7 +18,11 @@ namespace AbstractTravelCompanyFileImplement.Implements
         }
         public void CreateOrUpdate(ManagerBindingModel model)
         {
-            Manager element = new Manager();
+            Manager element = source.Managers.FirstOrDefault(c => c.ManagerFIO == model.ManagerFIO && c.Id != model.Id);
+            if (element != null)
+            {
+                throw new Exception("Уже есть менеджер с таким именем");
+            }
             if (model.Id.HasValue)
             {
                 element = source.Managers.FirstOrDefault(rec => rec.Id == model.Id);

@@ -15,7 +15,12 @@ namespace AbstractTravelCompanyDatabaseImplement.Implements
         {
             using (var context = new DataBaseContext())
             {
-                Manager element = new Manager();
+                Manager element = context.Managers.FirstOrDefault(c => c.ManagerFIO == model.ManagerFIO && c.Id != model.Id);
+                if (element != null)
+                {
+                    throw new Exception("Уже есть менеджер с таким именем");
+                }
+
                 if (model.Id.HasValue)
                 {
                     element = context.Managers.FirstOrDefault(rec => rec.Id == model.Id);
