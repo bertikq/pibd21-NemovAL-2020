@@ -21,6 +21,7 @@ namespace AbstractTravelCompanyFileImplement
         private readonly string ProductFileName = "Product.xml";
         private readonly string ProductComponentFileName = "ProductComponent.xml";
         private readonly string ManagerFileName = "Manager.xml";
+        private readonly string ClientFileName = "Client.xml";
         private readonly string MessageInfoFileName = "MessageInfo.xml";
         public List<Component> Components { get; set; }
         public List<Order> Orders { get; set; }
@@ -39,7 +40,7 @@ namespace AbstractTravelCompanyFileImplement
             TourComponents = LoadTourComponents();
             Stores = LoadStores();
             StoreComponents = LoadStoreComponents();
-            Clients = new List<Client>();
+            Clients = LoadClients();
             Managers = LoadManagers();
             MessageInfos = LoadMessageInfos();
         }
@@ -61,6 +62,7 @@ namespace AbstractTravelCompanyFileImplement
             SaveStoreComponents();
             SaveManagers();
             SaveMessageInfo();
+            SaveClients();
         }
         private List<Component> LoadComponents()
         {
@@ -225,6 +227,44 @@ namespace AbstractTravelCompanyFileImplement
                 }
             }
             return list;
+        }
+
+        private List<Client> LoadClients()
+        {
+            var list = new List<Client>();
+            if (File.Exists(ClientFileName))
+            {
+                XDocument xDocument = XDocument.Load(ClientFileName);
+                var xElements = xDocument.Root.Elements("Client").ToList();
+                foreach (var elem in xElements)
+                {
+                    list.Add(new Client
+                    {
+                        Id = Convert.ToInt32(elem.Attribute("Id").Value),
+                        Email = elem.Element("Email").Value,
+                        FIO = elem.Element("FIO").Value,
+                        Password = elem.Element("Password").Value
+                    });
+                }
+            }
+            return list;
+        }
+        private void SaveClients()
+        {
+            if (Clients != null)
+            {
+                var xElement = new XElement("Client");
+                foreach (var client in Clients)
+                {
+                    xElement.Add(new XElement("Product",
+                    new XAttribute("Id", client.Id),
+                    new XAttribute("Email", client.Email),
+                    new XAttribute("FIO", client.FIO),
+                    new XAttribute("Password", client.Password)));
+                }
+                XDocument xDocument = new XDocument(xElement);
+                xDocument.Save(ClientFileName);
+            }
         }
         private void SaveComponents()
         {
