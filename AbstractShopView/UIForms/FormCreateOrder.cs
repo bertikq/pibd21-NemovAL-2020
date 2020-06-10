@@ -134,30 +134,5 @@ namespace AbstractTravelCompamyView.UIForms
         {
             CalcSum();
         }
-
-        private void textBoxSumm_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void labelSumm_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void clientComboBox_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void labelCount_Click(object sender, EventArgs e)
-        {
-
-        }
     }
 }

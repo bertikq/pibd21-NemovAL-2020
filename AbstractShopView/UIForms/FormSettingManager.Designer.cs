@@ -120,7 +120,7 @@
             this.Controls.Add(this.textBoxFIO);
             this.Controls.Add(this.labelFIO);
             this.Name = "FormSettingManager";
-            this.Text = "FormSettingManager";
+            this.Text = "Настройка менеджера";
             this.Load += new System.EventHandler(this.FormSettingManager_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
