@@ -1,11 +1,10 @@
 ﻿using AbstractShopBusinessLogic.BindingModels;
 using AbstractShopBusinessLogic.Interfaces;
 using AbstractTravelCompanyBusinessLogic.ViewModels;
-using AbstractTravelCompanyListImplement.Models;
+using AbstractTravelCompanyFileImplement.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 namespace AbstractTravelCompanyFileImplement.Implements
 {
@@ -69,46 +68,25 @@ namespace AbstractTravelCompanyFileImplement.Implements
 
         public List<OrderViewModel> Read(OrderBindingModel model, DateTime? dateFrom = null, DateTime? dateTo = null)
         {
-            if (dateFrom == null || dateTo == null) {
-                return source.Orders
-                .Where(rec => model == null || rec.Id == model.Id || 
-                (model.ClientId.HasValue && model.ClientId.Value == rec.ClientId))
-                .Select(rec => new OrderViewModel
-                {
-                    Id = rec.Id,
-                    Count = rec.Count,
-                    Sum = rec.Sum,
-                    DateCreate = rec.DateCreate,
-                    DateImplement = rec.DateImplement,
-                    Status = rec.Status,
-                    TourId = rec.TourId,
-                    TourName = source.Tours.FirstOrDefault(a => a.Id == rec.TourId)?.TourName,
-                    ClientId = rec.ClientId,
-                    ClientFIO = source.Clients.FirstOrDefault(a => a.Id == rec.ClientId).FIO
-                })
-                .ToList();
-            }
-            else
+            return source.Orders
+            .Where(rec => model == null ||
+            (model.Id.HasValue && rec.Id == model.Id) ||
+            (dateFrom.HasValue && dateTo.HasValue && rec.DateCreate >= dateFrom && rec.DateCreate <= dateTo) ||
+            (model.ClientId.HasValue && rec.ClientId == model.ClientId))
+            .Select(rec => new OrderViewModel
             {
-                return source.Orders
-                   .Where(rec => (model == null || rec.Id == model.Id || 
-                   (model.ClientId.HasValue && model.ClientId.Value == rec.ClientId)) &&
-                   rec.DateCreate <= dateTo && rec.DateCreate >= dateFrom)
-                   .Select(rec => new OrderViewModel
-                   {
-                       Id = rec.Id,
-                       Count = rec.Count,
-                       Sum = rec.Sum,
-                       DateCreate = rec.DateCreate,
-                       DateImplement = rec.DateImplement,
-                       Status = rec.Status,
-                       TourId = rec.TourId,
-                       TourName = source.Tours.FirstOrDefault(a => a.Id == rec.TourId)?.TourName,
-                        ClientId = rec.ClientId,
-                       ClientFIO = source.Clients.FirstOrDefault(a => a.Id == rec.ClientId).FIO
-                   })
-                   .ToList();
-            }
+                Id = rec.Id,
+                Count = rec.Count,
+                Sum = rec.Sum,
+                DateCreate = rec.DateCreate,
+                DateImplement = rec.DateImplement,
+                Status = rec.Status,
+                TourId = rec.TourId,
+                TourName = source.Tours.FirstOrDefault(a => a.Id == rec.TourId)?.TourName,
+                ClientId = rec.ClientId,
+                ClientFIO = source.Clients.FirstOrDefault(a => a.Id == rec.ClientId).FIO
+            })
+            .ToList();
         }
     }
 }
