@@ -32,7 +32,7 @@ namespace AbstractTravelCompanyFileImplement
             Orders = LoadOrders();
             Tours = LoadTours();
             TourComponents = LoadTourComponents();
-            Clients = new List<Client>();
+            Clients = LoadClients();
             Managers = LoadManagers();
             MessageInfos = LoadMessageInfos();
         }
