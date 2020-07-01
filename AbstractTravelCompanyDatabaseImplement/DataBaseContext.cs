@@ -1,11 +1,5 @@
-﻿using AbstractShopBusinessLogic.Enums;
-using AbstractTravelCompanyDatabaseImplement.Models;
+﻿using AbstractTravelCompanyDatabaseImplement.Models;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Xml.Linq;
 
 namespace AbstractTravelCompanyDatabaseImplement
 {

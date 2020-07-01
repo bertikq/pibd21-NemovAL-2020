@@ -1,4 +1,4 @@
-﻿using AbstractShopBusinessLogic.Enums;
+﻿using AbstractTravelCompanyBusinessLogic.Enums;
 using System;
 
 namespace AbstractTravelCompanyFileImplement.Models

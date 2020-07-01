@@ -1,7 +1,5 @@
-﻿using AbstractShopBusinessLogic.Enums;
+﻿using AbstractTravelCompanyBusinessLogic.Enums;
 using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace AbstractTravelCompanyListImplement.Models
 {
