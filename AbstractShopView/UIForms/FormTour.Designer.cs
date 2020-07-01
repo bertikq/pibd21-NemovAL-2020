@@ -32,7 +32,7 @@
             this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Component = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Count = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.groupBox = new System.Windows.Forms.GroupBox();
             this.buttonUpd = new System.Windows.Forms.Button();
             this.buttonDel = new System.Windows.Forms.Button();
             this.buttonChange = new System.Windows.Forms.Button();
@@ -44,7 +44,7 @@
             this.buttonSave = new System.Windows.Forms.Button();
             this.buttonCancel = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).BeginInit();
-            this.groupBox1.SuspendLayout();
+            this.groupBox.SuspendLayout();
             this.SuspendLayout();
             // 
             // dataGridView
@@ -83,19 +83,19 @@
             this.Count.Name = "Count";
             this.Count.Width = 150;
             // 
-            // groupBox1
+            // groupBox
             // 
-            this.groupBox1.Controls.Add(this.buttonUpd);
-            this.groupBox1.Controls.Add(this.buttonDel);
-            this.groupBox1.Controls.Add(this.buttonChange);
-            this.groupBox1.Controls.Add(this.buttonAdd);
-            this.groupBox1.Controls.Add(this.dataGridView);
-            this.groupBox1.Location = new System.Drawing.Point(33, 84);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(572, 357);
-            this.groupBox1.TabIndex = 1;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Компоненты";
+            this.groupBox.Controls.Add(this.buttonUpd);
+            this.groupBox.Controls.Add(this.buttonDel);
+            this.groupBox.Controls.Add(this.buttonChange);
+            this.groupBox.Controls.Add(this.buttonAdd);
+            this.groupBox.Controls.Add(this.dataGridView);
+            this.groupBox.Location = new System.Drawing.Point(33, 84);
+            this.groupBox.Name = "groupBox";
+            this.groupBox.Size = new System.Drawing.Size(572, 357);
+            this.groupBox.TabIndex = 1;
+            this.groupBox.TabStop = false;
+            this.groupBox.Text = "Компоненты";
             // 
             // buttonUpd
             // 
@@ -200,12 +200,12 @@
             this.Controls.Add(this.textBoxName);
             this.Controls.Add(this.labelPrice);
             this.Controls.Add(this.labelName);
-            this.Controls.Add(this.groupBox1);
+            this.Controls.Add(this.groupBox);
             this.Name = "FormTour";
             this.Text = "Настройки Тура";
             this.Load += new System.EventHandler(this.FormProduct_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).EndInit();
-            this.groupBox1.ResumeLayout(false);
+            this.groupBox.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -214,7 +214,7 @@
         #endregion
 
         private System.Windows.Forms.DataGridView dataGridView;
-        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.GroupBox groupBox;
         private System.Windows.Forms.Label labelName;
         private System.Windows.Forms.Label labelPrice;
         private System.Windows.Forms.TextBox textBoxName;
