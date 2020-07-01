@@ -1,14 +1,13 @@
 ﻿using AbstractTravelCompanyBusinessLogic.BindingModels;
+using AbstractTravelCompanyBusinessLogic.Enums;
 using AbstractTravelCompanyBusinessLogic.Interfaces;
 using AbstractTravelCompanyBusinessLogic.ViewModels;
-using AbstractTravelCompanyListImplement;
 using AbstractTravelCompanyListImplement.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
-namespace AbstractTravelCompanyFileImplement.Implements
+namespace AbstractTravelCompanyListImplement.Implements
 {
     public class OrderLogic : IOrderLogic
     {
@@ -22,6 +21,10 @@ namespace AbstractTravelCompanyFileImplement.Implements
             Order tempProduct = model.Id.HasValue ? null : new Order { Id = 1 };
             foreach (var order in source.Orders)
             {
+                if (order.TourId == model.TourId && order.Id != model.Id)
+                {
+                    throw new Exception("Уже есть изделие с таким названием");
+                }
                 if (!model.Id.HasValue && order.Id >= tempProduct.Id)
                 {
                     tempProduct.Id = order.Id + 1;
@@ -96,45 +99,27 @@ namespace AbstractTravelCompanyFileImplement.Implements
 
         public List<OrderViewModel> Read(OrderBindingModel model, DateTime? dateFrom = null, DateTime? dateTo = null)
         {
-            List<OrderViewModel> result = new List<OrderViewModel>();
-            if (dateFrom == null || dateTo == null)
+            return source.Orders
+            .Where(rec => model == null ||
+            (rec.Id == model.Id && model.Id.HasValue) ||
+            (dateFrom.HasValue && dateTo.HasValue && rec.DateCreate >= dateFrom && rec.DateCreate <= dateTo) ||
+            (model.ClientId.HasValue && rec.ClientId == model.ClientId) ||
+            (model.FreeOrders.HasValue && model.FreeOrders.Value && !rec.ManagerId.HasValue) ||
+            (model.ManagerId.HasValue && rec.ManagerId == model.ManagerId && rec.Status == OrderStatus.Выполняется))
+            .Select(rec => new OrderViewModel
             {
-                foreach (var order in source.Orders)
-                {
-                    if (model != null)
-                    {
-                        if (order.Id == model.Id || (model.ClientId.HasValue && model.ClientId.Value == order.ClientId))
-                        {
-                            result.Add(CreateViewModel(order));
-                            break;
-                        }
-                        continue;
-                    }
-                    result.Add(CreateViewModel(order));
-                }
-            }
-            else
-            {
-                foreach (var order in source.Orders)
-                {
-                    if ((model == null || order.Id == model.Id || 
-                        (model.ClientId.HasValue && model.ClientId.Value == order.ClientId)) && 
-                        order.DateCreate <= dateTo && order.DateCreate >= dateFrom)
-                    {
-                        if (model != null)
-                        {
-                            if (order.Id == model.Id)
-                            {
-                                result.Add(CreateViewModel(order));
-                                break;
-                            }
-                            continue;
-                        }
-                        result.Add(CreateViewModel(order));
-                    }
-                }
-            }
-            return result;
+                Id = rec.Id,
+                Count = rec.Count,
+                Sum = rec.Sum,
+                DateCreate = rec.DateCreate,
+                DateImplement = rec.DateImplement,
+                Status = rec.Status,
+                TourId = rec.TourId,
+                TourName = source.Tours.FirstOrDefault(a => a.Id == model.TourId).TourName,
+                ClientFIO = source.Clients.FirstOrDefault(a => a.Id == model.ClientId).FIO,
+                ClientId = rec.ClientId,
+                ManagerFIO = source.Managers.FirstOrDefault(a => a.Id == model.ManagerId).ManagerFIO,
+            }).ToList();
         }
 
         private OrderViewModel CreateViewModel(Order order)
