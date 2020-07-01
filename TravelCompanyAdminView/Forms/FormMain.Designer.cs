@@ -72,10 +72,10 @@
             this.menuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.AddComponentInStoreToolStripMenuItem});
             this.menuStrip.Location = new System.Drawing.Point(0, 0);
-            this.menuStrip.Name = "menuStrip1";
+            this.menuStrip.Name = "menuStrip";
             this.menuStrip.Size = new System.Drawing.Size(824, 28);
             this.menuStrip.TabIndex = 0;
-            this.menuStrip.Text = "menuStrip1";
+            this.menuStrip.Text = "Меню";
             // 
             // AddComponentInStoreToolStripMenuItem
             // 
