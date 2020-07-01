@@ -1,4 +1,5 @@
 ﻿using AbstractShopBusinessLogic.BindingModels;
+using AbstractShopBusinessLogic.Enums;
 using AbstractShopBusinessLogic.Interfaces;
 using AbstractTravelCompanyBusinessLogic.ViewModels;
 using AbstractTravelCompanyListImplement.Models;
@@ -99,45 +100,27 @@ namespace AbstractTravelCompanyListImplement.Implements
 
         public List<OrderViewModel> Read(OrderBindingModel model, DateTime? dateFrom = null, DateTime? dateTo = null)
         {
-            List<OrderViewModel> result = new List<OrderViewModel>();
-            if (dateFrom == null || dateTo == null)
+            return source.Orders
+            .Where(rec => model == null ||
+            (rec.Id == model.Id && model.Id.HasValue) ||
+            (dateFrom.HasValue && dateTo.HasValue && rec.DateCreate >= dateFrom && rec.DateCreate <= dateTo) ||
+            (model.ClientId.HasValue && rec.ClientId == model.ClientId) ||
+            (model.FreeOrders.HasValue && model.FreeOrders.Value && !rec.ManagerId.HasValue) ||
+            (model.ManagerId.HasValue && rec.ManagerId == model.ManagerId && rec.Status == OrderStatus.Выполняется))
+            .Select(rec => new OrderViewModel
             {
-                foreach (var order in source.Orders)
-                {
-                    if (model != null)
-                    {
-                        if (order.Id == model.Id || (model.ClientId.HasValue && model.ClientId.Value == order.ClientId))
-                        {
-                            result.Add(CreateViewModel(order));
-                            break;
-                        }
-                        continue;
-                    }
-                    result.Add(CreateViewModel(order));
-                }
-            }
-            else
-            {
-                foreach (var order in source.Orders)
-                {
-                    if ((model == null || order.Id == model.Id || 
-                        (model.ClientId.HasValue && model.ClientId.Value == order.ClientId)) && 
-                        order.DateCreate <= dateTo && order.DateCreate >= dateFrom)
-                    {
-                        if (model != null)
-                        {
-                            if (order.Id == model.Id)
-                            {
-                                result.Add(CreateViewModel(order));
-                                break;
-                            }
-                            continue;
-                        }
-                        result.Add(CreateViewModel(order));
-                    }
-                }
-            }
-            return result;
+                Id = rec.Id,
+                Count = rec.Count,
+                Sum = rec.Sum,
+                DateCreate = rec.DateCreate,
+                DateImplement = rec.DateImplement,
+                Status = rec.Status,
+                TourId = rec.TourId,
+                TourName = source.Tours.FirstOrDefault(a => a.Id == model.TourId).TourName,
+                ClientFIO = source.Clients.FirstOrDefault(a => a.Id == model.ClientId).FIO,
+                ClientId = rec.ClientId,
+                ManagerFIO = source.Managers.FirstOrDefault(a => a.Id == model.ManagerId).ManagerFIO,
+            }).ToList();
         }
 
         private OrderViewModel CreateViewModel(Order order)
