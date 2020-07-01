@@ -36,7 +36,7 @@
             this.comboBoxTour = new System.Windows.Forms.ComboBox();
             this.labelSumm = new System.Windows.Forms.Label();
             this.textBoxSumm = new System.Windows.Forms.TextBox();
-            this.label1 = new System.Windows.Forms.Label();
+            this.labelClient = new System.Windows.Forms.Label();
             this.clientComboBox = new System.Windows.Forms.ComboBox();
             this.SuspendLayout();
             // 
@@ -111,14 +111,14 @@
             this.textBoxSumm.Size = new System.Drawing.Size(261, 22);
             this.textBoxSumm.TabIndex = 13;
             // 
-            // label1
+            // labelClient
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(51, 108);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(60, 17);
-            this.label1.TabIndex = 15;
-            this.label1.Text = "Клиент:";
+            this.labelClient.AutoSize = true;
+            this.labelClient.Location = new System.Drawing.Point(51, 108);
+            this.labelClient.Name = "labelClient";
+            this.labelClient.Size = new System.Drawing.Size(60, 17);
+            this.labelClient.TabIndex = 15;
+            this.labelClient.Text = "Клиент:";
             // 
             // clientComboBox
             // 
@@ -133,7 +133,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(421, 193);
-            this.Controls.Add(this.label1);
+            this.Controls.Add(this.labelClient);
             this.Controls.Add(this.clientComboBox);
             this.Controls.Add(this.textBoxSumm);
             this.Controls.Add(this.labelSumm);
@@ -161,7 +161,7 @@
         private System.Windows.Forms.ComboBox comboBoxTour;
         private System.Windows.Forms.Label labelSumm;
         private System.Windows.Forms.TextBox textBoxSumm;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label labelClient;
         private System.Windows.Forms.ComboBox clientComboBox;
     }
 }
