@@ -13,7 +13,7 @@ namespace AbstractTravelCompanyBusinessLogic.Enums
         Выполняется = 0,
         Готов = 2,
         Оплачен = 3,
-        ТребуютсяМатериалы = 4
+        ТребуютсяКомпоненты = 4
     }
 }
 

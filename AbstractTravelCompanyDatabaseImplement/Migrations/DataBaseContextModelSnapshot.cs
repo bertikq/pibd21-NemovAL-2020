@@ -245,7 +245,7 @@ namespace AbstractTravelCompanyDatabaseImplement.Migrations
                         .IsRequired();
 
                     b.HasOne("AbstractTravelCompanyDatabaseImplement.Models.Manager", "Manager")
-                        .WithMany()
+                        .WithMany("Orders")
                         .HasForeignKey("ManagerId");
 
                     b.HasOne("AbstractTravelCompanyDatabaseImplement.Models.Tour", "Tour")

@@ -59,7 +59,7 @@ namespace AbstractTravelCompanyBusinessLogic.BusinessLogics
                     {
                         throw new Exception("Не найден заказ");
                     }
-                    if (order.Status != OrderStatus.Принят && order.Status != OrderStatus.ТребуютсяМатериалы)
+                    if (order.Status != OrderStatus.Принят && order.Status != OrderStatus.ТребуютсяКомпоненты)
                     {
                         throw new Exception("Заказ не в статусе \"Принят\"");
                     }
@@ -94,7 +94,7 @@ namespace AbstractTravelCompanyBusinessLogic.BusinessLogics
                         Count = order.Count,
                         Sum = order.Sum,
                         DateCreate = order.DateCreate,
-                        Status = OrderStatus.ТребуютсяМатериалы,
+                        Status = OrderStatus.ТребуютсяКомпоненты,
                         ClientId = order.ClientId
                     });
                 }
