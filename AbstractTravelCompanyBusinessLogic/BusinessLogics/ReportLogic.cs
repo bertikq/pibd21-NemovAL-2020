@@ -101,7 +101,7 @@ namespace AbstractTravelCompanyBusinessLogic.BusinessLogics
             SaveToExcel.CreateDoc(new ExcelInfo
             {
                 FileName = model.FileName,
-                Title = "Список заказов",
+                Title = "Список туров",
                 Orders = GetOrders(model)
             });
         }
@@ -116,7 +116,7 @@ namespace AbstractTravelCompanyBusinessLogic.BusinessLogics
             SaveToPdf.CreateDoc(new PdfInfo
             {
                 FileName = model.FileName,
-                Title = "Список заказов",
+                Title = "Список туров",
                 Tours = GetTours()
             });
         }

@@ -65,5 +65,12 @@ namespace AbstractTravelCompanyView.UIForms
                 }
             }
         }
+
+        private void FormReportTourComponent_Load(object sender, EventArgs e)
+        {
+
+            this.reportViewer.RefreshReport();
+            this.reportViewer.RefreshReport();
+        }
     }
 }

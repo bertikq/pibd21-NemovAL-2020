@@ -29,11 +29,10 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            Microsoft.Reporting.WinForms.ReportDataSource reportDataSource2 = new Microsoft.Reporting.WinForms.ReportDataSource();
             this.buttonInPdf = new System.Windows.Forms.Button();
             this.buttonGenerate = new System.Windows.Forms.Button();
             this.reportViewer = new Microsoft.Reporting.WinForms.ReportViewer();
-            this.ReportToursComponentsViewModelBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            ((System.ComponentModel.ISupportInitialize)(this.ReportToursComponentsViewModelBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // buttonInPdf
@@ -58,10 +57,12 @@
             // 
             // reportViewer
             // 
+            reportDataSource2.Name = "DataSetTours";
+            this.reportViewer.LocalReport.DataSources.Add(reportDataSource2);
             this.reportViewer.LocalReport.ReportEmbeddedResource = "AbstractTravelCompanyView.ReportTours.rdlc";
             this.reportViewer.Location = new System.Drawing.Point(12, 49);
             this.reportViewer.Name = "reportViewer";
-            this.reportViewer.Size = new System.Drawing.Size(773, 378);
+            this.reportViewer.Size = new System.Drawing.Size(773, 389);
             this.reportViewer.TabIndex = 5;
             // 
             // FormReportTourComponent
@@ -74,7 +75,7 @@
             this.Controls.Add(this.buttonInPdf);
             this.Name = "FormReportTourComponent";
             this.Text = "Отчет туров и их составляющих";
-            ((System.ComponentModel.ISupportInitialize)(this.ReportToursComponentsViewModelBindingSource)).EndInit();
+            this.Load += new System.EventHandler(this.FormReportTourComponent_Load);
             this.ResumeLayout(false);
 
         }
@@ -84,6 +85,5 @@
         private System.Windows.Forms.Button buttonInPdf;
         private System.Windows.Forms.Button buttonGenerate;
         private Microsoft.Reporting.WinForms.ReportViewer reportViewer;
-        private System.Windows.Forms.BindingSource ReportToursComponentsViewModelBindingSource;
     }
 }

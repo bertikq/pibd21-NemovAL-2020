@@ -32,7 +32,7 @@ namespace AbstractTravelCompanyBusinessLogic.BusinessLogics
             CreateRow(new PdfRowParameters
             {
                 Table = table,
-                Texts = new List<string> { "Изделие", "Компонент изделия", "Количество" },
+                Texts = new List<string> { "Тур", "Компонент тура", "Количество" },
                 Style = "NormalTitle",
                 ParagraphAlignment = ParagraphAlignment.Center
             });
