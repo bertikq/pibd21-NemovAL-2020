@@ -29,7 +29,7 @@ namespace TravelCompanyClientView.Forms
             }
             else
             {
-                MessageBox.Show("Введите логин и пароль", "Ошибка", MessageBoxButtons.OK,
+                MessageBox.Show("Введите пароль", "Ошибка", MessageBoxButtons.OK,
                MessageBoxIcon.Error);
             }
         }
