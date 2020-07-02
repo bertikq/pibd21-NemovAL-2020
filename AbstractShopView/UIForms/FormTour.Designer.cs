@@ -29,9 +29,6 @@
         private void InitializeComponent()
         {
             this.dataGridView = new System.Windows.Forms.DataGridView();
-            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Component = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Count = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.groupBox = new System.Windows.Forms.GroupBox();
             this.buttonUpd = new System.Windows.Forms.Button();
             this.buttonDel = new System.Windows.Forms.Button();
@@ -43,6 +40,9 @@
             this.textBoxPrice = new System.Windows.Forms.TextBox();
             this.buttonSave = new System.Windows.Forms.Button();
             this.buttonCancel = new System.Windows.Forms.Button();
+            this.ColumnId = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Component = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Count = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).BeginInit();
             this.groupBox.SuspendLayout();
             this.SuspendLayout();
@@ -51,7 +51,7 @@
             // 
             this.dataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.Column1,
+            this.ColumnId,
             this.Component,
             this.Count});
             this.dataGridView.Location = new System.Drawing.Point(6, 21);
@@ -60,28 +60,6 @@
             this.dataGridView.RowTemplate.Height = 24;
             this.dataGridView.Size = new System.Drawing.Size(424, 330);
             this.dataGridView.TabIndex = 0;
-            // 
-            // Column1
-            // 
-            this.Column1.HeaderText = "Column1";
-            this.Column1.MinimumWidth = 6;
-            this.Column1.Name = "Column1";
-            this.Column1.Visible = false;
-            this.Column1.Width = 125;
-            // 
-            // Component
-            // 
-            this.Component.HeaderText = "Компонент";
-            this.Component.MinimumWidth = 6;
-            this.Component.Name = "Component";
-            this.Component.Width = 200;
-            // 
-            // Count
-            // 
-            this.Count.HeaderText = "Количество";
-            this.Count.MinimumWidth = 6;
-            this.Count.Name = "Count";
-            this.Count.Width = 150;
             // 
             // groupBox
             // 
@@ -189,6 +167,28 @@
             this.buttonCancel.UseVisualStyleBackColor = true;
             this.buttonCancel.Click += new System.EventHandler(this.ButtonCancel_Click);
             // 
+            // ColumnId
+            // 
+            this.ColumnId.HeaderText = "Column1";
+            this.ColumnId.MinimumWidth = 6;
+            this.ColumnId.Name = "ColumnId";
+            this.ColumnId.Visible = false;
+            this.ColumnId.Width = 125;
+            // 
+            // Component
+            // 
+            this.Component.HeaderText = "Компонент";
+            this.Component.MinimumWidth = 6;
+            this.Component.Name = "Component";
+            this.Component.Width = 200;
+            // 
+            // Count
+            // 
+            this.Count.HeaderText = "Количество";
+            this.Count.MinimumWidth = 6;
+            this.Count.Name = "Count";
+            this.Count.Width = 150;
+            // 
             // FormTour
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -225,7 +225,7 @@
         private System.Windows.Forms.Button buttonAdd;
         private System.Windows.Forms.Button buttonSave;
         private System.Windows.Forms.Button buttonCancel;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ColumnId;
         private System.Windows.Forms.DataGridViewTextBoxColumn Component;
         private System.Windows.Forms.DataGridViewTextBoxColumn Count;
     }
