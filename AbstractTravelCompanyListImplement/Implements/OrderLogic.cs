@@ -121,22 +121,5 @@ namespace AbstractTravelCompanyListImplement.Implements
                 ManagerFIO = source.Managers.FirstOrDefault(a => a.Id == model.ManagerId).ManagerFIO,
             }).ToList();
         }
-
-        private OrderViewModel CreateViewModel(Order order)
-        {
-            return new OrderViewModel
-            {
-                Id = order.Id,
-                Count = order.Count,
-                Sum = order.Sum,
-                DateCreate = order.DateCreate,
-                DateImplement = order.DateImplement,
-                Status = order.Status,
-                TourId = order.TourId,
-                TourName = source.Tours.FirstOrDefault(a => a.Id == order.TourId).TourName,
-                ClientId = order.ClientId,
-                ClientFIO = source.Clients.FirstOrDefault(a => a.Id == order.ClientId).FIO
-            };
-        }
     }
 }
