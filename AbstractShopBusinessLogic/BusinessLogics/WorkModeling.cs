@@ -96,7 +96,6 @@ namespace AbstractTravelCompanyBusinessLogic.BusinessLogics
 
             await Task.Run(() =>
             {
-                orders = orders.OrderBy(x => x.Status).ToList();
                 foreach (var order in orders)
                 {
                     // пытаемся назначить заказ на исполнителя
