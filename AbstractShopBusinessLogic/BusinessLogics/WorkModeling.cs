@@ -48,7 +48,8 @@ namespace AbstractTravelCompanyBusinessLogic.BusinessLogics
             // ищем заказы, которые уже в работе (вдруг исполнителя прервали)
             var runOrders = await Task.Run(() => orderLogic.Read(new OrderBindingModel
             {
-                ManagerId = implementer.Id
+                ManagerId = implementer.Id,
+                Status = Enums.OrderStatus.Выполняется
             }));
             foreach (var order in runOrders)
             {
