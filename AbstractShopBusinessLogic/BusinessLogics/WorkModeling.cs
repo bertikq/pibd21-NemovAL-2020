@@ -65,7 +65,7 @@ namespace AbstractTravelCompanyBusinessLogic.BusinessLogics
             var ordersWithoutMaterials = await Task.Run(() => orderLogic.Read(new OrderBindingModel()
             {
                 ManagerId = implementer.Id,
-                Status = OrderStatus.ТребуютсяМатериалы
+                Status = OrderStatus.ТребуютсяКомпоненты
             }));
 
             await Task.Run(() =>
@@ -79,7 +79,7 @@ namespace AbstractTravelCompanyBusinessLogic.BusinessLogics
                         ManagerId = implementer.Id
                     });
                     var updatedOrder = orderLogic.Read(new OrderBindingModel() { Id = order.Id })[0];
-                    if (updatedOrder.Status != Enums.OrderStatus.ТребуютсяМатериалы)
+                    if (updatedOrder.Status != Enums.OrderStatus.ТребуютсяКомпоненты)
                     {
                         // делаем работу 
                         Thread.Sleep(implementer.WorkingTime * rnd.Next(1, 5) * order.Count);
