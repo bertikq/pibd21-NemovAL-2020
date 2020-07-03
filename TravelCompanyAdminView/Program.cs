@@ -20,7 +20,7 @@ namespace TravelCompanyAdminView
             Application.SetHighDpiMode(HighDpiMode.SystemAware);
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            var form = new FormEnter(ConfigurationManager.AppSettings["Password"]);
+            var form = new FormEnter();
             if (form.ShowDialog() == DialogResult.OK)
             {
                 Application.Run(new FormMain());
