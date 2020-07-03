@@ -1,4 +1,5 @@
 ﻿using AbstractTravelCompanyBusinessLogic.BindingModels;
+using AbstractTravelCompanyBusinessLogic.Enums;
 using AbstractTravelCompanyBusinessLogic.Interfaces;
 using AbstractTravelCompanyBusinessLogic.ViewModels;
 using System;
@@ -60,6 +61,38 @@ namespace AbstractTravelCompanyBusinessLogic.BusinessLogics
                 // отдыхаем
                 Thread.Sleep(implementer.PauseTime);
             }
+
+            var ordersWithoutMaterials = await Task.Run(() => orderLogic.Read(new OrderBindingModel()
+            {
+                ManagerId = implementer.Id,
+                Status = OrderStatus.ТребуютсяМатериалы
+            }));
+
+            await Task.Run(() =>
+            {
+                foreach (var order in ordersWithoutMaterials)
+                {
+                    //пытаемся опять взять заказ в работу
+                    mainLogic.TakeOrderInWork(new ChangeStatusBindingModel()
+                    {
+                        OrderId = order.Id,
+                        ManagerId = implementer.Id
+                    });
+                    var updatedOrder = orderLogic.Read(new OrderBindingModel() { Id = order.Id })[0];
+                    if (updatedOrder.Status != Enums.OrderStatus.ТребуютсяМатериалы)
+                    {
+                        // делаем работу 
+                        Thread.Sleep(implementer.WorkingTime * rnd.Next(1, 5) * order.Count);
+                        mainLogic.FinishOrder(new ChangeStatusBindingModel
+                        {
+                            OrderId = order.Id
+                        });
+                        // отдыхаем
+                        Thread.Sleep(implementer.PauseTime);
+                    }
+                }
+            });
+
             await Task.Run(() =>
             {
                 orders = orders.OrderBy(x => x.Status).ToList();

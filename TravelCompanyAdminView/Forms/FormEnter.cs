@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Configuration;
 using System.Windows.Forms;
 using TravelCompanyAdminView;
 
@@ -6,17 +7,15 @@ namespace TravelCompanyClientView.Forms
 {
     public partial class FormEnter : Form
     {
-        private readonly string password;
-        public FormEnter(string password)
+        public FormEnter()
         {
             InitializeComponent();
-            this.password = password;
         }
         private void ButtonLogin_Click(object sender, EventArgs e)
         {
             if (!string.IsNullOrEmpty(textBoxPassword.Text))
             {
-                if (password == textBoxPassword.Text)
+                if (ConfigurationManager.AppSettings["Password"] == textBoxPassword.Text)
                 {
                     DialogResult = DialogResult.OK;
                     Close();
