@@ -82,6 +82,7 @@ namespace AbstractTravelCompanyBusinessLogic.BusinessLogics
                         Sum = order.Sum,
                         DateCreate = order.DateCreate,
                         Status = OrderStatus.ТребуютсяМатериалы,
+                        ManagerId = model.ManagerId,
                         ClientId = order.ClientId
                     });
                 }
